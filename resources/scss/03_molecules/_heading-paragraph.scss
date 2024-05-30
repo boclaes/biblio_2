@@ -1,0 +1,21 @@
+@import '../00_common/variables';
+.heading-paragraph {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0;
+    margin-top: 150px;
+    gap: 24px;
+
+
+}
+
+@media screen and (min-width: 768px) {
+
+}
+
+@media screen and (min-width: 1100px) {
+  
+}

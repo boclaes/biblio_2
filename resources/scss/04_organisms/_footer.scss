@@ -1,0 +1,132 @@
+@import '../00_common/variables';
+footer {
+  padding: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  gap: $gap-large;
+
+  .footer-list-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    gap: $gap-large;
+
+    .footer-list {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: $gap-between-features;
+
+      ul {
+        li{
+          margin-top: $margin-10;
+        }
+      }
+    }
+  }
+
+  .footer-icon-container {
+    display: flex;
+    flex-direction: column;
+    gap: $gap-30;
+
+    .footer-label-container {
+      display: flex;
+      flex-direction: column;
+      gap: $gap-between-features;
+
+      .footer-label {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: $gap-between-features;
+      }
+    }
+
+    .footer-social-container {
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      gap: $gap-between-features;
+
+      button {
+        background: none;
+        padding: 0;
+        width: $button-width;
+        height: auto;
+        border: none;
+
+        img {
+          max-width: $width-100;
+          height: auto;
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    align-items: center;
+
+    .footer-list-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: $width-70;
+
+      .footer-list {
+        gap: $gap-between-features;
+
+        ul {
+          li {
+            margin-top: $gap-between-features;
+          }
+        }
+      }
+    }
+
+    .footer-icon-container {
+      gap: $gap-50;
+      justify-content: center;
+
+      .footer-label-container {
+        flex-direction: row;
+        gap: $gap-40;
+      }
+
+      .footer-social-container {
+        justify-content: center;
+        gap: $gap-between-features;
+      }
+    }
+  }
+
+  @media screen and (min-width: 1100px) {
+    flex-direction: row;
+
+    .footer-list-container {
+      width: $width-50;
+      justify-content: flex-start;
+
+      .footer-list {
+        gap: $gap-between-features;
+      }
+    }
+
+    .footer-icon-container {
+      gap: $gap-50;
+
+      .footer-label-container {
+        flex-direction: column;
+        gap: $gap-20;
+      }
+
+      .footer-social-container {
+        justify-content: flex-start;
+      }
+    }
+  }
+}

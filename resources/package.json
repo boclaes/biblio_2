@@ -1,0 +1,61 @@
+{
+  "name": "eindopdracht-myrthedpvn",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "private": true,
+  "author": "Myrthe Diepeveen",
+  "main": "gulpfile.js",
+  "scripts": {
+    "prestart": "npm install",
+    "start": "npm run dev",
+    "dev": "gulp",
+    "build": "cross-env NODE_ENV=production gulp build"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "fslightbox": "^3.4.1",
+    "postcss": "^8.4.38"
+  },
+  "eslintConfig": {
+    "extends": "eslint:recommended",
+    "env": {
+      "browser": true,
+      "es2021": true
+    },
+    "globals": {
+      "process": "readonly",
+      "dataLayer": "writable"
+    },
+    "rules": {
+      "no-unused-vars": "warn"
+    },
+    "parserOptions": {
+      "sourceType": "module",
+      "ecmaVersion": 12
+    }
+  },
+  "devDependencies": {
+    "browser-sync": "^3.0.2",
+    "cross-env": "^7.0.3",
+    "css-loader": "^7.1.2",
+    "cssnano": "^6.1.2",
+    "del": "^7.1.0",
+    "eslint-webpack-plugin": "^4.0.1",
+    "gulp": "^4.0.2",
+    "gulp-flatten": "^0.4.0",
+    "gulp-imagemin": "^9.0.0",
+    "gulp-mode": "^1.1.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-postcss": "^10.0.0",
+    "gulp-sass": "^5.1.0",
+    "gulp-sass-glob": "^1.1.0",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-uglify": "^3.0.2",
+    "sass": "^1.77.2",
+    "sass-loader": "^14.2.1",
+    "style-loader": "^4.0.0",
+    "vinyl-named": "^1.1.0",
+    "webpack-stream": "^7.0.0"
+  }
+}

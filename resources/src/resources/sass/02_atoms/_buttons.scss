@@ -1,0 +1,51 @@
+@import '../00_common/variables';
+/* Button Styles */
+button, a {
+    font-family: $font-family;
+    color: $white;
+    font-size: $button-font-size-small;
+    display: inline-block;
+
+    // Primary Button Styles
+    &.primary {
+        border: none;
+        border-radius: 15px ;
+        background-color: #C05532;
+        transition: background-color $transition-speed ease;
+
+        &:hover {
+            background-color: #B5421C;
+        }
+    }
+
+    // Ghost Button Styles
+    &.ghost {
+        border: 2px $white solid;
+        background: none;
+        transition: background-color $transition-speed ease;
+
+        &:hover {
+            background-color: rgba($black, 0.5);
+        }
+    }
+
+    // Big Button Styles
+    &.big-button {
+        min-height: $button-min-height-big;
+        min-width: $button-min-width-big;
+        padding: $button-padding-big;
+    }
+
+    // Small Button Styles
+    &.small-button {
+        min-height: $button-min-height-small;
+        min-width: $button-min-width-small;
+    }
+}
+
+// Button Styles for Large Screens
+@media screen and (min-width: 1100px) {
+    button {
+        font-size: $button-font-size-large;
+    }
+}
