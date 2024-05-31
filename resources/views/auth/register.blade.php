@@ -12,7 +12,7 @@
             <a href="{{ route('welcome') }}"><img class="main-logo" src="{{ Vite::asset('resources/images/logo-hor.png') }}"></a>
             <div class="register-view-box">
                 <div class="center">
-                    <h1 class="title">Signup for Biblio<mark>Scan</mark></h1>
+                    <h1 class="title">Signup for Biblio<mark>Scan</mark>!</h1>
                     <div class="login-message">
                         <span>Already have an account? </span><a href="{{ route('login') }}">Login</a>
                     </div>

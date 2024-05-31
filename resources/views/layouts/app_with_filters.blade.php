@@ -38,7 +38,7 @@
         .alphabet-filter {
             display: flex;
             gap: 10px;
-            margin-bottom: 20px;
+            margin-top: 20px;
             justify-content: center;
         }
         .alphabet-filter a {
@@ -95,7 +95,7 @@
         </select>
     </div>
     <div>
-        <input type="text" id="search" placeholder="Search by book title..." autocomplete="off">
+        <input type="text" class="search" id="search" placeholder="Search by book title..." autocomplete="off">
     </div>
     <div class="alphabet-filter">
         @foreach(range('A', 'Z') as $letter)

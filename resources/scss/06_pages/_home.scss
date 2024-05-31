@@ -17,6 +17,7 @@
 	backdrop-filter: blur(30px);
 	padding: 45px;
 	margin-bottom: 40px;
+	border-radius: 10px;
 	box-sizing: border-box;
 	text-align: left;
 
@@ -41,8 +42,43 @@
 	}
 }
 
+.book-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
+  }
+  
+  .book-feature {
+
+    padding: 15px;
+    border-radius: 8px;
+    text-align: left;
+   
+    overflow: hidden; // This hides any overflow, including images
+  
+    img {
+      width: 120%; // Adjusted to be 100% of the container width
+      height: auto;
+      margin-bottom: 10px;
+    }
+  
+    h3 {
+      color: $beige;
+    }
+  }
+
 @media screen and (min-width: 768px) {
  
+	.book-section {
+        flex-direction: row;
+        justify-content: space-around;
+      }
+    
+      .book-feature {
+        max-width: 300px;
+      }
 
 }
 
@@ -94,6 +130,17 @@
 		max-width: 500px;
 	}
 	}
+
+	.book-section {
+        max-width: 960px;
+        margin: 0 auto;
+		
+      }
+    
+      .book-feature {
+        max-width: 300px;
+      }
+	  
 }
 
 @media screen and (min-width: 1400px) {
