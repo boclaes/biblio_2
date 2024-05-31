@@ -113,7 +113,6 @@
 
     <footer class="footer desktop-footer">
         <div class="footer-content">
-            <!-- Content for Desktop Footer -->
             <div class="explore">
                 <h3>Explore</h3>
                 <ul>
@@ -139,9 +138,7 @@
     </footer>
     
     <footer class="footer mobile-footer">
-        <div class="footer-content">
-            <!-- Content for Mobile Footer -->
-    
+        <div class="footer-content">   
             <div class="learn">
             <div class="logo">
                 <img src="{{ Vite::asset('resources/images/logo.png') }}" alt="BiblioScan Logo">
