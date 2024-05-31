@@ -83,11 +83,12 @@
                     <p>Based on your reading history and preferences, our platform provides tailored book recommendations. Expand your literary horizons and discover new favourites that align with your tastes and interests.</p>
                 </div>
             </div>
-            <div class="center">
+            <div class="feature-text">
                 <h4>BiblioScan is the best place for cataloging and managing your books online. </h4>
                 <h4> Now which version is the best for you?</h4>
-                <button class="primary big-button">Discover plans</button>
+                
             </div>
+            <button class="primary big-button">Discover plans</button>
         </div>
     </section>
     
@@ -109,5 +110,49 @@
             <img src="resources/images/man.png" alt="Man met tablet">
         </div>
     </section>
+
+    <footer class="footer desktop-footer">
+        <div class="footer-content">
+            <!-- Content for Desktop Footer -->
+            <div class="explore">
+                <h3>Explore</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">Login</a></li>
+                    <li><a href="#">Sign up</a></li>
+                </ul>
+                <a href="#" class="terms">Terms and Conditions</a>
+            </div>
+            <div class="logo">
+                <img src="{{ Vite::asset('resources/images/logo.png') }}" alt="BiblioScan Logo">
+            </div>
+            <div class="learn">
+                <h3>Learn</h3>
+                <ul>
+                    <li><a href="#">Contact us</a></li>
+                    <li><a href="#">Support</a></li>
+                </ul>
+                <a href="#" class="privacy">Privacy & cookie policy</a>
+            </div>
+        </div>
+    </footer>
+    
+    <footer class="footer mobile-footer">
+        <div class="footer-content">
+            <!-- Content for Mobile Footer -->
+    
+            <div class="learn">
+            <div class="logo">
+                <img src="{{ Vite::asset('resources/images/logo.png') }}" alt="BiblioScan Logo">
+            </div>
+                <h3>Learn</h3>
+                <ul>
+                    <li><a href="#">Contact us</a></li>
+                    <li><a href="#">Support</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

@@ -1,6 +1,7 @@
 @import '../00_common/variables';
 body {
-  background: linear-gradient(180deg, #000004 1.69%, #070212 59.5%, #050000 94.98%);
+  //background: linear-gradient(180deg, #000004 1.69%, #0b031c 59.5%, #0e0215 94.98%);
+  background: linear-gradient(180deg, #000004 2%, #211530 33%, #030A1C 67%, #050000 95%);
   background-repeat: no-repeat;  // Prevents the background from repeating
   background-attachment: fixed;  // Keeps the background fixed during scrolling
   background-size: cover;  // Ensures the background covers the entire element
@@ -37,7 +38,6 @@ body, h1, h2, h3, p, ul, li, a{
 {
   text-align: center;
 }
-
 
 .error-msg
 {
