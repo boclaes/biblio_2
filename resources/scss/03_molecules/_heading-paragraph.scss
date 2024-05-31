@@ -20,7 +20,7 @@
     margin-bottom: 0;
     gap: 24px;
 
-    h1{
+    h1, h4{
         max-width: 300px;
     }
 
@@ -43,6 +43,9 @@
 
         h1{
             max-width: 500px;
+        }
+        h4{
+            max-width: 620px;
         }
           
     }
