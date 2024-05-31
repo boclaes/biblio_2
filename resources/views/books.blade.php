@@ -79,17 +79,4 @@
             </div>
         @endforeach
     </div>
-    <div class="navigation-buttons">
-        <a href="{{ route('book.recommend') }}" class="recommendation-button"><button type="button">Get Book Recommendations</button></a>
-    </div>
-    <div class="navigation-buttons">
-        <a href="{{ route('accepted.books') }}" class="recommendation-button"><button type="button">Wishlist</button></a>
-    </div>
-    <form action="{{ route('register-rpi') }}" method="POST">
-        @csrf
-        <button type="submit">Register RPI</button>
-    </form>
-    <a href="{{ route('borrowed-books') }}" class="btn btn-info"><button type="button">View Borrowed books</button></a>
-    <a href="{{ route('books.addBorrow') }}" class="btn btn-info"><button type="button">Add Borrow</button></a>
-    <a href="{{ route('search.form') }}"><button type="button">Search books</button></a>
 @endsection

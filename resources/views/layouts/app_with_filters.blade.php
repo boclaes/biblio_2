@@ -108,18 +108,18 @@
         <nav>
             <ul class="nav-group">
                 <li><a href="{{ route('welcome') }}">My library</a></li>
-                <li><a href="">Add books</a></li>
-                <li><a href="">Book borrower</a></li>
-                <li><a href="">Discover books</a></li>
-                <li><a href="">Wishlist</a></li>
+                <li><a href="{{ route('search.form') }}">Add books</a></li>
+                <li><a href="{{ route('borrowed-books') }}">Book borrower</a></li>
+                <li><a href="{{ route('book.recommend') }}">Discover books</a></li>
+                <li><a href="{{ route('accepted.books') }}">Wishlist</a></li>
             </ul>
             <ul class="nav-group">
                 <li><a href="{{ route('account.settings') }}">Account</a></li>
-                <li><a href="">Support</a></li>
+                <li><a href="{{ route('welcome') }}">Support</a></li>
             </ul>
             <ul class="nav-group">
                 <li>
-                    <form method="POST" action="">
+                    <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button type="submit" class="primary small-button center">Logout</button>
                     </form>
