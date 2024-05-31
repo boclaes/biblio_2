@@ -111,20 +111,29 @@
 
 			&:first-child
 			{
-				width: 50%;
+				width: 45%;
 			}
 
 			&:nth-child(2)
 			{
-				width: 45%;
+				width: 50%;
 			}
 
 			&:nth-child(3)
 			{
-				width: 45%;
+				width: 50%;
 			}
 
 			&:nth-child(4)
+			{
+				width: 45%;
+			}
+			&:nth-child(5)
+			{
+				width: 45%;
+			}
+
+			&:nth-child(6)
 			{
 				width: 50%;
 			}
@@ -133,6 +142,10 @@
 
 	h2 {
 		max-width: 500px;
+	}
+	.wide
+	{
+		max-width: 600px;
 	}
 	}
 

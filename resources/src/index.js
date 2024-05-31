@@ -19,3 +19,4 @@ const handleLinkClick = () => {
   hamburgerMenu.classList.remove('active');
   menuList.classList.remove('is-active');
 };
+
