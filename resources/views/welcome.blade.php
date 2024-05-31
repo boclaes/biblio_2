@@ -19,8 +19,8 @@
                 <div class="menu-list-desktop">
                     <ul class="menu-list-desktop-left">
                         <li><a href="#home">Features</a></li>
-                        <li><a href="#product">Pricing</a></li>
-                        <li><a href="#about">Support</a></li>
+                        <li><a href="{{ route('pricing') }}">Pricing</a></li>
+                        <li><a href="{{ route('support') }}">Support</a></li>
                     </ul>
                     <div class="logo">
                         <img src="{{ Vite::asset('resources/images/logo.png') }}" alt="Company logo">
@@ -41,8 +41,8 @@
                     
                     <ul>
                         <li><a href="#home">Features</a></li>
-                        <li><a href="#product">Pricing</a></li>
-                        <li><a href="#about">Support</a></li>
+                        <li><a href="{{ route('pricing') }}">Pricing</a></li>
+                        <li><a href="{{ route('support') }}">Support</a></li>
                         <li><a href="{{ route('login') }}">Login</a></li>
                         <li><a href="{{ route('register') }}">Try for free</a></li>
                     </ul>                     
@@ -116,10 +116,10 @@
             <div class="explore">
                 <h3>Explore</h3>
                 <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Pricing</a></li>
-                    <li><a href="#">Login</a></li>
-                    <li><a href="#">Sign up</a></li>
+                <li><a href="{{ route('welcome') }}">Features</a></li>
+                    <li><a href="{{ route('pricing') }}">Pricing</a></li>
+                    <li><a href="{{ route('login') }}">Login</a></li>
+                    <li><a href="{{ route('register') }}">Try for free</a></li>
                 </ul>
                 <a href="#" class="terms">Terms and Conditions</a>
             </div>
@@ -129,8 +129,8 @@
             <div class="learn">
                 <h3>Learn</h3>
                 <ul>
-                    <li><a href="#">Contact us</a></li>
-                    <li><a href="#">Support</a></li>
+                    <li><a href="">Contact us</a></li>
+                    <li><a href="{{ route('support') }}">Support</a></li>
                 </ul>
                 <a href="#" class="privacy">Privacy & cookie policy</a>
             </div>
@@ -145,8 +145,8 @@
             </div>
                 <h3>Learn</h3>
                 <ul>
-                    <li><a href="#">Contact us</a></li>
-                    <li><a href="#">Support</a></li>
+                    <li><a href="">Contact us</a></li>
+                    <li><a href="{{ route('support') }}">Support</a></li>
                 </ul>
             </div>
         </div>
