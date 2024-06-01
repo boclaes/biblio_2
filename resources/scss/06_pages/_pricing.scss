@@ -1,38 +1,43 @@
 
 .comparison-container {
+    background-image: url(../images/book_back.png);
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	z-index: 1;
     display: flex;
     flex-direction: row; 
     justify-content: center;
-    gap: 32px;
+    gap: 48px;
     margin: 40px 0;
     padding: 56px;
-    width: 94%;
+    
 
 
 }
 .plan-card-left {
    
     background-color: rgba(101, 111, 158, 0.5);
-    backdrop-filter: blur(50px);
+    backdrop-filter: blur(10px);
     border-radius: 10px;
     color: white;
-    padding: 20px;
+    padding: 24px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 .plan-card-right {
-    
     background-color: rgba(5,0,0,0.5);
-    backdrop-filter: blur(50px);
+    backdrop-filter: blur(10px);
     border-radius: 10px;
     color: white;
-    padding: 20px;
+    padding: 24px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     border: $purple 2px solid;
 }
 .plan-card-left h2, .plan-card-right h2 {
     width: 100%;
     font-size: 36px;
-    color: #fff;
+    margin-bottom: 24px;
+    margin-top: 24px;
 
     mark
 			{
@@ -44,15 +49,30 @@
     font-size: 24px;
     font-weight: medium;
 }
+
+.plan-info {
+    margin: 24px;
+    width: 380px;
+}
 .plan-features {
-    list-style: none;
-    padding: 0;
     text-align: left;
 }
 .plan-feature {
-    padding: 16px 24px;
+    padding: 0 24px;
+
+    a{
+        font-weight: 200;
+        width: 380px;
+        padding-bottom: 32px;
+    }
 
 }
+
+.light{
+    list-style-image: url("../images/light.png");
+
+}
+
 
 
 @media screen and (min-width: 1100px) {

@@ -18,15 +18,9 @@
             width: 100%;
             height: auto;
         }
-        .dropdown {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 999;
-        }
     </style>
 
-    <h2>Accepted Books</h2>
+    <h2 class="title-wishlist">Wishlist</h2>
     <div class="book-container" id="bookContainer">
         @foreach ($acceptedBooks as $book)
             <div class="book-card">

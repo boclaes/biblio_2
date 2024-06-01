@@ -6,31 +6,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>@yield('title', 'Book Scanner')</title>
     @vite(['resources/scss/app.scss', 'resources/js/app.js'])
-
-    <style>
-        .book-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        .book-card {
-            width: 200px;
-            border: 1px solid #ccc;
-            padding: 10px;
-        }
-        .book-image {
-            width: 100%;
-            height: auto;
-        }
-        .stars {
-            display: flex;
-            align-items: center;
-        }
-        .star {
-            font-size: 24px;
-            color: gold;
-        }
-    </style>
 </head>
 <body class="books-view">
     {{--

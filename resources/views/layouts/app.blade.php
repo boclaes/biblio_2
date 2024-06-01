@@ -16,30 +16,49 @@
     @endif
 
     <div class="sidebar">
-        <a href="{{ route('welcome') }}"><img src="{{ Vite::asset('resources/images/logo.png') }}" alt="Company logo" class="main-logo"></a>
-        <nav>
-            <ul class="nav-group">
-                <li><a href="{{ route('welcome') }}">My library</a></li>
-                <li><a href="{{ route('search.form') }}">Add books</a></li>
-                <li><a href="{{ route('borrowed-books') }}">Book borrower</a></li>
-                <li><a href="{{ route('book.recommend') }}">Discover books</a></li>
-                <li><a href="{{ route('accepted.books') }}">Wishlist</a></li>
-            </ul>
-            <ul class="nav-group">
-                <li><a href="{{ route('account.settings') }}">Account</a></li>
-                <li><a href="{{ route('welcome') }}">Support</a></li>
-            </ul>
-            <ul class="nav-group">
-                <li>
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit" class="primary small-button center">Logout</button>
-                    </form>
-                </li>
-            </ul>
+    <a href="{{ route('welcome') }}"><img src="{{ Vite::asset('resources/images/logo.png') }}" alt="Company logo" class="main-logo"></a>
+        <nav class="container-library">
+            <div class="wrapper-library"> 
+                <div class="menu-list-desktop">
+                    <ul class="nav-group">
+                        <li><a href="{{ route('welcome') }}">My library</a></li>
+                        <li><a href="{{ route('search.form') }}">Add books</a></li>
+                        <li><a href="{{ route('borrowed-books') }}">Book borrower</a></li>
+                        <li><a href="{{ route('book.recommend') }}">Discover books</a></li>
+                        <li><a href="{{ route('accepted.books') }}">Wishlist</a></li>
+                        <li><a href="{{ route('account.settings') }}">Account</a></li>
+                        <li><a href="{{ route('welcome') }}">Support</a></li>
+                        <li>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="primary small-button center">Logout</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+                <div class="menu-list-mobile">
+                    <div class="flex space-between">
+                        <a class="hamburger-menu-library">Menu</a>
+                    </div>
+                    <ul class="nav-group">
+                        <li><a href="{{ route('welcome') }}">My library</a></li>
+                        <li><a href="{{ route('search.form') }}">Add books</a></li>
+                        <li><a href="{{ route('borrowed-books') }}">Book borrower</a></li>
+                        <li><a href="{{ route('book.recommend') }}">Discover books</a></li>
+                        <li><a href="{{ route('accepted.books') }}">Wishlist</a></li>
+                        <li><a href="{{ route('account.settings') }}">Account</a></li>
+                        <li><a href="{{ route('welcome') }}">Support</a></li>
+                        <li>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="primary small-button center">Logout</button>
+                            </form>
+                        </li>
+                    </ul>                    
+                </div>
+            </div>  
         </nav>
     </div>
-
     @yield('content')
 </body>
 </html>

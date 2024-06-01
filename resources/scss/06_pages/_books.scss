@@ -2,10 +2,18 @@
 	display: none; // Hides the title on screens smaller than 768px
 }
 
+.title-borrow {
+    display: none;
+}
+
+.title-wishlist {
+    display: none;
+}
+
 .hamburger-menu-library {
     position: relative; 
     margin-left: 310px; 
-    bottom: 30px;
+    bottom: 20px;
     border: none;
     background: none;
     width: 40px;
@@ -65,7 +73,7 @@
 .wrapper-library {
     width: 100%;
     position: relative;
-    bottom: 20px;
+    bottom: 30px;
     align-items: center;
     align-content: center;
     max-width: 1400px;
@@ -76,7 +84,7 @@
 .books-view {
     min-height: 100vh;
     width: 100%;
-    background: linear-gradient(180deg, #000004 1.69%, #070212 59.5%, #050000 94.98%);
+    background: linear-gradient(180deg, #000004 2%, #211530 33%, #030A1C 67%, #050000 95%);
     background-repeat: no-repeat;  
     background-attachment: fixed;  
     background-size: cover;  
@@ -204,9 +212,9 @@
 .select-wrapper {
     position: relative;
     width: 100px; 
-    background: darken(#6D6C8A, 20%);
+    background: #6D6C8A;
     border-radius: 20px;
-    background: darken(#6D6C8A, 20%);
+    background: #6D6C8A;
     color: white;
     right: 20px; 
     top: 113px;
@@ -215,7 +223,7 @@
 
     select.select-custom {
         appearance: none; 
-        background: darken(#6D6C8A, 20%);
+        background: #6D6C8A;
         border: none;
         padding: 10px 15px;
         width: 100%;
@@ -253,7 +261,7 @@
 
 .grid-button {
 	position: relative;
-    background: darken(#6D6C8A, 20%);
+    background: #6D6C8A;
     border: none;
     width: 50px; // Set the width as needed
     height: 40px; // Set the height as needed
@@ -280,6 +288,20 @@
 
 @media screen and (min-width: 1100px) {
 
+    .title-borrow {
+		display: block; // Ensures the title is displayed on larger screens
+		position: relative;
+		right: 525px;
+		bottom: 300px;
+	}
+
+    .title-wishlist {
+		display: block; // Ensures the title is displayed on larger screens
+		position: relative;
+		right: 630px;
+		bottom: 200px;
+	}
+
 	.title-library {
 		display: block; // Ensures the title is displayed on larger screens
 		position: relative;
@@ -290,7 +312,7 @@
     .books-view {
         min-height: 100vh;
         width: 100%;
-        background: linear-gradient(180deg, #000004 1.69%, #070212 59.5%, #050000 94.98%);
+        background: linear-gradient(180deg, #000004 2%, #211530 33%, #030A1C 67%, #050000 95%);
         background-repeat: no-repeat;  
         background-attachment: fixed; 
         background-size: cover; 

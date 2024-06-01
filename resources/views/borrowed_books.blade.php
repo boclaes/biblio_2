@@ -19,16 +19,10 @@
             width: 100%;
             height: auto;
         }
-        .dropdown {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 999;
-        }
     </style>
 
     <div class="container">
-        <h1>Borrowed Books</h1>
+        <h2 class="title-borrow">Borrowed Books</h2>
         <div class="book-container" id="bookContainer">
             @foreach ($borrowings as $borrowing)
                 <div class="book-card">
