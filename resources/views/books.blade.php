@@ -33,7 +33,7 @@
         }
     </style>
 
-    <h2>Your books</h2>
+    <h2 class="title-library">My library</h2>
     <div class="book-container" id="bookContainer">
         @foreach ($books->sortBy('title') as $book)
             @php

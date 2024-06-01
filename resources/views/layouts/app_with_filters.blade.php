@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>@yield('title', 'Book Scanner')</title>
     @vite(['resources/scss/app.scss', 'resources/js/app.js'])
 
@@ -29,30 +30,10 @@
             font-size: 24px;
             color: gold;
         }
-        .dropdown {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 999;
-        }
-        .alphabet-filter {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-            justify-content: center;
-        }
-        .alphabet-filter a {
-            text-decoration: none;
-            font-size: 18px;
-            color: #000;
-        }
-        .alphabet-filter a.active {
-            font-weight: bold;
-            color: #007bff;
-        }
     </style>
 </head>
 <body class="books-view">
+    {{--
     <!-- Error and success messages -->
     @if(session('error'))
         <div style="color: red;">{{ session('error') }}</div>
@@ -60,52 +41,60 @@
     @if(session('success'))
         <div style="color: green;">{{ session('success') }}</div>
     @endif
+    --}}
 
     <div class="dropdown">
-        <label for="sort">Sort By:</label>
-        <select id="sort">
-        @isset($includeName)
-            @if ($includeName)
-                <option value="name_asc">Name (A-Z)</option>
-                <option value="name_desc">Name (Z-A)</option>
-            @endif
-        @endisset
-        @isset($includeRatings)
-            @if ($includeRatings)
-                <option value="rating_asc">Rating (Lowest First)</option>
-                <option value="rating_desc">Rating (Highest First)</option>
-            @endif
-        @endisset
-        @isset($includeAuthor)
-            @if ($includeAuthor)
-                <option value="author">Author (A-Z)</option>
-            @endif
-        @endisset
-        @isset($includePages)
-            @if ($includePages)
-                <option value="pages">Pages</option>
-            @endif
-        @endisset
-        @isset($includeDate)
-            @if ($includeDate)
-                <option value="date_asc">Date (Oldest First)</option>
-                <option value="date_desc">Date (Newest First)</option>
-            @endif
-        @endisset
-        </select>
+        <div class="select-wrapper">
+            <select id="sort" class="select-custom">
+                @isset($includeName)
+                    @if ($includeName)
+                        <option value="name_asc">Title</option>
+                    @endif
+                @endisset
+                @isset($includeRatings)
+                    @if ($includeRatings)
+                        <option value="rating_desc">Rating</option>
+                    @endif
+                @endisset
+                @isset($includeAuthor)
+                    @if ($includeAuthor)
+                        <option value="author">Author</option>
+                    @endif
+                @endisset
+                @isset($includePages)
+                    @if ($includePages)
+                        <option value="pages">Pages</option>
+                    @endif
+                @endisset
+                @isset($includeDate)
+                    @if ($includeDate)
+                        <option value="date_desc">Date</option>
+                    @endif
+                @endisset
+            </select>
+        </div>
     </div>
-    <div>
-        <input type="text" class="search" id="search" placeholder="Search by book title..." autocomplete="off">
+    
+    <div class="search-bar">
+        <input type="text" class="search" id="search" placeholder="Search" autocomplete="off">
+        <span class="search-icon"><i class="fas fa-search"></i></span>
     </div>
+    
+    <button class="grid-button">
+        <i class="fas fa-th"></i>
+        <span class="button-text-grid">Cover</span>
+    </button>
+
     <div class="alphabet-filter">
         @foreach(range('A', 'Z') as $letter)
             <a href="#" data-letter="{{ $letter }}">{{ $letter }}</a>
         @endforeach
     </div>
+
     <div class="sidebar">
     <a href="{{ route('welcome') }}"><img src="{{ Vite::asset('resources/images/logo.png') }}" alt="Company logo" class="main-logo"></a>
-        <nav class="container">
-            <div class="wrapper"> 
+        <nav class="container-library">
+            <div class="wrapper-library"> 
                 <div class="menu-list-desktop">
                     <ul class="nav-group">
                         <li><a href="{{ route('welcome') }}">My library</a></li>

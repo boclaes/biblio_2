@@ -1,7 +1,11 @@
+.title-library {
+	display: none; // Hides the title on screens smaller than 768px
+}
+
 .hamburger-menu-library {
     position: relative; 
     margin-left: 310px; 
-	bottom: 85px;
+    bottom: 30px;
     border: none;
     background: none;
     width: 40px;
@@ -11,7 +15,6 @@
     justify-content: center;
     align-items: center;
     transition: all 0.3s;
-    z-index: 1000; 
     overflow: hidden;
     text-indent: -9999px;
 
@@ -27,7 +30,7 @@
 
     &::before, &::after {
         content: "";
-        position: absolute; // Ensure pseudo-elements are positioned absolutely
+        position: absolute;
         width: 28px;
         height: 2px;
         background: #fff;
@@ -44,160 +47,485 @@
     }
 }
 
-
-.books-view
-{
-	min-height: 100vh;
-	width: 100%;
-	background: linear-gradient(180deg, #000004 1.69%, #070212 59.5%, #050000 94.98%);
-	background-repeat: no-repeat;  // Prevents the background from repeating
-	background-attachment: fixed;  // Keeps the background fixed during scrolling
-	background-size: cover;  // Ensures the background covers the entire element
-	color: $white;
-	font-family: $font-family;
-
-	.sidebar
-	{
-		background: rgba(109, 108, 138, 0.2);
-		height: 100px;
-		width: 100%;
-		position: fixed;
-		top: 0;
-		left: 0;
-		box-sizing: border-box;
-
-		.main-logo
-		{
-			width: 150px;
-			padding-right: 285px;
-			padding-top: 25px;
-		}
-
-
-		nav
-		{
-			display: block;
-			padding: 0;
-			position: relative;
-
-			ul
-			{
-				display: block;
-				width: 100%;
-				padding: 0;
-				margin: 0;
-
-				&.nav-group
-				{
-					margin-bottom: 80px;
-				}
-
-				li
-				{
-					display: block;
-					text-align: left;
-
-					a
-					{
-						margin-bottom: 24px;
-						color: #FFF;
-						font-size: 16px;
-
-						&.primary
-						{
-							padding-top: 8px;
-						}
-					}
-				}
-			}
-		}
-	}
-	.dropdown{
-		margin-right: 100px;
-		margin-top: 150px;
-		z-index: -1;
-	}
-	.search{
-		margin-top: 200px;
-	}
+.container-library {
+    max-width: 100vw;
+    box-sizing: border-box;
+    padding-top: 0 !important;
+    width: 100%;
+  
+    &:nth-child(n+3) {
+      padding-top: $padding-medium;
+    }
+  
+    &:nth-child(2) {
+      padding-top: padding-large;
+    }
 }
+
+.wrapper-library {
+    width: 100%;
+    position: relative;
+    bottom: 20px;
+    align-items: center;
+    align-content: center;
+    max-width: 1400px;
+    display: block;
+    margin: 0 auto;
+}
+
+.books-view {
+    min-height: 100vh;
+    width: 100%;
+    background: linear-gradient(180deg, #000004 1.69%, #070212 59.5%, #050000 94.98%);
+    background-repeat: no-repeat;  
+    background-attachment: fixed;  
+    background-size: cover;  
+    color: $white;
+    font-family: $font-family;
+
+    .sidebar {
+        background: darken(#6D6C8A, 20%);
+        height: 82px;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        box-sizing: border-box;
+        padding-top: 0;
+        z-index: 1; 
+
+        .main-logo {
+			position: relative;
+			right: 110px;
+            width: 120px;
+            padding-top: 20px;
+        }
+
+        nav {
+            display: block;
+            padding: 0;
+            position: relative;
+
+            ul {
+                display: block;
+                width: 100%;
+                padding: 0;
+                margin: 0;
+
+                li {
+                    display: block;
+                    text-align: left;
+                    margin-left: 25px;
+
+                    a {
+                        margin-bottom: 24px;
+                        color: #FFF;
+                        font-size: 16px;
+
+                        &.primary {
+                            padding-top: 8px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.search {
+    width: 30%; 
+    height: 40px; 
+    padding-left: 10px; 
+    padding-right: 30px;
+    border-radius: 20px; 
+    border: 2px solid #C287E8; 
+    background-color: #000; 
+    color: #FFF; 
+    font-size: 16px; 
+    outline: none; 
+	top: 110px;
+	right: 40px;
+    box-shadow: none; 
+    position: relative; 
+	z-index: 3;
+
+    &::placeholder {
+        color: #FFF !important; 
+        opacity: 0.7; 
+    }
+
+    &:focus {
+        border-color: darken(#800080, 10%);
+        background-color: darken(#000, 5%); 
+    }
+}
+
+.search-icon {
+    position: absolute;
+	top: 132px;
+	left: 140px;
+    transform: translateY(-50%);
+    color: #C287E8;
+    cursor: pointer;
+    font-size: 18px; 
+	z-index: 3;
+}
+
+.container-for-search {
+    position: relative; 
+    padding: 0 15px; 
+}
+
+.alphabet-filter {
+	position: relative;
+    display: flex; // Ensures that the links are in a row
+    justify-content: center; // Centers the links horizontally
+    flex-wrap: wrap; // Allows the links to wrap to the next line if needed
+	top: 100px;
+	right: 0;
+
+    a {
+        text-decoration: none;
+        color: #fff; // Ensures the letters are white
+        margin: 5px 10px; // Adjust spacing between letters
+        font-weight: bold; // Make the letters bold
+        transition: color 0.3s; // Smooth transition for hover effect
+		font-size: 12px;
+
+        &:hover,
+        &.active {
+            color: #C287E8; // Adjust to the color you want for active and hover states
+        }
+    }
+}
+
+
+
+.select-wrapper {
+    position: relative;
+    width: 100px; 
+    background: darken(#6D6C8A, 20%);
+    border-radius: 20px;
+    background: darken(#6D6C8A, 20%);
+    color: white;
+    right: 20px; 
+    top: 113px;
+    float: right; 
+    z-index: 3;
+
+    select.select-custom {
+        appearance: none; 
+        background: darken(#6D6C8A, 20%);
+        border: none;
+        padding: 10px 15px;
+        width: 100%;
+        cursor: pointer;
+        color: white;
+        font-size: 16px;
+        border-radius: 20px;  
+
+        &:focus {
+            outline: none;
+        }
+
+        option {
+            background: #2C2C3E;
+            color: white; 
+            padding: 10px; 
+            font-size: 16px; 
+        }
+    }
+
+    &:after { 
+        content: "\25BC";
+        position: absolute;
+        top: 50%;
+        right: 15px; 
+        transform: translateY(-50%);
+        color: #FFF; 
+        pointer-events: none; 
+    }
+}
+
+.button-text-grid{
+	display: none;
+}
+
+.grid-button {
+	position: relative;
+    background: darken(#6D6C8A, 20%);
+    border: none;
+    width: 50px; // Set the width as needed
+    height: 40px; // Set the height as needed
+    border-radius: 8px; // Adjust the border-radius to match your design
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    outline: none;
+	top: 67px;
+	left: 190px;
+
+    i {
+        color: white; // White color for the icon
+        font-size: 22px; // Icon size
+    }
+
+    &:hover {
+        background-color: darken(#4A4A4A, 10%); // Slightly darker on hover
+    }
+}
+
 
 
 @media screen and (min-width: 1100px) {
-	.books-view
-	{
-		min-height: 100vh;
-		width: 100%;
-		background: linear-gradient(180deg, #000004 1.69%, #070212 59.5%, #050000 94.98%);
-		background-repeat: no-repeat;  // Prevents the background from repeating
-		background-attachment: fixed;  // Keeps the background fixed during scrolling
-		background-size: cover;  // Ensures the background covers the entire element
-		color: $white;
-		font-family: $font-family;
-	
-		.sidebar
-		{
-			padding: 56px 39px;
-			background: rgba(109, 108, 138, 0.2);
-			height: 100%;
-			width: 237px;
-			position: fixed;
-			top: 0;
-			left: 0;
-			box-sizing: border-box;
-	
-			.main-logo
-			{
-				width: 100%;
-				margin-bottom: 40px;
-				padding-right: 0;
-			}
-	
-			nav
-			{
-				display: block;
-				padding: 0;
+
+	.title-library {
+		display: block; // Ensures the title is displayed on larger screens
+		position: relative;
+		right: 600px;
+		bottom: 200px;
+	}
+
+    .books-view {
+        min-height: 100vh;
+        width: 100%;
+        background: linear-gradient(180deg, #000004 1.69%, #070212 59.5%, #050000 94.98%);
+        background-repeat: no-repeat;  
+        background-attachment: fixed; 
+        background-size: cover; 
+        color: $white;
+        font-family: $font-family;
+    
+        .sidebar {
+            padding: 56px 39px;
+            background: rgba(109, 108, 138, 0.2);
+            height: 100%;
+            width: 237px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            box-sizing: border-box;
+            z-index: 1;
+    
+            .main-logo {
 				position: relative;
+                width: 100%;
+				left: 0px;
+            }
+    
+            nav {
+                display: block;
+                padding: 0;
+                position: relative;
+				top: 60px;
+    
+                ul {
+                    display: block;
+                    width: 100%;
+                    padding: 0;
+                    margin: 0;
+    
+                    &.nav-group {
+                        margin-bottom: 80px;
+                    }
+    
+                    li {
+                        display: block;
+                        text-align: left;
+                        padding-left: 0;
+                        padding-right: 0;
+                        margin-left: 10px;
+
+                        a {
+                            margin-bottom: 0px;
+                            color: #FFF;
+                            font-size: 16px;
+
+                            &.primary {
+                                padding-top: 8px;
+                            }
+
+                        }
+                    }
+                    li:nth-last-child(4) { 
+                        a {
+                            margin-bottom: 48px; 
+                        }
+                    }
+
+                    li:nth-last-child(2) { 
+                        a {
+                            margin-bottom: 60px; 
+                        }
+                    }
+                }
+            }
+        }
+    
+        .content {
+            margin-left: 237px;
+            padding: 120px;
+            box-sizing: border-box;
+            width: calc(100% - 237px);
+        }
+    }
+
+	.search {
+		width: 41%; 
+		height: 40px; 
+		padding-left: 10px; 
+		padding-right: 30px;
+		border-radius: 20px; 
+		border: 2px solid #C287E8; 
+		background-color: #000; 
+		color: #FFF; 
+		font-size: 16px; 
+		outline: none; 
+		top: 170px;
+		right: 100px;
+		box-shadow: none; 
+		position: relative; 
+		z-index: 3;
 	
-				ul
-				{
-					display: block;
-					width: 100%;
-					padding: 0;
-					margin: 0;
-	
-					&.nav-group
-					{
-						margin-bottom: 80px;
-					}
-	
-					li
-					{
-						display: block;
-						text-align: left;
-	
-						a
-						{
-							margin-bottom: 24px;
-							color: #FFF;
-							font-size: 16px;
-	
-							&.primary
-							{
-								padding-top: 8px;
-							}
-						}
-					}
-				}
-			}
+		&::placeholder {
+			color: #FFF !important; 
+			opacity: 0.7; 
 		}
 	
-		.content
-		{
-			margin-left: 237px;
-			padding: 120px;
-			box-sizing: border-box;
-			width: calc(100% - 237px);
+		&:focus {
+			border-color: darken(#800080, 10%);
+			background-color: darken(#000, 5%); 
 		}
 	}
-}
+	
+	.search-icon {
+		position: absolute;
+		top: 192px;
+		left: 1140px;
+		transform: translateY(-50%);
+		color: #C287E8;
+		cursor: pointer;
+		font-size: 18px; 
+		z-index: 3;
+	}
+	
+	.container-for-search {
+		position: relative; 
+		padding: 0 15px; 
+	}
+	
+	.alphabet-filter {
+		position: relative;
+		display: flex; // Ensures that the links are in a row
+		justify-content: center; // Centers the links horizontally
+		flex-wrap: wrap; // Allows the links to wrap to the next line if needed
+		top: 160px;
+		right: 190px;
+	
+		a {
+			text-decoration: none;
+			color: #fff; // Ensures the letters are white
+			margin: 5px 10px; // Adjust spacing between letters
+			font-weight: bold; // Make the letters bold
+			transition: color 0.3s; // Smooth transition for hover effect
+			font-size: 18px;
+	
+			&:hover,
+			&.active {
+				color: #C287E8; // Adjust to the color you want for active and hover states
+			}
+		}
+	}
+	.select-wrapper {
+		font-family: "Poppins", sans-serif;
+		position: relative;
+		width: 179px; 
+		height: 51px;
+		border: 2px solid #6D6C8A;
+		border-radius: 20px;
+		background: #6D6C8A;
+		color: white;
+		right: 100px; 
+		top: 159px;
+		float: right; 
+		z-index: 3;
+	
+		select.select-custom {
+			appearance: none; 
+			background-color: #6D6C8A; 
+			border: none;
+			padding: 0 40px 0 15px; // Adjust padding to make room for the arrow
+			width: 100%;
+			height: 100%; // Make sure the select takes up the full height
+			cursor: pointer;
+			color: white;
+			font-size: 18px;
+			border-radius: 20px;  
+	
+			&:focus {
+				outline: none;
+			}
+	
+			option {
+				background: #2C2C3E;
+				color: white; 
+				padding: 10px; 
+				font-size: 16px; 
+			}
+		}
+	
+		&:after { 
+			content: "\25BC";
+			position: absolute;
+			top: 50%;
+			right: 15px; 
+			transform: translateY(-50%);
+			color: #FFF; 
+			pointer-events: none; 
+			font-size: 12px;
+		}
+	}
+	.button-text-grid{
+		display: block;
+	}
+	
+	.button-text-grid{
+		display: block;
+	}
+	
+	.grid-button {
+		top: 116px;
+		margin-left: 1200px; // Positions the button at the right edge of the nearest positioned ancestor
+		background-color: #6D6C8A;
+		border: none;
+		height: 55px;
+		width: 179px;
+		border-radius: 20px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		outline: none;
+		transition: background-color 0.3s;
+	
+		i {
+			color: white;
+			font-size: 24px;
+			margin-left: -30px; // Move the icon to the left
+			margin-right: 30px;
+		}
+	
+		.button-text {
+			color: white;
+			display: block; // Change this to 'block' if you want the text to always show on desktop
+			font-size: 18px !important;
+			font-weight: 400;
+		}
+	
+		&:hover {
+			background-color: darken(#6D6C8A, 10%);
+		}
+	}	
+}	
+
