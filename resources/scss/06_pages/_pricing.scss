@@ -1,4 +1,8 @@
 
+
+
+@media screen and (min-width: 1100px) {
+    
 .comparison-container {
     background-image: url(../images/book_back.png);
 	background-size: contain;
@@ -11,12 +15,9 @@
     gap: 48px;
     margin: 40px 0;
     padding: 56px;
-    
-
 
 }
 .plan-card-left {
-   
     background-color: rgba(101, 111, 158, 0.5);
     backdrop-filter: blur(10px);
     border-radius: 10px;
@@ -72,8 +73,4 @@
     list-style-image: url("../images/light.png");
 
 }
-
-
-
-@media screen and (min-width: 1100px) {
 }
