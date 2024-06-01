@@ -29,3 +29,22 @@ const handleLinkClick = () => {
 links.forEach(link => {
   link.addEventListener('click', handleLinkClick);
 });
+
+// slider monthly annual
+document.addEventListener('DOMContentLoaded', function () {
+  function toggleSlide(plan) {
+      const slide = document.querySelector('.toggle-slide');
+      const buttons = document.querySelectorAll('.toggle-button');
+      buttons.forEach((button, index) => {
+          if (button.textContent.toLowerCase() === plan) {
+              slide.style.left = index === 0 ? '0' : '50%';
+          }
+      });
+  }
+
+  // Attach event listeners to buttons
+  const buttons = document.querySelectorAll('.toggle-button');
+  buttons.forEach(button => {
+      button.addEventListener('click', () => toggleSlide(button.textContent.toLowerCase()));
+  });
+});

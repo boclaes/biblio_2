@@ -44,9 +44,41 @@ button, a {
     }
 }
 
+.toggle-button-group {
+    border: 1px solid #555;
+    display: inline-flex;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+   
+}
+.toggle-button {
+    padding: 10px 20px;
+    cursor: pointer;
+    color: white;
+    background: transparent;
+    font-size: 18px;
+    border: none;
+    transition: color 0.3s;
+    z-index: 2;
+}
+.toggle-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 50%;
+    background-color: $orange;
+    border-radius: 15px;
+    transition: left 0.3s;
+    z-index: 1;
+}
+
 // Button Styles for Large Screens
 @media screen and (min-width: 1100px) {
     button {
         font-size: $button-font-size-large;
     }
+
+   
 }

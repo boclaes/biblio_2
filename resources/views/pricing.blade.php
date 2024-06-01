@@ -44,7 +44,7 @@
                 </div>
             </div>  
         </nav>
-        <div class="heading-paragraph-2">
+        <div class="heading-paragraph-3">
             <h1>Pick your Biblio<mark>Scan</mark> plan!</h1>
             <h4>Track your full library for free – we promise it's yours to keep.</h4>
             <h4>Hungry for more? Biblioscan Pro delivers!</h4>
@@ -52,7 +52,35 @@
     </header>
 
     <section>
-        <h2>Monthly / annual</h2>
+        <div class="toggle-button-group">
+            <div class="toggle-slide"></div>
+            <button class="toggle-button" onclick="toggleSlide('monthly')">Monthly</button>
+            <button class="toggle-button" onclick="toggleSlide('annual')">Annual</button>
+        </div>
+        <div class="comparison-container">
+        <div class="plan-card-left">
+            <h2>BiblioScan Free</h2>
+            <p class="plan-price">€0/month</p>
+            <ul class="plan-features">
+                <li class="plan-feature">Book organization</li>
+                <li class="plan-feature">Up to 5000 items</li>
+                <li class="plan-feature">Wishlist sharing</li>
+                <li class="plan-feature">Reading Progress</li>
+                <li class="plan-feature">Filtering Options</li>
+            </ul>
+        </div>
+        <div class="plan-card-right">
+            <h2>BiblioScan <mark>Pro</mark></h2>
+            <p class="plan-price">€9/month</p>
+            <ul class="plan-features">
+                <li class="plan-feature">Book organization</li>
+                <li class="plan-feature">Up to 100,000 items</li>
+                <li class="plan-feature">Scanner Inclusion</li>
+                <li class="plan-feature">Recommendations</li>
+                <li class="plan-feature">Add Notes and Reviews</li>
+            </ul>
+        </div>
+        </div>
     </section>
 
     <section class="features">
