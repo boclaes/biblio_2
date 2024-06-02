@@ -39,8 +39,8 @@ button, a {
 
     // Small Button Styles
     &.small-button {
-        min-height: $button-min-height-small;
-        min-width: $button-min-width-small;
+        min-height: 45px;
+        min-width: 100px;
     }
 }
 

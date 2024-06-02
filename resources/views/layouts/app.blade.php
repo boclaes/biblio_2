@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>@yield('title', 'Book Scanner')</title>
     @vite(['resources/scss/app.scss', 'resources/js/app.js'])
 </head>
 <body class="books-view">
+    {{--
     <!-- Error and success messages -->
     @if(session('error'))
         <div style="color: red;">{{ session('error') }}</div>
@@ -14,7 +16,7 @@
     @if(session('success'))
         <div style="color: green;">{{ session('success') }}</div>
     @endif
-
+    --}}
     <div class="sidebar">
     <a href="{{ route('welcome') }}"><img src="{{ Vite::asset('resources/images/logo.png') }}" alt="Company logo" class="main-logo"></a>
         <nav class="container-library">
@@ -60,5 +62,6 @@
         </nav>
     </div>
     @yield('content')
+    <script src="{{ asset('js/search.js') }}"></script>
 </body>
 </html>

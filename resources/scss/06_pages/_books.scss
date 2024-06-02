@@ -13,7 +13,8 @@
 .hamburger-menu-library {
     position: relative; 
     margin-left: 310px; 
-    bottom: 20px;
+    bottom: 17px;
+    left: 45px;
     border: none;
     background: none;
     width: 40px;
@@ -73,7 +74,7 @@
 .wrapper-library {
     width: 100%;
     position: relative;
-    bottom: 30px;
+    bottom: 33px;
     align-items: center;
     align-content: center;
     max-width: 1400px;
@@ -104,7 +105,7 @@
 
         .main-logo {
 			position: relative;
-			right: 110px;
+			right: 140px;
             width: 120px;
             padding-top: 20px;
         }
@@ -152,7 +153,7 @@
     font-size: 16px; 
     outline: none; 
 	top: 110px;
-	right: 40px;
+	right: 55px;
     box-shadow: none; 
     position: relative; 
 	z-index: 3;
@@ -171,7 +172,7 @@
 .search-icon {
     position: absolute;
 	top: 132px;
-	left: 140px;
+	left: 155px;
     transform: translateY(-50%);
     color: #C287E8;
     cursor: pointer;
@@ -272,7 +273,7 @@
     cursor: pointer;
     outline: none;
 	top: 67px;
-	left: 190px;
+	left: 230px;
 
     i {
         color: white; // White color for the icon

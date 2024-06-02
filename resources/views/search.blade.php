@@ -3,57 +3,41 @@
 @section('title', 'Scanning Page - Book Scanner')
 
 @section('content')
-    <h2>Enter ISBN or Book Title:</h2>
+    <div class="background-container">
+        <img src="{{ asset('images/book_back.png') }}" alt="Background Image" class="background-image">
+        <div class="blur-overlay"></div>
+    </div>
+
+    <h2 class="search-title">Add your books</h2>
+
+    <div class="search-selection">
+        Select Item Type
+    </div>
+
+    <div class="item-type-options">
+        <label class="item-type-option">
+            <input type="radio" name="itemType" value="book" checked> Book
+        </label>
+        <label class="item-type-option">
+            <input type="radio" name="itemType" value="ebook"> E-book
+        </label>
+    </div>
 
     <form id="searchForm" method="post" action="{{ route('search') }}">
         @csrf
-        <div>
-            <button type="button" id="searchByTitle" onclick="setSearchType('title')">Search by Title</button>
-            <button type="button" id="searchByISBN" onclick="setSearchType('isbn')">Search by ISBN</button>
+        <div class="search-options">
+            <span class="search-option" id="searchByTitle" onclick="setSearchType('title')">Search Books</span>
+            <span class="search-option" id="searchByIsbn" onclick="setSearchType('isbn')">Scan Books</span>
         </div>
-        <input id="searchInput" type="text" name="query" placeholder="Enter Book Title" required autofocus autocomplete="off">
-        <input id="searchType" type="hidden" name="searchType" value="title"> <!-- Default to title -->
-        <button type="submit">Search Book</button>
+
+        <input class="search-search" id="searchInput" type="text" name="query" placeholder="Enter Book Title" required autofocus autocomplete="off">
+        <input class="search-search" id="searchType" type="hidden" name="searchType" value="title"> <!-- Default to title -->
+        <span class="search-icon-search"><i class="fas fa-search"></i></span>
+
+        <div class="search-description">
+            Search by ISBN or keyword. ISBN search will auto-add an item.
+        </div>
+
+        <button class="search-accept" type="submit">Search Book</button>
     </form>
-    
-    <script>
-        window.onload = function() {
-            document.getElementById('searchInput').focus();
-        };
-
-        function setSearchType(type) {
-            const searchTypeInput = document.getElementById('searchType');
-            searchTypeInput.value = type;
-
-            const searchInput = document.getElementById('searchInput');
-            searchInput.placeholder = type === 'isbn' ? 'Enter ISBN' : 'Enter Book Title';
-            searchInput.value = '';
-            searchInput.setAttribute('pattern', type === 'isbn' ? '\\d{10}|\\d{13}' : '.*');
-            searchInput.setAttribute('title', type === 'isbn' ? 'Please enter a valid 10 or 13 digit ISBN.' : 'Please enter a valid book title.');
-        }
-
-        document.getElementById('searchForm').addEventListener('submit', function(event) {
-            console.log('Form submitted'); // Debug: Check if the form submit is caught
-            const searchType = document.getElementById('searchType').value;
-            const query = document.getElementById('searchInput').value;
-
-            if (searchType === 'isbn') {
-                const isbnPattern = /^(?:\d{10}|\d{13})$/;
-                console.log('Checking ISBN', query); // Debug: Log the query
-                if (!isbnPattern.test(query)) {
-                    console.log('Invalid ISBN'); // Debug: Log if invalid
-                    alert('Please enter a valid 10 or 13 digit ISBN.');
-                    event.preventDefault();
-                }
-            } else if (searchType === 'title') {
-                console.log('Checking Title', query); // Debug: Log the title check
-                if (!query.trim()) {
-                    console.log('Invalid Title'); // Debug: Log if invalid
-                    alert('Please enter a valid book title.');
-                    event.preventDefault();
-                }
-            }
-        });
-
-    </script>
 @endsection
