@@ -9,7 +9,7 @@
     <h1>Edit Review for {{ $book->title }}</h1>
     <form method="POST" action="{{ route('save.review', $book->id) }}">
         @csrf
-        <label for="review">Review:</label>
+        <label for="review">Review</label>
         <textarea id="review" name="review" rows="4" cols="50">{{ $book->review_user }}</textarea><br>
         <button type="submit">Save</button>
     </form>

@@ -51,8 +51,8 @@
             @endphp
             <div class="book-card" data-title="{{ $book->title }}">
                 <h3>{{ $book->title }}</h3>
-                <p class="author">By: {{ $book->author }}</p>
-                <p class="pages">Pages: {{$book->pages}}</p>
+                <p class="author">By {{ $book->author }}</p>
+                <p class="pages">Pages {{$book->pages}}</p>
                 @if ($status)
                     <p class="status">{{ $status }}</p>
                 @endif

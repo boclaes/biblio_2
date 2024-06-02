@@ -28,9 +28,9 @@
                 <div class="book-card">
                     <img src="{{ $borrowing->book->cover }}" alt="Cover" class="book-image">
                     <h3>{{ $borrowing->book->title }}</h3>
-                    <p class="author">By: {{ $borrowing->book->author }}</p>
-                    <p>Borrowed by: {{ $borrowing->borrower_name }}</p>
-                    <p class="borrowed-since">Borrowed on: {{ $borrowing->borrowed_since->format('Y-m-d') }}</p>
+                    <p class="author">By {{ $borrowing->book->author }}</p>
+                    <p>Borrowed by {{ $borrowing->borrower_name }}</p>
+                    <p class="borrowed-since">Borrowed on {{ $borrowing->borrowed_since->format('Y-m-d') }}</p>
                     <form action="{{ route('borrowings.return', $borrowing->id) }}" method="POST" style="display: inline;">
                         @csrf
                         @method('DELETE')

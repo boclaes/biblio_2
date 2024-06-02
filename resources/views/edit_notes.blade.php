@@ -9,7 +9,7 @@
     <h1>Edit Notes for {{ $book->title }}</h1>
     <form method="POST" action="{{ route('save.notes', $book->id) }}">
         @csrf
-        <label for="notes">Notes:</label><br>
+        <label for="notes">Notes</label><br>
         <textarea id="notes" name="notes" rows="4" cols="50">{{ $book->notes_user }}</textarea><br>
         <button type="submit">Save</button>
     </form>

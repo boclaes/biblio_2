@@ -48,10 +48,10 @@
     <div class="container">
         <div class="book-card">
             <h3>{{ $book->title }}</h3>
-            <p><strong>Author(s):</strong> {{ $book->author }}</p>
-            <p><strong>Pages:</strong> {{ $book->pages }}</p>
-            <p><strong>Year:</strong> {{ $book->year }}</p>
-            <p><strong>Description:</strong> {{ $book->description }}</p>
+            <p><strong>Author(s)</strong> {{ $book->author }}</p>
+            <p><strong>Pages</strong> {{ $book->pages }}</p>
+            <p><strong>Year</strong> {{ $book->year }}</p>
+            <p><strong>Description</strong> {{ $book->description }}</p>
             @if ($book->cover)
                 <img src="{{ $book->cover }}" alt="Book Cover" class="book-image">
             @else
@@ -59,13 +59,13 @@
             @endif
         </div>
         <div class="book-details" data-book-id="{{ $book->id }}" data-csrf-token="{{ csrf_token() }}">
-            <p><strong>Your Notes:</strong></p>
+            <p><strong>Your Notes</strong></p>
             <span class="description-field">
                 {{ $book->notes_user ? $book->notes_user : 'No custom notes' }}
             </span>
             <br><br>
             <a href="{{ route('edit.notes', $book->id) }}"><button>Edit Notes</button></a>
-            <p><strong>Your Review:</strong></p>
+            <p><strong>Your Review</strong></p>
             <span class="description-field">
                 {{ $book->review ? $book->review : 'No custom review' }}
             </span>

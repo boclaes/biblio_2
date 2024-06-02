@@ -3,7 +3,7 @@
 @section('title', 'Select Book - Add Book')
 
 @section('content')
-    <h2>Add Your Books:</h2>
+    <h2>Add your books</h2>
 
     @forelse ($books as $book)
         <div class="book-card">
