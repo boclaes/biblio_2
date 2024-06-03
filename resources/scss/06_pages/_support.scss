@@ -42,7 +42,48 @@
     top: 55%; 
     right: 5%; 
 }
+.accordion{
+    margin-bottom: 200px;
+   
+}
 
+.accordion-button {
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+    padding: 18px;
+    width: 80%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 24px;
+    font-weight: 400;
+    transition: background-color 0.6s ease;
+    margin-bottom: 10px;
+}
+
+.accordion-content {
+    width: 60%;
+    padding: 4px 60px;
+    text-align: left;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    background-color: transparent;
+    color: white;
+}
+
+.accordion-button:after {
+    content: '\002B'; /* Unicode character for "+" sign */
+    color: $purple;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+.accordion-button.active:after {
+    content: "\2212"; /* Unicode character for "-" sign */
+}
 
 @media screen and (min-width: 1100px) {
     .search-support {
@@ -79,44 +120,12 @@
         margin-bottom: 200px;
         margin-top: 100px;
     }
-
-    .accordion-button {
-        background-color: transparent;
-        color: white;
-        cursor: pointer;
-        padding: 18px;
-        width: 80%;
-        border: none;
-        text-align: left;
-        outline: none;
-        font-size: 24px;
-        font-weight: 400;
-        transition: background-color 0.6s ease;
-        margin-bottom: 10px;
-    }
     
     .accordion-content {
-        width: 60%;
         padding: 4px 260px;
-        text-align: left;
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.2s ease-out;
-        background-color: transparent;
-        color: white;
+
     }
     
-    .accordion-button:after {
-        content: '\002B'; /* Unicode character for "+" sign */
-        color: $purple;
-        font-weight: bold;
-        float: right;
-        margin-left: 5px;
-    }
-    
-    .accordion-button.active:after {
-        content: "\2212"; /* Unicode character for "-" sign */
-    }
     
     
 }
