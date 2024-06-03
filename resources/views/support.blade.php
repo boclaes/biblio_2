@@ -59,11 +59,26 @@
         <button href="{{ route('contact') }}" class="primary big-button">Ask a question</button>
     </div>
 
-    <div class="faq-item">
-        <input type="checkbox" id="faq1" hidden/>
-        <label for="faq1" class="faq-title">Is there a limit to how many items I can store?<span></span></label>
-        <div class="faq-content">Content about item limits.</div>
+    <div class="accordion">
+    <div class="accordion-item">
+        <button class="accordion-button" type="button">
+            My item is missing some information, what can I do?
+        </button>
+        <div class="accordion-content">
+            <p>All users can edit covers, titles, descriptions and creators. So feel free to make these changes as needed. Pro users can edit all data, so any missing information can be quickly added and removed. Alternatively, every item on the website has a “flag” option. If an item is flagged it will go under review and a Libib staff member will make any necessary changes within 48 business hours.</p>
+        </div>
     </div>
+    <div class="accordion-item">
+        <button class="accordion-button" type="button">
+            Is there a limit to how many items I can store?
+        </button>
+        <div class="accordion-content">
+            <p>You can store up to 5000 books with the free version. With BiblioScan Pro you can store up to 10000 items.</p>
+        </div>
+    </div>
+    <!-- Repeat for other items -->
+</div>
+
 
     <footer class="footer desktop-footer">
         <div class="footer-content">
