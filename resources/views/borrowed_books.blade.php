@@ -1,28 +1,12 @@
-@extends('layouts.app_with_filters', ['includeRatings' => false, 'includePages' => false, 'includeName' => false, 'includeAuthor' => false, 'includeDate' => true  ])
+@extends('layouts.app_with_filters_borrow', ['includeRatings' => false, 'includePages' => false, 'includeName' => false, 'includeAuthor' => false, 'includeDate' => true  ])
 
 @section('title', 'Borrowed Books')
 
 @section('content')
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <style>
-        .book-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        .book-card {
-            width: 200px;
-            border: 1px solid #ccc;
-            padding: 10px;
-        }
-        .book-image {
-            width: 100%;
-            height: auto;
-        }
-    </style>
 
     <div class="container">
-        <h2 class="title-borrow">Borrowed Books</h2>
+        <h2 class="title-borrow">Who borrowed my book?</h2>
         <div class="book-container" id="bookContainer">
             @foreach ($borrowings as $borrowing)
                 <div class="book-card">

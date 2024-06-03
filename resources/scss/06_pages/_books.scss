@@ -2,14 +2,6 @@
 	display: none; // Hides the title on screens smaller than 768px
 }
 
-.title-borrow {
-    display: none;
-}
-
-.title-wishlist {
-    display: none;
-}
-
 .hamburger-menu-library {
     position: relative; 
     margin-left: 310px; 
@@ -101,7 +93,7 @@
         left: 0;
         box-sizing: border-box;
         padding-top: 0;
-        z-index: 1; 
+        z-index: 2; 
 
         .main-logo {
 			position: relative;
@@ -156,7 +148,7 @@
 	right: 55px;
     box-shadow: none; 
     position: relative; 
-	z-index: 3;
+	z-index: 1;
 
     &::placeholder {
         color: #FFF !important; 
@@ -177,7 +169,7 @@
     color: #C287E8;
     cursor: pointer;
     font-size: 18px; 
-	z-index: 3;
+	z-index: 1;
 }
 
 .container-for-search {
@@ -190,7 +182,7 @@
     display: flex; // Ensures that the links are in a row
     justify-content: center; // Centers the links horizontally
     flex-wrap: wrap; // Allows the links to wrap to the next line if needed
-	top: 100px;
+	margin-top: 100px;
 	right: 0;
 
     a {
@@ -214,13 +206,13 @@
     position: relative;
     width: 100px; 
     background: #6D6C8A;
-    border-radius: 20px;
+    border-radius: 12px;
     background: #6D6C8A;
     color: white;
     right: 20px; 
     top: 113px;
     float: right; 
-    z-index: 3;
+    z-index: 1;
 
     select.select-custom {
         appearance: none; 
@@ -231,7 +223,7 @@
         cursor: pointer;
         color: white;
         font-size: 16px;
-        border-radius: 20px;  
+        border-radius: 12px;  
 
         &:focus {
             outline: none;
@@ -266,7 +258,7 @@
     border: none;
     width: 50px; // Set the width as needed
     height: 40px; // Set the height as needed
-    border-radius: 8px; // Adjust the border-radius to match your design
+    border-radius: 12px; // Adjust the border-radius to match your design
     display: flex;
     align-items: center;
     justify-content: center;
@@ -285,25 +277,74 @@
     }
 }
 
+.book-header {
+    display: flex; /* Aligns the header letter and the line horizontally */
+    align-items: center; /* Vertically centers the line with the text */
+    margin-top: 30px;
+    margin-right: 400px;
+    left: 25px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #C287E8;
+    position: relative; /* Needed for absolute positioning of the pseudo-element */
+    width: 100%;
+}
+
+.book-header::before {
+    content: ''; /* Creates a pseudo-element for the line */
+    position: absolute;
+    left: 15%; /* Starts the line from the left edge */
+    right: -1150%; /* Ends the line at the right edge */
+    bottom: 0; /* Aligns at the bottom of the header */
+    height: 2px; /* Line thickness */
+    background-color: #333; /* Line color */
+    z-index: -1; /* Ensures the line is behind the text */
+}
+
+.book-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows wrapping to the next line */
+    justify-content: space-between; /* Adds space between columns */
+}
+
+.book-card-library {
+    width: 48%; /* Adjust the width to fit two cards side by side */
+    box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
+    margin-top: 20px;
+}
+
+.book-image {
+    max-width: 100%; /* Ensures images fit within the card */
+    height: auto; /* Maintains aspect ratio */
+    transition: transform 0.3s ease-in-out; /* Smooth transition */
+    margin-bottom: 10px;
+}
+
+.book-image:hover {
+    transform: scale(1.05); /* Scales the image up by 10% */
+}
+
+.author {
+    margin-top: 5px;
+    color: #8A8A8A;
+}
+
+.title-library-small {
+    font-size: 18px;
+}
+
+.stars {
+}
+
+.star {
+    font-size: 30px;
+    color: #FFFFFF;
+}
 
 
 @media screen and (min-width: 1100px) {
 
-    .title-borrow {
-		display: block; // Ensures the title is displayed on larger screens
-		position: relative;
-		right: 525px;
-		bottom: 300px;
-	}
-
-    .title-wishlist {
-		display: block; // Ensures the title is displayed on larger screens
-		position: relative;
-		right: 630px;
-		bottom: 200px;
-	}
-
-	.title-library {
+    .title-library {
 		display: block; // Ensures the title is displayed on larger screens
 		position: relative;
 		right: 600px;
@@ -368,6 +409,10 @@
                                 padding-top: 8px;
                             }
 
+                            a.active {
+                                color: #C287E8; // Example: a bright color for active state
+                                font-weight: bold;
+                            }
                         }
                     }
                     li:nth-last-child(4) { 
@@ -396,40 +441,14 @@
 	.search {
 		width: 41%; 
 		height: 40px; 
-		padding-left: 10px; 
-		padding-right: 30px;
-		border-radius: 20px; 
-		border: 2px solid #C287E8; 
-		background-color: #000; 
-		color: #FFF; 
-		font-size: 16px; 
-		outline: none; 
 		top: 170px;
 		right: 100px;
-		box-shadow: none; 
-		position: relative; 
-		z-index: 3;
-	
-		&::placeholder {
-			color: #FFF !important; 
-			opacity: 0.7; 
-		}
-	
-		&:focus {
-			border-color: darken(#800080, 10%);
-			background-color: darken(#000, 5%); 
-		}
-	}
+    }
 	
 	.search-icon {
 		position: absolute;
 		top: 192px;
 		left: 1140px;
-		transform: translateY(-50%);
-		color: #C287E8;
-		cursor: pointer;
-		font-size: 18px; 
-		z-index: 3;
 	}
 	
 	.container-for-search {
@@ -442,6 +461,7 @@
 		display: flex; // Ensures that the links are in a row
 		justify-content: center; // Centers the links horizontally
 		flex-wrap: wrap; // Allows the links to wrap to the next line if needed
+        margin-top: 0;
 		top: 160px;
 		right: 190px;
 	
@@ -459,17 +479,18 @@
 			}
 		}
 	}
+
 	.select-wrapper {
 		font-family: "Poppins", sans-serif;
 		position: relative;
 		width: 179px; 
 		height: 51px;
 		border: 2px solid #6D6C8A;
-		border-radius: 20px;
+		border-radius: 12px;
 		background: #6D6C8A;
 		color: white;
-		right: 100px; 
-		top: 159px;
+		right: 150px; 
+		top: 160px;
 		float: right; 
 		z-index: 3;
 	
@@ -483,7 +504,7 @@
 			cursor: pointer;
 			color: white;
 			font-size: 18px;
-			border-radius: 20px;  
+			border-radius: 12px;  
 	
 			&:focus {
 				outline: none;
@@ -508,6 +529,7 @@
 			font-size: 12px;
 		}
 	}
+    
 	.button-text-grid{
 		display: block;
 	}
@@ -518,12 +540,12 @@
 	
 	.grid-button {
 		top: 116px;
-		margin-left: 1200px; // Positions the button at the right edge of the nearest positioned ancestor
+		margin-left: 1120px; // Positions the button at the right edge of the nearest positioned ancestor
 		background-color: #6D6C8A;
 		border: none;
 		height: 55px;
 		width: 179px;
-		border-radius: 20px;
+		border-radius: 12px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -549,5 +571,69 @@
 			background-color: darken(#6D6C8A, 10%);
 		}
 	}	
+    
+    .book-header {
+        display: flex; /* Aligns the header letter and the line horizontally */
+        align-items: center; /* Vertically centers the line with the text */
+        margin-top: 30px;
+        left: -5px;
+        font-size: 24px;
+        font-weight: bold;
+        color: #C287E8;
+        position: relative; /* Needed for absolute positioning of the pseudo-element */
+        width: 100%;
+    }
+    
+    .book-header::before {
+        content: ''; /* Creates a pseudo-element for the line */
+        position: absolute;
+        left: 0%; /* Starts the line from the left edge */
+        right: -38%; /* Ends the line at the right edge */
+        bottom: 0; /* Aligns at the bottom of the header */
+        height: 2px; /* Line thickness */
+        background-color: #333; /* Line color */
+        z-index: -1; /* Ensures the line is behind the text */
+    }
+    
+    .book-container {
+        display: flex;
+        flex-wrap: wrap; /* Allows wrapping to the next line */
+        justify-content: left;
+    }
+    
+    .book-card-library {
+        width: 18%; /* Adjust the width to fit five cards side by side */
+        box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
+        margin-top: 30px;
+        margin-right: 50px;
+    }
+    
+    .book-image {
+        max-width: 100%; /* Ensures images fit within the card */
+        height: auto; /* Maintains aspect ratio */
+        transition: transform 0.3s ease-in-out; /* Smooth transition */
+        margin-bottom: 10px;
+    }
+    
+    .book-image:hover {
+        transform: scale(1.05); /* Scales the image up by 10% */
+    }
+    
+    .author {
+        margin-top: 5px;
+        color: #8A8A8A;
+    }
+    
+    .title-library-small {
+        font-size: 18px;
+    }
+    
+    .stars {
+    }
+    
+    .star {
+        font-size: 30px;
+        color: #FFFFFF;
+    }    
 }	
 

@@ -19,8 +19,8 @@
     --}}
 
     <div class="dropdown">
-        <div class="select-wrapper">
-            <select id="sort" class="select-custom">
+        <div class="select-wrapper-borrow">
+            <select id="sort" class="select-custom-borrow">
                 @isset($includeName)
                     @if ($includeName)
                         <option value="name_asc">Title</option>
@@ -49,31 +49,17 @@
             </select>
         </div>
     </div>
-    
-    <div class="search-bar">
-        <input type="text" class="search" id="search" placeholder="Search" autocomplete="off">
-        <span class="search-icon"><i class="fas fa-search"></i></span>
-    </div>
-    
-    <button class="grid-button">
-        <i class="fas fa-th"></i>
-        <span class="button-text-grid">Cover</span>
-    </button>
 
-    <div class="alphabet-filter">
-        @foreach(range('A', 'Z') as $letter)
-            <a href="#" data-letter="{{ $letter }}">{{ $letter }}</a>
-        @endforeach
-    </div>
+    <button type="button" class="button-add-borrow" onclick="window.location.href='{{ route('books.addBorrow') }}';">Add new book borrow</button>
 
     <div class="sidebar">
-        <a href="{{ route('welcome') }}"><img src="{{ Vite::asset('resources/images/logo.png') }}" alt="Company logo" class="main-logo"></a>
+    <a href="{{ route('welcome') }}"><img src="{{ Vite::asset('resources/images/logo.png') }}" alt="Company logo" class="main-logo"></a>
         <nav class="container-library">
             <div class="wrapper-library"> 
                 <div class="menu-list-desktop">
                     <ul class="nav-group">
-                        <li><a href="{{ route('welcome') }}" >My library</a></li>
-                        <li><a href="{{ route('search.form') }}" >Add books</a></li>
+                        <li><a href="{{ route('welcome') }}">My library</a></li>
+                        <li><a href="{{ route('search.form') }}">Add books</a></li>
                         <li><a href="{{ route('borrowed-books') }}">Book borrower</a></li>
                         <li><a href="{{ route('book.recommend') }}">Discover books</a></li>
                         <li><a href="{{ route('accepted.books') }}">Wishlist</a></li>

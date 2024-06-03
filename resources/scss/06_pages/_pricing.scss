@@ -1,3 +1,70 @@
+   
+.comparison-container {
+    background-image: url(../images/book_back.png);
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	z-index: 1;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    gap: 48px;
+    margin: 40px 0;
+    padding: 48px;
+
+}
+.plan-card-left {
+    background-color: rgba(101, 111, 158, 0.5);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    color: white;
+    padding: 16px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.plan-card-right {
+    background-color: rgba(5,0,0,0.5);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    color: white;
+    padding: 24px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border: $purple 2px solid;
+}
+.plan-card-left h2, .plan-card-right h2 {
+    width: 100%;
+    font-size: 36px;
+    margin-bottom: 24px;
+
+    mark
+			{
+				color: $purple;
+				background-color: transparent;
+			}
+}
+.plan-price {
+    font-size: 24px;
+    font-weight: medium;
+}
+
+.plan-info {
+    margin: 24px;
+
+}
+.plan-features {
+    text-align: left;
+}
+.plan-feature {
+   
+    a{
+        font-weight: 200;
+    }
+
+}
+
+.light{
+    list-style-image: url("../images/light.png");
+
+}
 
 
 

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Support - Book Scanner</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     @vite(['resources/scss/app.scss', 'resources/js/app.js'])
 </head>
 <body>
@@ -49,13 +50,21 @@
         </div>
     </header>
 
+    <div class="search-bar-support">
+        <input type="text" class="search-support" id="search" placeholder="Search" autocomplete="off">
+        <span class="search-icon-support"><i class="fas fa-search"></i></span>
+    </div>
+
+    <div class="contact-button">
+        <button href="{{ route('contact') }}" class="primary big-button">Ask a question</button>
+    </div>
+
     <div class="faq-item">
         <input type="checkbox" id="faq1" hidden/>
         <label for="faq1" class="faq-title">Is there a limit to how many items I can store?<span></span></label>
         <div class="faq-content">Content about item limits.</div>
     </div>
 
-{{-- 
     <footer class="footer desktop-footer">
         <div class="footer-content">
             <div class="explore">
@@ -74,7 +83,7 @@
             <div class="learn">
                 <h3>Learn</h3>
                 <ul>
-                    <li><a href="">Contact us</a></li>
+                    <li><a href="{{ route('contact') }}">Contact us</a></li>
                     <li><a href="{{ route('support') }}">Support</a></li>
                 </ul>
                 <a href="#" class="privacy">Privacy & cookie policy</a>
@@ -90,11 +99,11 @@
             </div>
                 <h3>Learn</h3>
                 <ul>
-                    <li><a href="">Contact us</a></li>
+                    <li><a href="{{ route('contact') }}">Contact us</a></li>
                     <li><a href="{{ route('support') }}">Support</a></li>
                 </ul>
             </div>
         </div>
-    </footer> --}}
+    </footer> 
 </body>
 </html>

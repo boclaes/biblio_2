@@ -1,0 +1,148 @@
+.button-add-borrow{
+    position: absolute;
+    top: 250px;
+    left: 150px;
+    transform: translateX(-50%);
+    padding: 10px 30px;
+    background-color: #C05532;
+    color: #FFF;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 16px;
+    white-space: nowrap;
+    z-index: 2;
+}
+
+.title-borrow {
+    position: relative;
+    top: 120px;
+    margin-left: 35px;
+    text-align: left;
+}
+
+
+.select-wrapper-borrow {
+    position: relative;
+    width: 100px; 
+    background: #6D6C8A;
+    border-radius: 12px;
+    background: #6D6C8A;
+    color: white;
+    right: 25px; 
+    top: 253px;
+    float: right; 
+    z-index: 3;
+
+    select.select-custom-borrow {
+        appearance: none; 
+        background: #6D6C8A;
+        border: none;
+        padding: 10px 15px;
+        width: 100%;
+        cursor: pointer;
+        color: white;
+        font-size: 16px;
+        border-radius: 20px;  
+
+        &:focus {
+            outline: none;
+        }
+
+        option {
+            background: #2C2C3E;
+            color: white; 
+            padding: 10px; 
+            font-size: 16px; 
+        }
+    }
+
+    &:after { 
+        content: "\25BC";
+        position: absolute;
+        top: 50%;
+        right: 15px; 
+        transform: translateY(-50%);
+        color: #FFF; 
+        pointer-events: none; 
+    }
+}
+
+@media screen and (min-width: 1100px) {
+
+    .title-borrow {
+        position: absolute;
+        top: 0px;
+        margin-left: 0;
+        left: 350px;
+        top: 60px;
+    }
+
+	.select-wrapper-borrow {
+		font-family: "Poppins", sans-serif;
+		position: relative;
+		width: 120px; 
+		height: 40px;
+		border: 2px solid #6D6C8A;
+		border-radius: 12px;
+		background: #6D6C8A;
+		color: white;
+		right: 1200px; 
+		top: 200px;
+		float: right; 
+		z-index: 3;
+	
+		select.select-custom-borrow {
+			appearance: none; 
+			background-color: #6D6C8A; 
+			border: none;
+			padding: 0 40px 0 15px; // Adjust padding to make room for the arrow
+			width: 100%;
+			height: 100%; // Make sure the select takes up the full height
+			cursor: pointer;
+			color: white;
+			font-size: 18px;
+			border-radius: 20px;  
+	
+			&:focus {
+				outline: none;
+			}
+	
+			option {
+				background: #2C2C3E;
+				color: white; 
+				padding: 10px; 
+				font-size: 16px; 
+			}
+		}
+	
+		&:after { 
+			content: "\25BC";
+			position: absolute;
+			top: 50%;
+			right: 15px; 
+			transform: translateY(-50%);
+			color: #FFF; 
+			pointer-events: none; 
+			font-size: 12px;
+		}
+	}  
+
+    .button-add-borrow{
+        position: absolute;
+        top: 200px;
+        left: 460px;
+        transform: translateX(-50%);
+        padding: 12px 30px;
+        background-color: #C05532;
+        color: #FFF;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        font-size: 14px;
+        white-space: nowrap;
+        z-index: 2;
+    }
+}

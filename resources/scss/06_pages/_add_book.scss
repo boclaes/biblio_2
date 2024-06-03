@@ -22,11 +22,39 @@
     flex: 0 0 auto;
     text-align: center;
     margin-right: 20px;
+    position: relative; // Ensures we can position forms absolutely if needed
 }
 
 .book-image {
-    height: 200px;
+    height: 220px;
     border-radius: 5px;
+}
+
+.button-container {
+    display: flex; // Set display to flex to align children side by side
+    justify-content: center; // Center the buttons horizontally
+}
+
+.image-form {
+    margin: 0 5px; // Adds space between the buttons
+    background: none;
+    border: none;
+    padding: 0;
+    padding-bottom: 20px;
+}
+
+.image-button {
+    background: none;
+    border: none;
+    padding: 0;
+    display: block; // Ensures button uses full width of its container
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.action-image {
+    width: 40px; // Adjust as necessary for your design
+    height: auto;
 }
 
 .button-add-library-container {
@@ -53,13 +81,13 @@
     justify-content: space-between;
 }
 
-.book-header {
+.book-header-add {
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
 }
 
-.book-header h3 {
+.book-header-add h3 {
     font-size: 24px;
     text-align: left;
     margin-bottom: 10px;
@@ -73,8 +101,7 @@
     right: 10px;
 }
 
-.book-header p {
-    margin: 5px 0;
+.book-header-add p {
     text-align: left;
     position: relative;
     right: 10px;
@@ -89,9 +116,12 @@
     bottom: 10px;
 }
 
+.search-pages{
+    margin-bottom: 10px;
+}
+
 .description-container {
     width: 100%; /* Full width of the book-card */
-    margin-top: 20px;
 }
 
 .description-title {
@@ -115,3 +145,71 @@
     width: 100%; /* Ensure the text uses all available width */
 }
 
+@media screen and (min-width: 1100px) {
+
+    .book-card {
+        top: 50px;
+        display: flex;
+        flex-direction: column; /* Change to column to stack children vertically */
+        width: 60%;
+        margin: 40px auto;
+        background-color: rgba(5, 0, 0, 0.5);
+        backdrop-filter: blur(5px);
+        border-radius: 10px;
+        padding: 20px;
+        color: #fff;
+        position: relative;
+    }
+
+    .book-image {
+        height: 280px;
+        border-radius: 5px;
+    }
+
+    .add-book-title {
+        display: block; // Ensures the title is displayed on larger screens
+        margin-right: 780px;
+        margin-top: 70px;
+    }
+
+    .button-add-library {
+        background-color: #C287E8;
+        color: #fff;
+        border: none;
+        padding: 8px 30px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-bottom: 40px;
+    }
+
+    .description-container {
+        width: 70%; /* Full width of the book-card */
+        margin-top: 0px;
+        height: 70%;
+    }
+
+    .description-title {
+        font-size: 24px;
+        border-bottom: 2px solid #C287E8;
+        margin-bottom: 10px;
+        text-align: left;
+        font-weight: bold;
+        display: inline-block;
+        position: relative;
+        bottom: 100px;
+        right: 50px;
+    }
+
+    .description-content {
+        position: relative;
+        text-align: left;
+        width: 100%; /* Ensure the text uses all available width */
+        margin-left: 280px;
+        bottom: 100px;
+    }
+
+    .search-pages{
+        margin-bottom: 10px;
+    }
+}

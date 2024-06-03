@@ -183,7 +183,7 @@ class BookController extends Controller
 
         $query = $request->input('query');
         if ($query) {
-            return redirect()->route('search', ['query' => $query])->with('success', 'Book deleted successfully.');
+            return redirect()->route('search', ['query' => $query])->with('success', 'Book deleted successfully');
         }
 
         return redirect()->back()->with('success', 'Book deleted successfully.');

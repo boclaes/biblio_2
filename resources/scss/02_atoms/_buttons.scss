@@ -32,9 +32,9 @@ button, a {
 
     // Big Button Styles
     &.big-button {
-        min-height: $button-min-height-big;
-        min-width: $button-min-width-big;
-        padding: $button-padding-big;
+        min-height: 50px;
+        min-width: 130px;
+        padding: 0 28px;
     }
 
     // Small Button Styles

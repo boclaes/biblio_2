@@ -1,38 +1,8 @@
-@extends('layouts.app_with_filters', ['includeRatings' => true, 'includePages' => true, 'includeName' => true, 'includeAuthor' => true ])
+@extends('layouts.app_with_filters', ['includeRatings' => true, 'includePages' => false, 'includeName' => true, 'includeAuthor' => true])
 
 @section('title', 'Simple Book List')
 
 @section('content')
-    <style>
-        .book-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        .book-card {
-            width: 200px;
-            border: 1px solid #ccc;
-            padding: 10px;
-            transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth transition */
-        }
-        .book-card:hover {
-            transform: scale(1.05); /* Slightly larger on hover */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow effect */
-        }
-        .book-image {
-            width: 100%;
-            height: auto;
-        }
-        .stars {
-            display: flex;
-            align-items: center;
-        }
-        .star {
-            font-size: 24px;
-            color: gold;
-        }
-    </style>
-
     <h2 class="title-library">My library</h2>
     <div class="book-container" id="bookContainer">
         @foreach ($books->sortBy('title') as $book)
@@ -49,13 +19,16 @@
                     $status = 'Done Reading';
                 }
             @endphp
-            <div class="book-card" data-title="{{ $book->title }}">
-                <h3>{{ $book->title }}</h3>
-                <p class="author">By {{ $book->author }}</p>
-                <p class="pages">Pages {{$book->pages}}</p>
-                @if ($status)
-                    <p class="status">{{ $status }}</p>
+            <div class="book-card-library" data-title="{{ $book->title }}">
+                @if ($book->cover)
+                    <a href="{{ route('details.book', $book->id) }}">
+                        <img src="{{ $book->cover }}" alt="Book Cover" class="book-image">
+                    </a>
+                @else
+                    <p>No Cover Image</p>
                 @endif
+                <h3 class="title-library-small">{{ $book->title }}</h3>
+                <p class="author">{{ $book->author }}</p>
                 <div class="stars" data-rating="{{ $numStars }}">
                     @for ($i = 1; $i <= $numStars; $i++)
                         <span class="star">&#9733;</span>
@@ -64,18 +37,6 @@
                         <span class="star">&#9734;</span>
                     @endfor
                 </div>
-                @if ($book->cover)
-                    <a href="{{ route('details.book', $book->id) }}">
-                        <img src="{{ $book->cover }}" alt="Book Cover" class="book-image">
-                    </a>
-                @else
-                    <p>No Cover Image</p>
-                @endif
-                <a href="{{ route('edit.book', $book->id) }}">Edit Book</a> <!-- New Edit Book button -->
-                <form action="{{ route('show.book', $book->id) }}" method="POST">
-                    @csrf
-                    <button type="submit">Show Book</button>
-                </form>
             </div>
         @endforeach
     </div>

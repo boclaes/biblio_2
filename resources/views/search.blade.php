@@ -25,6 +25,9 @@
 
     <form id="searchForm" method="post" action="{{ route('search') }}">
         @csrf
+        @if(request('wish'))
+            <input type="hidden" name="wish" value="1">
+        @endif
         <div class="search-options">
             <span class="search-option" id="searchByTitle" onclick="setSearchType('title')">Search Books</span>
             <span class="search-option" id="searchByIsbn" onclick="setSearchType('isbn')">Scan Books</span>
