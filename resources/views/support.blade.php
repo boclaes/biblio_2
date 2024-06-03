@@ -75,6 +75,27 @@
         <div class="accordion-content">
             <p>You can store up to 5000 books with the free version. With BiblioScan Pro you can store up to 10000 items.</p>
         </div>
+        <div class="accordion-item">
+        <button class="accordion-button" type="button">
+            What does a Pro subscription get me?
+        </button>
+        <div class="accordion-content">
+            <p>It gives you much more options and storage. Visit the pricing page for more information.</p>
+        </div>
+        <div class="accordion-item">
+        <button class="accordion-button" type="button">
+            What happens when I make a change to my subscription?
+        </button>
+        <div class="accordion-content">
+            <p>If you change to pro you get a lot more options. If you change to free, all the extra's will become unavailable.</p>
+        </div>
+        <div class="accordion-item">
+        <button class="accordion-button" type="button">
+            How can I delete my account?
+        </button>
+        <div class="accordion-content">
+            <p>You can delete your account in 'account settings'.</p>
+        </div>
     </div>
     <!-- Repeat for other items -->
 </div>
