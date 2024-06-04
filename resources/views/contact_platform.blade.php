@@ -1,6 +1,6 @@
 @extends('layouts.app_no_filters', ['includeRatings' => false, 'includePages' => false, 'includeName' => true, 'includeAuthor' => true ])
 
-@section('title', 'Support')
+@section('title', 'Contact_platform')
 
 @section('content')
     <div class="contact-view">
@@ -40,3 +40,4 @@
             </div>
         </div>
     </div>
+    @endsection
