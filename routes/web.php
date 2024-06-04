@@ -26,6 +26,10 @@ Route::get('/support', function () {
     return view('support');
 })->name('support');
 
+Route::get('/support_platform', function () {
+    return view('support_platform');
+})->name('support_platform');
+
 Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
