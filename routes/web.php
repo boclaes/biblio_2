@@ -57,6 +57,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/add-book', [BookController::class, 'addBook'])->name('addBook');
     Route::delete('/book/{id}', [BookController::class, 'delete'])->name('delete.book');
     Route::get('/searchform', [BookController::class, 'searchForm'])->name('search.form');
+    Route::get('/detailsBack', [BookController::class, 'detailsBack'])->name('details.back');
 
     // Book Borrow
     Route::get('/books/add-borrow', [BookController::class, 'showAddBorrow'])->name('books.addBorrow');

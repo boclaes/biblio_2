@@ -1,0 +1,20 @@
+.background-image-borrow {
+    position: absolute;
+    top: 250px;
+    left: 30px;
+    width: 80%;
+    height: 40%;
+    z-index: 1; // Ensure the image is below the blur overlay
+}
+
+.blur-overlay-borrow {
+    position: absolute;
+    top: 200px;
+    left: 20px;
+    width: 90%;
+    height: 50%;
+    border-radius: 20px;
+    z-index: 2;
+    background-color: rgba(5, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}

@@ -593,7 +593,7 @@ class BookController extends Controller
         ]);
         $borrowing->save();
 
-        return redirect()->route('books')->with('success', 'Book borrowing recorded successfully.');
+        return redirect()->route('borrowed-books')->with('success', 'Book borrowing recorded successfully.');
     }
 
     public function showBorrowedBooks()
@@ -616,4 +616,11 @@ class BookController extends Controller
     {
         return view('search'); // This now points to what was previously home.blade.php
     }
+
+    public function detailsBack(Request $request)
+    {
+        $query = $request->input('query', '');
+        return redirect()->route('search', ['query' => $query]);
+    }
+
 }

@@ -13,7 +13,13 @@
 
             <div class="book-details-container">
                 <div class="book-image-container">
-                    <img src="{{ $book['volumeInfo']['imageLinks']['thumbnail'] ?? asset('images/default_cover.jpg') }}" alt="Cover Image" class="book-image">
+                    @if (array_key_exists($googleBooksId, $userBookMap))
+                    <a href="{{ route('details.book.search', ['id' => $userBookMap[$googleBooksId], 'query' => request('query')]) }}">
+                        <img src="{{ $book['volumeInfo']['imageLinks']['thumbnail'] ?? asset('images/default_cover.jpg') }}" alt="Cover Image" class="book-image-hover">
+                    </a>
+                    @else
+                        <img src="{{ $book['volumeInfo']['imageLinks']['thumbnail'] ?? asset('images/default_cover.jpg') }}" alt="Cover Image" class="book-image-search">
+                    @endif
                     @if (!array_key_exists($googleBooksId, $userBookMap))
                         <form method="post" action="{{ route('addBook') }}" class="button-add-library-container">
                             @csrf
@@ -29,12 +35,12 @@
                                 @csrf
                                 @method('DELETE')
                                 <input type="hidden" name="query" value="{{ request('query') }}">
-                                <button type="submit" class="image-button">
+                                <button type="submit" class="image-button-hover">
                                     <img src="{{ asset('images/delete.png') }}" alt="Delete from Library" class="action-image"/>
                                 </button>
                             </form>
                             <form method="get" action="{{ route('edit.book', ['id' => $userBookMap[$googleBooksId]]) }}" class="image-form">
-                                <button type="submit" class="image-button">
+                                <button type="submit" class="image-button-hover">
                                     <img src="{{ asset('images/edit.png') }}" alt="Edit Book" class="action-image"/>
                                 </button>
                             </form>

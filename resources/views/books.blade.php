@@ -20,6 +20,12 @@
                 }
             @endphp
             <div class="book-card-library" data-title="{{ $book->title }}">
+                <form action="{{ route('show.book', $book->id) }}" method="POST">
+                    @csrf
+                    <button class="image-button-library" type="submit">
+                        <img src="{{ asset('images/Showbook.png') }}" alt="Delete from Library" class="action-image-wishlist"/>
+                    </button>
+                </form>
                 @if ($book->cover)
                     <a href="{{ route('details.book', $book->id) }}">
                         <img src="{{ $book->cover }}" alt="Book Cover" class="book-image">
@@ -38,6 +44,7 @@
                     @endfor
                 </div>
             </div>
+
         @endforeach
     </div>
 @endsection

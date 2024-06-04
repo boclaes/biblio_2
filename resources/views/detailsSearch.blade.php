@@ -103,6 +103,6 @@
             </div>
         </div>
     </div>
-    <a href="{{ route('search.form')}}">back</a>
+    <a href="{{ route('details.back', ['query' => request('query')]) }}">back</a>
     <script src="{{ asset('js/books.js') }}"></script>
 @endsection

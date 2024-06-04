@@ -315,7 +315,7 @@
 
 .book-image {
     max-width: 100%; /* Ensures images fit within the card */
-    height: auto; /* Maintains aspect ratio */
+    width: 170px;
     transition: transform 0.3s ease-in-out; /* Smooth transition */
     margin-bottom: 10px;
 }
@@ -339,6 +339,23 @@
 .star {
     font-size: 30px;
     color: #FFFFFF;
+}
+
+.image-button-library {
+    position: relative;
+    margin-left: 170px;
+    top: 20px;
+    position: relative;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    z-index: 1; // Ensure it is above the book image
+    transition: transform 0.3s ease-in-out; /* Smooth transition */
+}
+
+.image-button-library:hover {
+    transform: scale(1.2); /* Scales the image up by 10% */
 }
 
 
@@ -634,6 +651,23 @@
     .star {
         font-size: 30px;
         color: #FFFFFF;
-    }    
+    }   
+    
+    .image-button-library {
+        position: relative;
+        margin-left: 170px;
+        top: 20px;
+        position: relative;
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        z-index: 1; // Ensure it is above the book image
+        transition: transform 0.3s ease-in-out; /* Smooth transition */
+    }
+    
+    .image-button-library:hover {
+        transform: scale(1.2); /* Scales the image up by 10% */
+    }
 }	
 
