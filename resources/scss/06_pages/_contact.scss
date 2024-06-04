@@ -1,0 +1,178 @@
+.contact-view
+{
+	height: 100vh;
+	width: 100vw;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	&::before
+	{
+		width: 50vw;
+		height: 50vw;
+		position: absolute;
+		bottom: 0;
+		opacity: 0.2;
+		right: -15vw;
+		content: '';
+		background-image: url(../images/Ellipse-blauw.png);
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: right center;
+		z-index: 1;
+	}
+
+	&::after
+	{
+		width: 50%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		right: 0;
+		content: '';
+		background-image: url(../images/frame.svg);
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: right center;
+		z-index: 1;
+		opacity: 0.6;
+	}
+
+	.main-logo
+	{
+		height: 67px;
+		width: auto;
+		position: absolute;
+		top: 72px;
+		left: 0;
+	}
+
+	.container
+	{
+		width: 100%;
+		position: relative;
+		z-index: 9;
+		height: 100%;
+	}
+
+	.wrapper
+	{
+		position: relative;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		padding-top: 100px;
+		padding-bottom: 150px;
+	}
+
+	.contact-view-box
+	{
+		background-color: rgba(109, 108, 138, 0.6);
+		backdrop-filter: blur(10px);
+		padding: 40px;
+		box-sizing: border-box;
+		border-radius: 20px;
+		width: 100%;
+		margin: 0 auto;
+		max-width: 800px;
+		text-align: left;
+		z-index: 9;
+
+		.title
+		{
+			line-height: 60px;
+		}
+
+		.login-message
+		{
+			margin-bottom: 50px;
+			margin-top: 20px;
+			font-size: 14px;
+			font-weight: 600;
+			line-height: 24px;
+
+			a
+			{
+				color: #C287E8;
+				display: inline-block;
+				margin-left: 20px;
+			}
+		}
+
+		label
+		{
+			font-size: 16px;
+			font-weight: 400;
+			line-height: 30px;
+			text-align: left;
+			color: #FFF;
+			display: block;
+			margin-bottom: 5px;
+		}
+
+		input[type="email"], input[type="text"]
+		{
+			display: block;
+			width: 100%;
+			background-color: #F1F1F1;
+			border-radius: 16px;
+			padding: 16px;
+			box-sizing: border-box;
+			font-size: 16px;
+			border: none;
+			box-shadow: none;
+			margin-bottom: 20px;
+		}
+
+        input[type="comments"]
+		{
+			display: block;
+			width: 100%;
+			background-color: #F1F1F1;
+			border-radius: 16px;
+			padding: 16px;
+            padding-bottom: 100px;
+			box-sizing: border-box;
+			font-size: 16px;
+			border: none;
+			box-shadow: none;
+			margin-bottom: 20px;
+		}
+
+		button.primary
+		{
+			margin-top: 30px;
+		}
+
+		.forgot-password a
+		{
+			color: #E4C8A8;
+			margin-top: 32px;
+			display: inline-block;
+			font-size: 14px;
+		}
+	}
+}
+
+@media screen and (min-width: 768px) {
+
+}
+
+@media screen and (min-width: 1100px) {
+	.contact-view
+{
+
+	width: 100%;
+
+	.contact-view-box
+	{
+		padding: 104px;
+
+	}
+}
+
+}
+
+@media screen and (min-width: 1400px) {
+
+} 
