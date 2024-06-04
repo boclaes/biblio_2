@@ -1,30 +1,20 @@
+@extends('layouts.app_no_filters', ['includeRatings' => false, 'includePages' => false, 'includeName' => true, 'includeAuthor' => true ])
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Support - Book Scanner</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    @vite(['resources/scss/app.scss', 'resources/js/app.js'])
-</head>
-<body>
+@section('title', 'Support')
+
 @section('content')
-        <div>
-            <h1>Frequently asked questions</h1>
-        </div>
-    </header>
-
-    <div class="search-bar-support">
-        <input type="text" class="search-support" id="search" placeholder="Search" autocomplete="off">
-        <span class="search-icon-support"><i class="fas fa-search"></i></span>
+    <div class="container">
+        <h2 class="title-borrow">Frequently asked questions</h2>
+    </div>
+    <div class="search-bar">
+        <input type="text" class="search" id="search" placeholder="Search" autocomplete="off">
+        <span class="search-icon"><i class="fas fa-search"></i></span>
     </div>
 
-    <div class="contact-button">
+    <div class="support-button">
         <button href="{{ route('contact') }}" class="primary big-button">Ask a question</button>
     </div>
-
-    <div class="accordion">
+    <div class="accordion-platform">
     <div class="accordion-item">
         <button class="accordion-button" type="button">
             My item is missing some information, what can I do?
@@ -62,6 +52,6 @@
             <p>You can delete your account in 'account settings'.</p>
         </div>
     </div>
-    <!-- Repeat for other items -->
+   
 </div>
 
