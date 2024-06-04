@@ -22,7 +22,7 @@
     </div>
 
     <div class="contact-button">
-        <button href="{{ route('contact') }}" class="primary big-button">Ask a question</button>
+    <button type="button" class="primary big-button" onclick="window.location.href='{{ route('contact') }}';">Ask a question</button>
     </div>
 
     <div class="accordion">
