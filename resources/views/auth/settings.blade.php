@@ -1,14 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account Settings - Book Scanner</title>
-</head>
-<body>
-    <div class="account-settings">
-        <h1>Account Settings</h1>
+@extends('layouts.app')
 
+@section('title', 'Account settings')
+
+@section('content')
+<div class="container">
+        <h2 class="title-borrow">Account Settings</h2>
+    </div>
+    <div class="account-settings">
         <!-- Error and success message display -->
         @if(session('error'))
             <div style="color: red;">{{ session('error') }}</div>
