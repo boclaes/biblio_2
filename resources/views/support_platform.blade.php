@@ -1,4 +1,4 @@
-@extends('layouts.app_no_filters', ['includeRatings' => false, 'includePages' => false, 'includeName' => true, 'includeAuthor' => true ])
+@extends('layouts.app')
 
 @section('title', 'Support')
 
@@ -6,9 +6,10 @@
     <div class="container">
         <h2 class="title-borrow">Frequently asked questions</h2>
     </div>
-    <div class="search-bar">
-        <input type="text" class="search" id="search" placeholder="Search" autocomplete="off">
-        <span class="search-icon"><i class="fas fa-search"></i></span>
+
+    <div>
+        <input type="text" class="search-support-platform" id="search" placeholder="Search" autocomplete="off">
+        <span class="search-icon-platform"><i class="fas fa-search"></i></span>
     </div>
 
     <div class="support-button">

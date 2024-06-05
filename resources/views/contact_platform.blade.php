@@ -1,10 +1,11 @@
-@extends('layouts.app_no_filters', ['includeRatings' => false, 'includePages' => false, 'includeName' => true, 'includeAuthor' => true ])
+@extends('layouts.app')
 
 @section('title', 'Contact_platform')
 
 @section('content')
     <div class="contact-view">
         <div class="container">
+            <a href="{{ route('support_platform') }}"><img src="{{ Vite::asset('resources/images/back.png') }}" alt="Go back" class="back" ></a>
             <div class="wrapper">
                 <div class="contact-view-box">
                     <div class="center">

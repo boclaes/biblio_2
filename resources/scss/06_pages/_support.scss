@@ -37,6 +37,44 @@
     z-index: 3;
 }
 
+.search-support-platform {
+    width: 30%; 
+    height: 48px; 
+    padding-left: 10px; 
+    padding-right: 30px;
+    border-radius: 20px; 
+    border: 2px solid #C287E8;
+    background-color: #050000;
+    color: #FFF;
+    outline: none;
+    position: absolute; 
+    top: 25%; 
+    left: 28%; 
+    transform: translateX(-50%); 
+   
+
+    &::placeholder {
+        color: #FFF !important; 
+        opacity: 0.7; 
+    }
+
+    &:focus {
+        border-color: darken(#800080, 10%);
+        background-color: darken(#000, 5%); 
+    }
+
+}
+.search-icon-platform {
+    position: absolute;
+    top: 27.8%; 
+    left: 38%; 
+    transform: translateY(-50%);
+    color: #C287E8;
+    cursor: pointer;
+    font-size: 18px;
+    z-index: 3;
+}
+
 .contact-button{
     position: absolute; 
     top: 55%; 
@@ -47,7 +85,7 @@
 .support-button{
     position: absolute; 
     top: 25%; 
-    right: 10%; 
+    right: 5%; 
 }
 
 .accordion-button {
@@ -89,7 +127,8 @@
 }
 
 .accordion-platform{
-    margin-top: 150px;
+    margin-top: 250px;
+
     
 }
 
@@ -99,24 +138,24 @@
         width: 30%; 
         top: 0%;
         right: 100px;
-        box-shadow: none; 
-        position: relative; 
         font-size: 18px;
-
-        &::placeholder {
-            color: #FFF !important; 
-            opacity: 0.7; 
-        }
-
-        &:focus {
-            border-color: darken(#800080, 10%);
-            background-color: darken(#000, 5%); 
-        }
     }
 
     .search-icon-support {
         top: 100%; 
         left: 38%; 
+    }
+
+    .search-support-platform {
+        width: 30%; 
+        top: 22%; 
+        left: 34%; 
+        font-size: 18px;
+    
+    }
+    .search-icon-platform {
+        top: 24.8%; 
+        left: 48%; 
     }
 
     .contact-button{
@@ -127,8 +166,8 @@
 
     .support-button{
         position: absolute; 
-        top: 20%; 
-        right: 30%; 
+        top: 22%; 
+        right: 700px; 
     }
 
 
@@ -148,7 +187,8 @@
     }
 
     .accordion-platform{
-        margin-top: 300px;
+        margin-top: 200px;
+        margin-left: 150px;
 
     }
     
