@@ -73,6 +73,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/books/add-borrow', [BookController::class, 'storeBorrow'])->name('books.storeBorrow');    
     Route::get('/borrowed-books', [BookController::class, 'showBorrowedBooks'])->name('borrowed-books');
     Route::delete('/borrowings/{borrowing}', [BookController::class, 'returnBook'])->name('borrowings.return');
+    Route::get('/borrowings/edit/{borrowing}', [BookController::class, 'showEditBorrow'])->name('borrowings.edit');
+    Route::post('/borrowings/update/{borrowing}', [BookController::class, 'updateBorrow'])->name('borrowings.update');
+
     
     // Book Notes and Reviews
     Route::post('/books/{id}/save-notes', [BookController::class, 'saveNotes'])->name('save.notes');
@@ -117,3 +120,4 @@ Route::group(['middleware' => 'auth', 'prefix' => 'account'], function () {
     Route::post('update-password', [AccountController::class, 'updatePassword'])->name('account.password');
     Route::post('delete', [AccountController::class, 'deleteAccount'])->name('account.delete');
 });
+

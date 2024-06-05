@@ -20,9 +20,9 @@
                                         <img src="{{ asset('images/delete.png') }}" alt="Delete from Library" class="action-image"/>
                                     </button>
                                 </form>
-                                <form method="get" action="{{ route('books.addBorrow')}}" class="image-form">
+                                <form method="get" action="{{ route('borrowings.edit', $borrowing) }}" class="image-form">
                                     <button type="submit" class="image-button">
-                                        <img src="{{ asset('images/edit.png') }}" alt="Edit Book" class="action-image"/>
+                                        <img src="{{ asset('images/edit.png') }}" alt="Edit Borrowing" class="action-image"/>
                                     </button>
                                 </form>
                             </div>

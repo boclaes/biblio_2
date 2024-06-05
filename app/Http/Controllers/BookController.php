@@ -623,4 +623,28 @@ class BookController extends Controller
         return redirect()->route('search', ['query' => $query]);
     }
 
+    public function showEditBorrow(Borrowing $borrowing)
+    {
+        $user = Auth::user();
+        $books = $user->books; // Assuming you want to show all books regardless of borrowing status here for editing
+
+        return view('edit_borrow', compact('borrowing', 'books'));
+    }
+
+    public function updateBorrow(Request $request, Borrowing $borrowing)
+    {
+        $request->validate([
+            'book_id' => 'required|exists:books,id',
+            'borrower_name' => 'required|string',
+            'borrowed_since' => 'required|date',
+        ]);
+
+        $borrowing->update([
+            'book_id' => $request->book_id,
+            'borrower_name' => $request->borrower_name,
+            'borrowed_since' => $request->borrowed_since,
+        ]);
+
+        return redirect()->route('borrowed-books')->with('success', 'Borrowing details updated successfully.');
+    }
 }

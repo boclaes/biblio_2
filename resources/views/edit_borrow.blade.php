@@ -10,27 +10,27 @@
     </div>
     <h2 class="title-borrow">Who borrowed my book?</h2>
     <div class="borrow-container">
-        <form action="{{ route('books.storeBorrow') }}" method="POST">
+        <form action="{{ route('borrowings.update', $borrowing->id) }}" method="POST">
             @csrf
             <div class="form-group">
                 <label for="book_id">Select a book</label>
                 <select name="book_id" id="book_id" class="form-control-select" required>
                     @foreach ($books as $book)
-                        <option value="{{ $book->id }}">{{ $book->title }}</option>
+                        <option value="{{ $book->id }}" {{ $book->id == $borrowing->book_id ? 'selected' : '' }}>{{ $book->title }}</option>
                     @endforeach
                 </select>
             </div>
             <div class="form-group">
                 <label for="borrower_name">Who borrowed it</label>
-                <input type="text" id="borrower_name" name="borrower_name" class="form-control-name" required>
+                <input type="text" id="borrower_name" name="borrower_name" class="form-control-name" value="{{ $borrowing->borrower_name }}" required>
             </div>
             <div class="form-group">
                 <label for="borrowed_since">Borrowed since</label>
-                <input type="date" id="borrowed_since" name="borrowed_since" class="form-control-date" required>
+                <input type="date" id="borrowed_since" name="borrowed_since" class="form-control-date" value="{{ $borrowing->borrowed_since->format('Y-m-d') }}" required>
                 <label for="borrowed_since" class="icon-label"><i class="fa fa-calendar" aria-hidden="true"></i></label>
             </div>
             <div class="button-group">
-                <button type="submit" class="btn save-borrow">Save</button>
+                <button type="submit" class="btn save-borrow">Update</button>
                 <a href="{{ route('borrowed-books') }}" class="btn cancel-borrow">Cancel</a>
             </div>
         </form>
@@ -38,4 +38,3 @@
 </div>
 <script src="{{ asset('js/app.js') }}"></script>
 @endsection
-
