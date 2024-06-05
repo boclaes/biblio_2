@@ -49,7 +49,7 @@
                         <li><a href="{{ route('book.recommend') }}">Discover books</a></li>
                         <li><a href="{{ route('accepted.books') }}">Wishlist</a></li>
                         <li><a href="{{ route('account.settings') }}">Account</a></li>
-                        <li><a href="{{ route('welcome') }}">Support</a></li>
+                        <li><a href="{{ route('support_platform') }}">Support</a></li>
                         <li>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
