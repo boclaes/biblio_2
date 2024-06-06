@@ -60,19 +60,24 @@
     
     <section class="book-section">
         <div class="book-feature">
+            <div class="book-feature-content">
+                <h3>Automatic data for books and E-books</h3>
+                <p>Just use our dedicated scanner to scan the ISBN/UPC barcode, or manually enter the ISBN. We'll then fetch and organise the details for you, making managing your collection a breeze.</p>
+            </div>
             <img src="{{ Vite::asset('resources/images/meisje.png') }}" alt="Meisje met boeken">
-            <h3>Automatic data for books and E-books</h3>
-            <p>Just use our dedicated scanner to scan the ISBN/UPC barcode, or manually enter the ISBN. We'll then fetch and organise the details for you, making managing your collection a breeze.</p>
-            
         </div>
         <div class="book-feature">
-            <h3>Collaborative Book Wishes</h3>
-            <p>With BiblioScan, not only can you create a wishlist of books you desire, but you can also easily share it with friends and family. Whether it's for gift ideas or shared reading interests, make book-sharing a communal experience.</p>
+            <div class="book-feature-content">
+                <h3>Collaborative Book Wishes</h3>
+                <p>With BiblioScan, not only can you create a wishlist of books you desire, but you can also easily share it with friends and family. Whether it's for gift ideas or shared reading interests, make book-sharing a communal experience.</p>
+            </div>
             <img src="{{ Vite::asset('resources/images/vrouw.png') }}" alt="vrouw met boeken">
         </div>
         <div class="book-feature">
-            <h3>Unlock Advanced Features with BiblioScan Pro</h3>
-            <p>Want to track book lending, manage personal recommendations, or enjoy the convenience of our dedicated scanner? BiblioScan Pro offers an array of additional features tailored for the avid book collector. Experience enhanced book management like never before.</p>
+            <div class="book-feature-content">
+                <h3>Unlock Advanced Features with BiblioScan Pro</h3>
+                <p>Want to track book lending, manage personal recommendations, or enjoy the convenience of our dedicated scanner? BiblioScan Pro offers an array of additional features tailored for the avid book collector. Experience enhanced book management like never before.</p>
+            </div>
             <img src="{{ Vite::asset('resources/images/man.png') }}" alt="Man met tablet">
         </div>
     </section>
