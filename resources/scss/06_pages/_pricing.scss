@@ -52,17 +52,15 @@
 }
 .plan-features {
     text-align: left;
+    padding-top: 32px;
 }
 .plan-feature {
+    
    
     a{
         font-weight: 200;
+        padding-bottom: 32px;
     }
-
-}
-
-.light{
-    list-style-image: url("../images/light.png");
 
 }
 
@@ -124,6 +122,7 @@
 }
 .plan-features {
     text-align: left;
+    padding-top: 48px;
 }
 .plan-feature {
     padding: 0 24px;
@@ -134,10 +133,9 @@
         padding-bottom: 32px;
     }
 
-}
 
-.light{
-    list-style-image: url("../images/light.png");
 
 }
+
+
 }
