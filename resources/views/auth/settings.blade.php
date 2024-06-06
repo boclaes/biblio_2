@@ -3,6 +3,7 @@
 @section('title', 'Account settings')
 
 @section('content')
+
 <div class="container">
     <h2 class="title-borrow">Account Settings</h2>
 </div>
@@ -20,50 +21,50 @@
     <ul>
         <li>
             <div class="button-container">
-                <button onclick="toggleVisibility('change-email')">Change Email</button>
+                <button onclick="toggleVisibility('change-email')">Change email</button>
                 <div id="change-email" class="form-container" style="display:none;">
                     <form action="{{ route('account.email') }}" method="POST">
                         @csrf
                         <input type="email" name="email" placeholder="New email" value="{{ auth()->user()->email }}">
-                        <button type="submit">Update Email</button>
+                        <button type="submit">Update email</button>
                     </form>
                 </div>
             </div>
         </li>
         <li>
             <div class="button-container">
-                <button onclick="toggleVisibility('change-password')">Change Password</button>
+                <button onclick="toggleVisibility('change-password')">Change password</button>
                 <div id="change-password" class="form-container" style="display:none;">
                     <form action="{{ route('account.password') }}" method="POST">
                         @csrf
                         <input type="password" name="current_password" placeholder="Current Password" required>
                         <input type="password" name="new_password" placeholder="New Password" required>
                         <input type="password" name="new_password_confirmation" placeholder="Confirm New Password" required>
-                        <button type="submit">Update Password</button>
+                        <button type="submit">Update password</button>
                     </form>
                 </div>
             </div>
         </li>
         <li>
             <div class="button-container">
-                <button onclick="toggleVisibility('change-name')">Change Name</button>
+                <button onclick="toggleVisibility('change-name')">Change name</button>
                 <div id="change-name" class="form-container" style="display:none;">
                     <form action="{{ route('account.name') }}" method="POST">
                         @csrf
                         <input type="text" name="name" placeholder="New name" value="{{ auth()->user()->name }}">
-                        <button type="submit">Update Name</button>
+                        <button type="submit">Update name</button>
                     </form>
                 </div>
             </div>
         </li>
         <li>
             <div class="button-container">
-                <button onclick="toggleVisibility('delete-account')">Delete Account</button>
+                <button onclick="toggleVisibility('delete-account')">Delete account</button>
                 <div id="delete-account" class="form-container" style="display:none;">
                     <form action="{{ route('account.delete') }}" method="POST">
                         @csrf
-                        <button type="submit" onclick="return confirm('Are you sure you want to delete your account?');">
-                            Delete Account
+                        <button type="del" onclick="return confirm('Are you sure you want to delete your account?');">
+                            Delete account
                         </button>
                     </form>
                 </div>
