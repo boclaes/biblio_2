@@ -298,7 +298,7 @@ class BookController extends Controller
 
         return view('edit_notes', compact('book'));
     }
-
+    
     public function editReview($id)
     {
         $user = Auth::user();
@@ -308,8 +308,12 @@ class BookController extends Controller
             return redirect()->route('books')->with('error', 'You do not have permission to edit this book.');
         }
 
-        return view('edit_review', compact('book'));
+        // Ensure the review field is being passed correctly
+        $review = $book->review;
+
+        return view('edit_review', compact('book', 'review'));
     }
+
 
     public function rateBook(Request $request, $bookId)
     {
@@ -387,12 +391,17 @@ class BookController extends Controller
             $genres = explode(' / ', $book->genre);
             Log::info("Processing book ID: {$book->id}, genres: " . json_encode($genres));
             
-            // Check if it is a single genre and skip if it is just "Fiction or General"
-            if (count($genres) === 1 && (trim($genres[0]) === 'Fiction' || trim($genres[0]) === 'General')) {
+            // Filter out "General" from the genres
+            $genres = array_filter($genres, function($genre) {
+                return trim($genre) !== 'General';
+            });
+    
+            // Check if it is a single genre and skip if it is just "Fiction"
+            if (count($genres) === 1 && trim($genres[0]) === 'Fiction') {
                 Log::info("Skipping genre '" . $genres[0] . "'");
                 continue;
             }
-            
+    
             // Combine genres and count
             $combinedGenre = implode(' / ', array_map('trim', $genres));
             if (!isset($genreCounts[$combinedGenre])) {
@@ -407,30 +416,27 @@ class BookController extends Controller
         arsort($genreCounts);
     
         return array_key_first($genreCounts);
-    }    
-
+    }     
 
     public function recommendBook()
     {
         $user = Auth::user();
         $exclusionList = $this->getExclusionList($user->id);
-    
         $topGenre = $this->calculateTopGenre($user->id);
-        
+    
         if (!$topGenre) {
             return redirect()->route('books')->with('error', 'No favorite genres found. Add some books to get recommendations!');
         }
     
         Log::info("Top genre being queried: " . $topGenre);
         $startIndex = 0;
+        $books = $this->bookHelper->getRecommendations([$topGenre], $exclusionList, $user->id, $startIndex, 4);
     
-        $book = $this->bookHelper->getRecommendation([$topGenre], $exclusionList, $user->id, $startIndex);
-    
-        if (!$book) {
+        if (!$books) {
             return redirect()->route('books')->with('error', 'No recommendations found for your favorite genres.');
         }
     
-        return view('recommendation', compact('book'));
+        return view('recommendation', compact('books'));
     }
     
     public function handleDecision(Request $request)
@@ -458,7 +464,10 @@ class BookController extends Controller
             $startIndex = $user->last_book_index + 1;
             Log::info("handleDecision updated startIndex to: {$startIndex}");
     
-            $newBook = $this->bookHelper->getRecommendation([$topGenre], $exclusionList, $userId, $startIndex);
+            $newBook = $this->bookHelper->getRecommendations([$topGenre], $exclusionList, $userId, $startIndex, 1);
+            
+            // Assuming getRecommendations returns an array, pick the first book
+            $newBook = $newBook[0] ?? null;
     
             return response()->json([
                 'success' => true,
@@ -468,7 +477,7 @@ class BookController extends Controller
             Log::error("Error handling decision: " . $e->getMessage());
             return response()->json(['error' => 'Internal Server Error'], 500);
         }
-    }      
+    }    
     
     public function rejectBook($userId, $bookDetails)
     {
@@ -496,7 +505,7 @@ class BookController extends Controller
         $startIndex = $user->last_book_index + 1;
         Log::info("rejectBook updated startIndex to: {$startIndex}");
     
-        $newBook = $this->bookHelper->getRecommendation([$topGenre], $exclusionList, $userId, $startIndex);
+        $newBook = $this->bookHelper->getRecommendations([$topGenre], $exclusionList, $userId, $startIndex);
     
         return response()->json([
             'success' => true,

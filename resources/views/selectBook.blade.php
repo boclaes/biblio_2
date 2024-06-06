@@ -51,7 +51,7 @@
                     <div class="book-header-add">
                         <h3>{{ $book['volumeInfo']['title'] }}</h3>
                         <p class="search-author">{{ isset($book['volumeInfo']['authors']) ? implode(', ', $book['volumeInfo']['authors']) : 'Unknown Author' }}</p>
-                        <p>{{ $book['volumeInfo']['publishedDate'] ? date('Y', strtotime($book['volumeInfo']['publishedDate'])) : 'N/A' }}</p>
+                        <p>{{ isset($book['volumeInfo']['publishedDate']) ? date('Y', strtotime($book['volumeInfo']['publishedDate'])) : 'N/A' }}</p>
                         <p class="search-pages">{{ $book['volumeInfo']['pageCount'] ?? 'N/A' }} pages</p>
                         <p>{{ $book['volumeInfo']['categories'][0] ?? 'Classics' }}</p>
                     </div>

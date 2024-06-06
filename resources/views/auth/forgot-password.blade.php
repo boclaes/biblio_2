@@ -8,7 +8,7 @@
 </head>
 <body class="password-view">
     <div class="container">
-    <a href="{{ route('login') }}"><img src="{{ Vite::asset('resources/images/back.png') }}" alt="Go back" class="back-pas" ></a>
+    <a href="{{ route('login') }}"><img src="{{ Vite::asset('resources/images/back.png') }}" alt="Go back" class="back-pasw" ></a>
         <div class="wrapper">
             <a href="{{ route('welcome') }}"><img class="main-logo" src="{{ Vite::asset('resources/images/logo-hor.png') }}"></a>
             <div class="password-view-box">

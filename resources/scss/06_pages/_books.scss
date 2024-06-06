@@ -206,7 +206,7 @@
     position: relative;
     width: 100px; 
     background: #6D6C8A;
-    border-radius: 12px;
+    border-radius: 15px;
     background: #6D6C8A;
     color: white;
     right: 20px; 
@@ -223,7 +223,7 @@
         cursor: pointer;
         color: white;
         font-size: 16px;
-        border-radius: 12px;  
+        border-radius: 15px;  
 
         &:focus {
             outline: none;
@@ -258,7 +258,7 @@
     border: none;
     width: 50px; // Set the width as needed
     height: 40px; // Set the height as needed
-    border-radius: 12px; // Adjust the border-radius to match your design
+    border-radius: 15px; // Adjust the border-radius to match your design
     display: flex;
     align-items: center;
     justify-content: center;
@@ -318,6 +318,7 @@
     width: 170px;
     transition: transform 0.3s ease-in-out; /* Smooth transition */
     margin-bottom: 10px;
+    border-radius: 15px;
 }
 
 .book-image:hover {
@@ -503,7 +504,7 @@
 		width: 179px; 
 		height: 51px;
 		border: 2px solid #6D6C8A;
-		border-radius: 12px;
+		border-radius: 15px;
 		background: #6D6C8A;
 		color: white;
 		right: 150px; 
@@ -521,7 +522,7 @@
 			cursor: pointer;
 			color: white;
 			font-size: 18px;
-			border-radius: 12px;  
+			border-radius: 15px;  
 	
 			&:focus {
 				outline: none;
@@ -562,7 +563,7 @@
 		border: none;
 		height: 55px;
 		width: 179px;
-		border-radius: 12px;
+		border-radius: 15px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -630,6 +631,7 @@
         height: auto; /* Maintains aspect ratio */
         transition: transform 0.3s ease-in-out; /* Smooth transition */
         margin-bottom: 10px;
+        border-radius: 15px;
     }
     
     .book-image:hover {

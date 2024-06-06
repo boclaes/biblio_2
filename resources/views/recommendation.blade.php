@@ -1,48 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Recommendation</title>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <style>
-        .button {
-            display: inline-block;
-            padding: 8px 16px;
-            margin: 10px 0;
-            font-size: 16px;
-            cursor: pointer;
-            text-align: center;
-            outline: none;
-            color: #fff;
-            background-color: #4CAF50;
-            border: none;
-            border-radius: 5px;
-            box-shadow: 0 9px #999;
-        }
-        
-        .button:hover {background-color: #3e8e41}
+@extends('layouts.app')
 
-        .button:active {
-            background-color: #3e8e41;
-            box-shadow: 0 5px #666;
-            transform: translateY(4px);
-        }
-    </style>
-</head>
-<body>
-    <div id="book-recommendation" data-book='@json($book)' data-google-books-id="{{ $book['id'] ?? '' }}">
-        @if ($book)
-            <img src="{{ $book['cover'] ?? asset('images/default_cover.jpg') }}" alt="Cover Image of {{ $book['title'] ?? 'No Title' }}">
-            <h2>{{ $book['title'] ?? 'No Title' }}</h2>
-            <p>{{ $book['description'] ?? 'No description available.' }}</p>
-            <button onclick="handleDecision('accept', '{{ $book['id'] ?? '' }}')">Accept</button>
-            <button onclick="handleDecision('reject', '{{ $book['id'] ?? '' }}')">Reject</button>
+@section('title', 'Discover - Book Discover')
+
+@section('content')
+    <div class="recommendation-container">
+        <div class="title-section">
+            <h1 class="main-title">Discover your next <span class="highlight">favorite read!</span></h1>
+            <h2 class="subtitle">Based on genre</h2>
+        </div>
+        @if ($books)
+            <div class="books-grid">
+                @foreach ($books as $book)
+                    <div class="book-section" id="book-{{ $book['google_books_id'] }}" data-book="{{ json_encode($book) }}">
+                        <img class="arrow-right" src="{{ asset('images/arrow-right.png') }}" onclick="handleDecision('accept', '{{ $book['google_books_id'] }}')">
+                        <div class="book-cover">
+                            <img src="{{ $book['cover'] ?? asset('images/default_cover.jpg') }}" alt="Cover Image of {{ $book['title'] ?? 'No Title' }}">
+                        </div>
+                        <div class="book-details">
+                            <h3 class="book-title">{{ $book['title'] ?? 'No Title' }}</h3>
+                            <p class="book-author">{{ $book['author'] ?? 'Unknown Author' }}</p>
+                            <p class="book-description">{{ Str::limit($book['description'] ?? 'No description available.', 100, '...') }}</p>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
         @else
             <p>No recommendations available at the moment.</p>
         @endif
     </div>
-    <a href="{{ route('books') }}" class="button">Back to Books</a>
     <script src="{{ asset('js/recommendationHandler.js') }}"></script>
-</body>
-</html>
+@endsection

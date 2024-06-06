@@ -1,0 +1,167 @@
+.title-notes{
+    margin-top: 120px;
+    font-size: 32px;
+    text-align: left;
+    margin-left: 30px;
+}
+
+.blur-overlay-notes {
+    position: absolute;
+    top: 200px;
+    left: 20px;
+    width: 90%;
+    height: 50%;
+    border-radius: 20px;
+    z-index: 1;
+    background-color: rgba(5, 0, 0, 0.15);
+    backdrop-filter: blur(5px);
+}
+
+.sub-title-notes{
+    z-index: 3;
+    position: relative;
+    margin-top: 60px;
+    text-align: left;
+    font-size: 22px;
+    margin-left: 48px;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+  
+/* Define the styles for the textarea */
+textarea {
+    position: relative;
+    z-index: 3;
+    width: 75%;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-family: inherit;
+    resize: none;
+    outline: none;
+    background-color: rgba(5, 0, 0, 0.4);
+    color: white;
+    height: 300px;
+}
+
+.save-notes {
+    margin-top: 50px;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 16px;
+    font-size: 16px;
+    font-family: 'Arial', sans-serif;
+    color: white;
+    cursor: pointer;
+    margin-right: 260px; /* Adds space between buttons */
+  }
+
+.cancel-notes{
+    margin-right: 40px;
+    bottom: 47px;
+    position: relative;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-family: 'Arial', sans-serif;
+    color: white;
+    cursor: pointer;
+}
+  
+  .save-notes {
+    background-color: #C287E8; /* Purple color for save button */
+  }
+  
+  .cancel-notes {
+    background-color: #5F5D5D; /* Gray color for cancel button */
+  }
+
+@media screen and (min-width: 1100px) {
+
+    .title-notes{
+        font-size: 46px;
+        text-align: left;
+        margin-top: 150px;
+        text-align: left;
+        margin-left: 400px;
+    }
+       
+    .blur-overlay-notes {
+        position: absolute;
+        top: 250px;
+        left: 400px;
+        width: 50%;
+        height: 50%;
+        border-radius: 20px;
+        z-index: 1;
+        background-color: rgba(5, 0, 0, 0.15);
+        backdrop-filter: blur(5px);
+    }
+    
+    .sub-title-notes{
+        z-index: 3;
+        position: relative;
+        margin-top: 70px;
+        text-align: left;
+        font-size: 22px;
+        margin-left: 500px;
+        margin-bottom: 30px;
+        font-weight: bold;
+    }
+      
+    /* Define the styles for the textarea */
+    textarea {
+        position: relative;
+        z-index: 3;
+        bottom: 100px;
+        right: 62px;
+        width: 40%;
+        padding: 10px;
+        border: none;
+        border-radius: 16px;
+        font-size: 16px;
+        font-family: inherit;
+        resize: none;
+        outline: none;
+        background-color: rgba(5, 0, 0, 0.4);
+        color: white;
+        height: 300px;
+    }
+    
+    .save-notes {
+        position: absolute;
+        bottom: 120px;
+        padding: 15px 20px;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-family: 'Arial', sans-serif;
+        color: white;
+        cursor: pointer;
+        right: 1060px;
+      }
+    
+    .cancel-notes{
+        right: 1150px;
+        bottom: 120px;
+        position: absolute;
+        padding: 15px 20px;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-family: 'Arial', sans-serif;
+        color: white;
+        cursor: pointer;
+    }
+      
+      .save-notes {
+        background-color: #C287E8; /* Purple color for save button */
+      }
+      
+      .cancel-notes {
+        background-color: #5F5D5D; /* Gray color for cancel button */
+      }
+}
+

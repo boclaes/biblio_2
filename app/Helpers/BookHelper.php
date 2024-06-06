@@ -147,17 +147,23 @@ class BookHelper
         $cover = $bookInfo['imageLinks']['thumbnail'] ?? $this->getGoogleImage($title);
         Log::info("Selected Cover Image for '{$title}': {$cover}");
 
+        $publishedDate = isset($bookInfo['publishedDate']) ? $bookInfo['publishedDate'] : 'Unknown Year';
+        $authors = implode(", ", $bookInfo['authors'] ?? ['Unknown Author']);
+        $description = $this->cleanDescription($bookInfo['description'] ?? 'Description not available');
+        $pages = isset($bookInfo['pageCount']) && $bookInfo['pageCount'] > 0 ? $bookInfo['pageCount'] : 'N/A';
+        $genres = $bookInfo['categories'] ?? ['Classics'];
+
         return [
             'google_books_id' => $bookItem['id'] ?? null,
             'title' => $title,
-            'author' => implode(", ", $bookInfo['authors'] ?? ['Unknown Author']),
-            'year' => $bookInfo['publishedDate'] ?? 'Unknown Year',
-            'description' => $this->cleanDescription($bookInfo['description'] ?? 'Description not available'),
+            'author' => $authors,
+            'year' => $publishedDate,
+            'description' => $description,
             'cover' => $cover,
-            'genre' => $this->selectRelevantGenre($bookInfo['categories'] ?? ['Classics']),
-            'pages' => isset($bookInfo['pageCount']) && $bookInfo['pageCount'] > 0 ? $bookInfo['pageCount'] : 'N/A',
+            'genre' => $this->selectRelevantGenre($genres),
+            'pages' => $pages,
         ];
-    }  
+    }
 
     public function getBookDetailsByISBN($isbn)
     {
@@ -198,7 +204,7 @@ class BookHelper
         return null;
     }
 
-    public function getRecommendation(array $genres, $exclusionList, $userId, $startIndex = 0)
+    public function getRecommendations(array $genres, $exclusionList, $userId, $startIndex = 0, $numBooks = 4)
     {
         $user = User::find($userId);
         $genreQuery = implode("|", array_map('urlencode', $genres));
@@ -246,17 +252,26 @@ class BookHelper
             return null; // Exit the function if the retry limit is reached without success
         }
     
+        $validBooks = [];
         foreach ($books as $index => $book) {
             if ($this->isBookValid($book, $exclusionList)) {
                 $user->last_book_index = $startIndex + $index; // Update last book index
                 $user->save();
-                return $this->formatBookDetails($book);
+                $validBooks[] = $this->formatBookDetails($book);
+                if (count($validBooks) >= $numBooks) {
+                    break; // Exit loop once the desired number of books is reached
+                }
             }
         }
     
-        // If no valid book is found and retry limit hasn't been reached, increment startIndex and try again
-        $startIndex += 40;
-        return $this->getRecommendation($genres, $exclusionList, $userId, $startIndex);
+        if (count($validBooks) < $numBooks) {
+            // If fewer valid books found, increment startIndex and try again
+            $startIndex += 40;
+            $additionalBooks = $this->getRecommendations($genres, $exclusionList, $userId, $startIndex, $numBooks - count($validBooks));
+            $validBooks = array_merge($validBooks, $additionalBooks);
+        }
+    
+        return $validBooks;
     }    
 
     public function saveToDatabase($bookDetails)

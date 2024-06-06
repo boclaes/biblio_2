@@ -27,12 +27,12 @@
 
 .book-image-search {
     height: 220px;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
 .book-image-hover {
     height: 220px;
-    border-radius: 5px;
+    border-radius: 10px;
     transition: transform 0.3s ease-in-out;
 }
 
@@ -84,7 +84,7 @@
     color: #fff;
     border: none;
     padding: 5px 10px;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
     font-size: 16px;
     margin-bottom: 40px;
@@ -181,12 +181,12 @@
 
     .book-image-hover {
         height: 280px;
-        border-radius: 5px;
+        border-radius: 10px;
     }
 
     .book-image-search {
         height: 280px;
-        border-radius: 5px;
+        border-radius: 10px;
     }
 
     .add-book-title {
@@ -200,7 +200,7 @@
         color: #fff;
         border: none;
         padding: 8px 30px;
-        border-radius: 5px;
+        border-radius: 10px;
         cursor: pointer;
         font-size: 16px;
         margin-bottom: 40px;

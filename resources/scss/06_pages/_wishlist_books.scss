@@ -6,7 +6,7 @@
     position: relative;
     width: 70px; 
     background: #6D6C8A;
-    border-radius: 12px;
+    border-radius: 15px;
     background: #6D6C8A;
     color: white;
     right: 150px; 
@@ -23,7 +23,7 @@
         cursor: pointer;
         color: white;
         font-size: 16px;
-        border-radius: 12px;  
+        border-radius: 15px;  
 
         &:focus {
             outline: none;
@@ -118,7 +118,7 @@
     background-color: #C05532;
     color: #FFF;
     border: none;
-    border-radius: 12px;
+    border-radius: 15px;
     cursor: pointer;
     transition: background-color 0.3s;
     font-size: 12px;
@@ -153,7 +153,7 @@
     width: 150px;
     height: auto; /* Maintains aspect ratio */
     margin-bottom: 10px;
-    border-radius: 5px
+    border-radius: 15px
 }
 
 .purchase-button {
@@ -163,7 +163,7 @@
     background-color: #C287E8; // Change to your preferred color
     color: #FFF;
     text-align: center;
-    border-radius: 12px;
+    border-radius: 15px;
     text-decoration: none;
     font-size: 14px; // Adjust as necessary
     transition: background-color 0.3s;
@@ -177,6 +177,12 @@
 .book-card-library-wishlist {
     width: 48%; /* Adjust the width to fit two cards side by side */
     box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
+    transition: opacity 0.5s, transform 0.5s;
+        
+    &.fade-out {
+        opacity: 0;
+        transform: translateY(20px);
+    }
 }
 
 @media screen and (min-width: 1100px) {
@@ -260,7 +266,7 @@
         background-color: #C05532;
         color: #FFF;
         border: none;
-        border-radius: 12px;
+        border-radius: 15px;
         cursor: pointer;
         transition: background-color 0.3s;
         font-size: 18px;
@@ -274,7 +280,7 @@
 		width: 179px; 
 		height: 51px;
 		border: 2px solid #6D6C8A;
-		border-radius: 12px;
+		border-radius: 15px;
 		background: #6D6C8A;
 		color: white;
 		right: 370px; 
@@ -292,7 +298,7 @@
 			cursor: pointer;
 			color: white;
 			font-size: 18px;
-			border-radius: 12px;  
+			border-radius: 15px;  
 	
 			&:focus {
 				outline: none;
@@ -342,7 +348,7 @@
         background-color: #C287E8; // Change to your preferred color
         color: #FFF;
         text-align: center;
-        border-radius: 12px;
+        border-radius: 15px;
         text-decoration: none;
         font-size: 14px; // Adjust as necessary
         transition: background-color 0.3s;
@@ -357,12 +363,18 @@
         width: 170px;
         height: auto; /* Maintains aspect ratio */
         margin-bottom: 10px;
-        border-radius: 5px;
+        border-radius: 15px;
     }
 
     .book-card-library-wishlist {
         width: 18%; /* Adjust the width to fit five cards side by side */
         box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
         margin-right: 50px;
+        transition: opacity 0.5s, transform 0.5s;
+
+        &.fade-out {
+            opacity: 0;
+            transform: translateY(20px);
+        }
     }
 }
