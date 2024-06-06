@@ -8,7 +8,6 @@
     @vite(['resources/scss/app.scss', 'resources/js/app.js'])
 </head>
 <body>
-
     <header class="hero-header-faq" id="top">
         @extends('layouts.welcome_nav')
         <div class="heading-paragraph-2">
@@ -16,7 +15,7 @@
         </div>
     </header>
 
-    <div class="search-bar-support">
+    <div>
         <input type="text" class="search-support" id="search" placeholder="Search" autocomplete="off">
         <span class="search-icon-support"><i class="fas fa-search"></i></span>
     </div>
