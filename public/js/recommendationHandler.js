@@ -26,13 +26,28 @@ function handleDecision(decision, googleBooksId) {
 
             // Wait for the fade-out animation to complete before updating the content
             setTimeout(() => {
-                updateBookSection(googleBooksId, data.newBook);
+                // Check for duplicates before updating
+                if (!isDuplicateBook(data.newBook)) {
+                    updateBookSection(googleBooksId, data.newBook);
+                } else {
+                    // If duplicate, fetch another book
+                    handleDecision(decision, googleBooksId);
+                }
             }, 500); // Match this duration to the CSS transition duration
         } else {
             alert('Error: ' + data.error);
         }
     })
     .catch(error => console.error('Error:', error));
+}
+
+function isDuplicateBook(newBook) {
+    const bookElements = document.querySelectorAll('.book-section');
+    const books = Array.from(bookElements).map(bookElement => {
+        return JSON.parse(bookElement.dataset.book);
+    });
+
+    return books.some(b => b.google_books_id === newBook.google_books_id);
 }
 
 function updateBookSection(googleBooksId, newBook) {

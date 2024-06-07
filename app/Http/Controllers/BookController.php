@@ -13,6 +13,7 @@ use App\Models\Review;
 use App\Models\RejectedBook;
 use App\Models\Borrowing;
 use App\Models\AcceptedBook;
+use Illuminate\Support\Facades\Session;
 
 
 class BookController extends Controller
@@ -119,8 +120,6 @@ class BookController extends Controller
         ]);
     }
     
-     
-
     public function addBook(Request $request)
     {
         Log::info('Received data for adding book:', $request->all());
@@ -298,22 +297,21 @@ class BookController extends Controller
 
         return view('edit_notes', compact('book'));
     }
-    
+
     public function editReview($id)
     {
         $user = Auth::user();
         $book = $user->books()->find($id);
-
+    
         if (!$book) {
             return redirect()->route('books')->with('error', 'You do not have permission to edit this book.');
         }
-
+    
         // Ensure the review field is being passed correctly
         $review = $book->review;
-
+    
         return view('edit_review', compact('book', 'review'));
-    }
-
+    }    
 
     public function rateBook(Request $request, $bookId)
     {
@@ -390,7 +388,7 @@ class BookController extends Controller
         foreach ($books as $book) {
             $genres = explode(' / ', $book->genre);
             Log::info("Processing book ID: {$book->id}, genres: " . json_encode($genres));
-            
+    
             // Filter out "General" from the genres
             $genres = array_filter($genres, function($genre) {
                 return trim($genre) !== 'General';
@@ -413,24 +411,53 @@ class BookController extends Controller
     
         Log::info("Final genre counts: " . json_encode($genreCounts));
     
+        // Sort genres by count in descending order
         arsort($genreCounts);
     
-        return array_key_first($genreCounts);
-    }     
+        // Check for ties
+        $topCount = reset($genreCounts);
+        $topGenres = array_keys(array_filter($genreCounts, function($count) use ($topCount) {
+            return $count === $topCount;
+        }));
+    
+        // If there is a tie, pick a random genre from the top genres
+        if (count($topGenres) > 1) {
+            $selectedGenre = $topGenres[array_rand($topGenres)];
+        } else {
+            $selectedGenre = array_key_first($genreCounts);
+        }
+    
+        Log::info("Top genre being queried: {$selectedGenre}");
+    
+        return $selectedGenre;
+    }    
 
     public function recommendBook()
     {
         $user = Auth::user();
         $exclusionList = $this->getExclusionList($user->id);
-        $topGenre = $this->calculateTopGenre($user->id);
     
+        // Recalculate the top genre on each request
+        $topGenre = $this->calculateTopGenre($user->id);
         if (!$topGenre) {
             return redirect()->route('books')->with('error', 'No favorite genres found. Add some books to get recommendations!');
         }
+        Session::put('current_genre', $topGenre);
     
         Log::info("Top genre being queried: " . $topGenre);
         $startIndex = 0;
         $books = $this->bookHelper->getRecommendations([$topGenre], $exclusionList, $user->id, $startIndex, 4);
+    
+        if (!$books) {
+            // Recalculate the top genre if no books are found
+            $topGenre = $this->calculateTopGenre($user->id);
+            if (!$topGenre) {
+                return redirect()->route('books')->with('error', 'No favorite genres found. Add some books to get recommendations!');
+            }
+            Session::put('current_genre', $topGenre);
+    
+            $books = $this->bookHelper->getRecommendations([$topGenre], $exclusionList, $user->id, $startIndex, 4);
+        }
     
         if (!$books) {
             return redirect()->route('books')->with('error', 'No recommendations found for your favorite genres.');
@@ -455,7 +482,7 @@ class BookController extends Controller
             }
     
             $exclusionList = $this->getExclusionList($userId);
-            $topGenre = $this->calculateTopGenre($userId);
+            $topGenre = Session::get('current_genre');
     
             if (!$topGenre) {
                 return response()->json(['error' => 'No favorite genres found'], 400);
@@ -465,9 +492,20 @@ class BookController extends Controller
             Log::info("handleDecision updated startIndex to: {$startIndex}");
     
             $newBook = $this->bookHelper->getRecommendations([$topGenre], $exclusionList, $userId, $startIndex, 1);
-            
-            // Assuming getRecommendations returns an array, pick the first book
-            $newBook = $newBook[0] ?? null;
+    
+            // Retry with recalculated top genre if no books are found
+            if (!$newBook) {
+                Log::info("No recommendations found, recalculating top genre and retrying...");
+                $topGenre = $this->calculateTopGenre($userId);
+                if (!$topGenre) {
+                    return response()->json(['error' => 'No favorite genres found'], 400);
+                }
+                Session::put('current_genre', $topGenre);
+    
+                $newBook = $this->bookHelper->getRecommendations([$topGenre], $exclusionList, $userId, $startIndex, 1);
+            }
+    
+            $newBook = $newBook[0] ?? null;  // Ensure we're only taking the first book
     
             return response()->json([
                 'success' => true,
@@ -533,11 +571,21 @@ class BookController extends Controller
     }
     
     
-
     public function acceptBook($userId, $bookDetails)
     {
+        // Check if the book is already in the accepted books
+        $existingBook = AcceptedBook::where([
+            ['user_id', '=', $userId],
+            ['google_books_id', '=', $bookDetails['google_books_id']]
+        ])->first();
+    
+        if ($existingBook) {
+            // Book already exists in the accepted books, no need to add it again
+            return;
+        }
+    
         $defaultPurchaseLink = $this->generatePurchaseLink($bookDetails['title'], $bookDetails['author']);
-
+    
         AcceptedBook::create([
             'user_id' => $userId,
             'google_books_id' => $bookDetails['google_books_id'],
@@ -550,7 +598,7 @@ class BookController extends Controller
             'pages' => $bookDetails['pages'],
             'purchase_link' => $bookDetails['purchase_link'] ?? $defaultPurchaseLink
         ]);
-    }
+    }    
 
     private function generatePurchaseLink($title, $author)
     {

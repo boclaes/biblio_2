@@ -21,6 +21,17 @@
     <ul>
         <li>
             <div class="button-container">
+                <button onclick="toggleVisibility('register-rpi')">Register RPI</button>
+                <div id="register-rpi" class="form-container" style="display:none;">
+                <form action="{{ route('register-rpi') }}" method="POST">
+                @csrf
+                    <button type="submit">Register RPI</button>
+                </form>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="button-container">
                 <button onclick="toggleVisibility('change-email')">Change email</button>
                 <div id="change-email" class="form-container" style="display:none;">
                     <form action="{{ route('account.email') }}" method="POST">
@@ -75,7 +86,7 @@
 
 <script>
     function toggleVisibility(id) {
-        var forms = ['change-email', 'change-password', 'change-name', 'delete-account'];
+        var forms = ['change-email', 'change-password', 'change-name', 'delete-account', 'register-rpi'];
         forms.forEach(function(form) {
             var element = document.getElementById(form);
             if (form === id) {

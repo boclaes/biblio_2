@@ -135,24 +135,24 @@ class BookHelper
     private function formatBookDetails($bookItem)
     {
         $bookInfo = $bookItem['volumeInfo'] ?? [];
-
+    
         if (empty($bookInfo['title'])) {
             Log::error("Title not found in book information: " . json_encode($bookInfo));
             return [
                 'error' => 'Title not found in book information'
             ];
         }
-
+    
         $title = $bookInfo['title'];
         $cover = $bookInfo['imageLinks']['thumbnail'] ?? $this->getGoogleImage($title);
         Log::info("Selected Cover Image for '{$title}': {$cover}");
-
+    
         $publishedDate = isset($bookInfo['publishedDate']) ? $bookInfo['publishedDate'] : 'Unknown Year';
         $authors = implode(", ", $bookInfo['authors'] ?? ['Unknown Author']);
         $description = $this->cleanDescription($bookInfo['description'] ?? 'Description not available');
         $pages = isset($bookInfo['pageCount']) && $bookInfo['pageCount'] > 0 ? $bookInfo['pageCount'] : 'N/A';
         $genres = $bookInfo['categories'] ?? ['Classics'];
-
+    
         return [
             'google_books_id' => $bookItem['id'] ?? null,
             'title' => $title,
@@ -163,7 +163,7 @@ class BookHelper
             'genre' => $this->selectRelevantGenre($genres),
             'pages' => $pages,
         ];
-    }
+    }    
 
     public function getBookDetailsByISBN($isbn)
     {
@@ -217,33 +217,54 @@ class BookHelper
     
         while (!$books && $retryCount < $retryLimit) {
             $query = "subject:{$genreQuery}&startIndex={$startIndex}&maxResults=40";
-            $fullUrl = "https://www.googleapis.com/books/v1/volumes?q={$query}&langRestrict=en&orderBy=relevance";            
-            Log::info("Querying Google Books API: " . $fullUrl);
-            $response = Http::get($fullUrl);
     
-            if ($response->successful()) {
-                $books = $response->json('items');
-                if (empty($books)) {
-                    $attemptNumber = $retryCount + 1;
-                    Log::info("No more books available at startIndex {$startIndex}, retrying... (Attempt {$attemptNumber} of {$retryLimit})");
-                    $user->last_book_index = 0;
-                    $user->save();
+            // Fetch books sorted by relevance
+            $fullUrlRelevance = "https://www.googleapis.com/books/v1/volumes?q={$query}&langRestrict=en&orderBy=relevance";
+            Log::info("Querying Google Books API (Relevance): " . $fullUrlRelevance);
+            $responseRelevance = Http::get($fullUrlRelevance);
     
-                    // Increment the version to invalidate old cache keys
-                    $newVersion = $version + 1;
-                    Cache::put('books_cache_version', $newVersion, 86400); // Store new version for a day
-                    Cache::forget($cacheKey); // Optionally clear the old cache immediately
+            // Fetch books sorted by newest
+            $fullUrlNewest = "https://www.googleapis.com/books/v1/volumes?q={$query}&langRestrict=en&orderBy=newest";
+            Log::info("Querying Google Books API (Newest): " . $fullUrlNewest);
+            $responseNewest = Http::get($fullUrlNewest);
     
-                    $startIndex = 0; // Reset startIndex for a new attempt
-                    $retryCount++; // Increment the retry counter
-                    continue; // Continue to the next iteration of the loop
-                } else {
-                    Cache::put($cacheKey, $books, 3600); // Cache the results for 1 hour
-                    break; // Exit the loop as books have been found
+            $booksRelevance = $responseRelevance->successful() ? $responseRelevance->json('items') : null;
+            $booksNewest = $responseNewest->successful() ? $responseNewest->json('items') : null;
+    
+            // Recalculate the top genre and retry if both API responses are null
+            if ($booksRelevance === null && $booksNewest === null) {
+                Log::info("Both API responses are null, recalculating top genre and retrying...");
+                $topGenre = $this->calculateTopGenre($userId);
+                if (!$topGenre) {
+                    Log::error("No favorite genres found after recalculating.");
+                    return null;
                 }
+                $genres = [$topGenre];
+                $genreQuery = implode("|", array_map('urlencode', $genres));
+                $cacheKey = "books_{$genreQuery}_{$startIndex}_{$version}"; // Update cache key
+                $retryCount++; // Increment the retry counter
+                continue; // Continue to the next iteration of the loop
+            }
+    
+            $mergedBooks = $this->mergeBooks($booksRelevance, $booksNewest);
+    
+            if (empty($mergedBooks)) {
+                $attemptNumber = $retryCount + 1;
+                Log::info("No more books available at startIndex {$startIndex}, retrying... (Attempt {$attemptNumber} of {$retryLimit})");
+                $user->last_book_index = 0;
+                $user->save();
+    
+                $newVersion = $version + 1;
+                Cache::put('books_cache_version', $newVersion, 86400); // Store new version for a day
+                Cache::forget($cacheKey); // Optionally clear the old cache immediately
+    
+                $startIndex = 0; // Reset startIndex for a new attempt
+                $retryCount++; // Increment the retry counter
+                continue; // Continue to the next iteration of the loop
             } else {
-                Log::error("Failed to fetch data from Google Books API: " . $response->body());
-                return null; // Exit if there is an API error
+                Cache::put($cacheKey, $mergedBooks, 3600); // Cache the results for 1 hour
+                $books = $mergedBooks;
+                break; // Exit the loop as books have been found
             }
         }
     
@@ -272,7 +293,40 @@ class BookHelper
         }
     
         return $validBooks;
-    }    
+    }      
+    
+    /**
+     * Merge books from relevance and newest queries, prioritizing books that appear in both lists.
+     */
+    private function mergeBooks(?array $booksRelevance, ?array $booksNewest)
+    {
+        $mergedBooks = [];
+    
+        if ($booksRelevance === null) {
+            $booksRelevance = [];
+        }
+    
+        if ($booksNewest === null) {
+            $booksNewest = [];
+        }
+    
+        $booksNewestIds = array_column($booksNewest, 'id');
+    
+        foreach ($booksRelevance as $book) {
+            if (in_array($book['id'], $booksNewestIds)) {
+                $mergedBooks[] = $book;
+            }
+        }
+    
+        foreach ($booksNewest as $book) {
+            if (!in_array($book, $mergedBooks) && count($mergedBooks) < 40) {
+                $mergedBooks[] = $book;
+            }
+        }
+    
+        return $mergedBooks;
+    }
+    
 
     public function saveToDatabase($bookDetails)
     {

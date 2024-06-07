@@ -1,0 +1,336 @@
+.title-notes-book{
+    margin-top: 120px;
+    font-size: 32px;
+    text-align: left;
+    margin-left: 30px;
+}
+
+.button-container-book {
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    z-index: 2;
+    margin-top: 80px;
+  
+    .btn-with-icon {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        color: inherit;
+  
+        span {
+            font-size: 14px;
+        }
+    }
+  
+    .delete-button {
+        background: none;
+        border: none;
+        color: inherit;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+  
+        span {
+            font-size: 14px;
+            color: #BB3C43;
+        }
+    }
+  }
+  
+  .images-notes{
+    width: 16px;
+    margin-bottom: 5px;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .images-notes:hover {
+    transform: scale(1.2); /* Scales the image up by 10% */
+  }
+  
+  
+  .images-notes-delete{
+    width: 12.5px;
+    margin-bottom: 5px;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .images-notes-delete:hover {
+    transform: scale(1.2); /* Scales the image up by 10% */
+  }
+  
+  .images-notes-pen{
+    width: 15px;
+    margin-bottom: 5px;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .images-notes-pen:hover {
+    transform: scale(1.2); /* Scales the image up by 10% */
+  }
+
+  .blur-overlay-buttons-book {
+    position: absolute;
+    top: 1140px;
+    left: 0px;
+    width: 100%;
+    height: 10%;
+    border-radius: 0px;
+    z-index: 1;
+    background-color: rgba(5, 0, 0, 0.15);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 9px 10px 10px rgba(194, 135, 232, 0.30); // Drop shadow only at the bottom
+  }
+
+.edit-book-form {
+    padding: 20px;
+    color: white;
+    max-width: 340px;
+    margin: auto;
+    margin-top: 30px;
+    margin-right: 50px;
+    z-index: 2;
+}
+
+.edit-book-form .form-group {
+    margin-bottom: 15px;
+}
+
+.edit-book-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+
+.edit-book-form input[type="text"],
+.edit-book-form input[type="number"],
+.edit-book-form textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    margin-bottom: 15px;
+    height: 25px;
+    background-color: rgba(5, 0, 0, 0.4);
+    color: #FFFFFF;
+    font-size: 16px;
+}
+
+.edit-book-form textarea {
+    height: 318px;
+    resize: none;
+    font-size: 16px;
+    margin-top: 0px;
+    margin-left: 0px;
+}
+
+
+.save-notes-book {
+    position: absolute;
+    bottom: -150px;
+    left: 60px;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-family: 'Arial', sans-serif;
+    color: white;
+    cursor: pointer;
+    margin-right: 260px; /* Adds space between buttons */
+  }
+
+.cancel-notes-book{
+    bottom: -150px;
+    left: 160px;
+    position: absolute;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-family: 'Arial', sans-serif;
+    color: white;
+    cursor: pointer;
+}
+  
+  .save-notes-book {
+    background-color: #C287E8; /* Purple color for save button */
+  }
+  
+  .cancel-notes-book {
+    background-color: #5F5D5D; /* Gray color for cancel button */
+  }
+
+.blur-overlay-book {
+    position: absolute;
+    top: 200px;
+    left: 30px;
+    width: 88%;
+    height: 70%;
+    border-radius: 0px;
+    z-index: 1;
+    background-color: rgba(5, 0, 0, 0.15);
+}
+
+@media screen and (min-width: 1100px) {
+    .title-notes-book{
+        margin-top: 100px;
+        font-size: 46px;
+        text-align: left;
+        margin-left: 400px;
+    }
+    .button-container-book {
+        position: relative;
+        display: flex;
+        justify-content: flex-start;
+        bottom: 1240px;
+        z-index: 2;
+        margin-left: 300px;
+    
+        .btn-with-icon {
+            display: flex;
+            flex-direction: row; // Change to row direction
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+            margin-left: 100px; // Adjust spacing as needed
+    
+            img {
+                width: 16px; // Adjust the size of the image as needed
+                height: 16px; // Adjust the size of the image as needed
+                margin-right: 8px; // Adjust spacing between icon and text
+            }
+    
+            span {
+                font-size: 14px;
+            }
+        }
+    
+        .delete-button {
+            background: none;
+            border: none;
+            color: inherit;
+            cursor: pointer;
+            display: flex;
+            flex-direction: row; // Change to row direction
+            align-items: center;
+    
+            img {
+                width: 16px; // Adjust the size of the image as needed
+                height: 16px; // Adjust the size of the image as needed
+                margin-right: 8px; // Adjust spacing between icon and text
+            }
+    
+            span {
+                font-size: 14px;
+                color: #BB3C43;
+            }
+        }
+    }    
+
+    .blur-overlay-buttons-book {
+        position: absolute;
+        top: 0;
+        left: 238px;
+        width: 90%;
+        height: 8%;
+        border-radius: 0;
+        z-index: 1;
+        background-color: rgba(5, 0, 0, 0.30); // Adjusted color
+        backdrop-filter: blur(5px);
+        box-shadow: 0 5px 15px -7px rgba(194, 135, 232, 0.30); // Drop shadow only at the bottom
+    }
+
+    .edit-book-form {
+        padding: 20px;
+        color: white;
+        max-width: 900px;
+        margin: auto;
+        margin-top: 30px;
+        margin-right: 550px;
+        z-index: 2;
+    }
+    
+    .edit-book-form .form-group {
+        margin-bottom: 15px;
+        z-index: 2;
+    }
+    
+    .edit-book-form label {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 16px;
+    }
+    
+    .edit-book-form input[type="text"],
+    .edit-book-form input[type="number"],
+    .edit-book-form textarea {
+        width: 100%;
+        padding: 10px;
+        border-radius: 10px;
+        border: none;
+        margin-bottom: 15px;
+        height: 25px;
+        background-color: rgba(5, 0, 0, 0.4);
+        color: #FFFFFF;
+        font-size: 16px;
+    }
+    
+    .edit-book-form textarea {
+        margin-top: 100px;
+        margin-left: 53px;
+        height: 318px;
+        resize: none;
+        font-size: 16px;
+    }
+
+    .blur-overlay-book {
+        position: absolute;
+        top: 200px;
+        left: 400px;
+        width: 55%;
+        height: 90%;
+        border-radius: 0px;
+        z-index: 1;
+        background-color: rgba(5, 0, 0, 0.15);
+    }
+
+    
+.save-notes-book {
+    position: absolute;
+    bottom: -200px;
+    left: 470px;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-family: 'Arial', sans-serif;
+    color: white;
+    cursor: pointer;
+    margin-right: 260px; /* Adds space between buttons */
+    z-index: 2;
+  }
+
+.cancel-notes-book{
+    bottom: -200px;
+    left: 580px;
+    position: absolute;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-family: 'Arial', sans-serif;
+    color: white;
+    cursor: pointer;
+    z-index: 2;
+}
+  
+  .save-notes-book {
+    background-color: #C287E8; /* Purple color for save button */
+  }
+  
+  .cancel-notes-book {
+    background-color: #5F5D5D; /* Gray color for cancel button */
+  }
+}
