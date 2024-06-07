@@ -25,7 +25,9 @@ nav {
 
 	.menu-list-mobile
 	{
+		position: relative;
 		display: block;
+		z-index: 999;
 
 		.logo
 		{
@@ -36,16 +38,22 @@ nav {
 		{
 			opacity: 0;
 			transform: scaleY(0);
+			height: 0;
 			transform-origin: center top;
 			background-color: rgba(5, 0, 0, 0.8);
 			transition: all 0.9s ease-in-out;
 			border-radius: 10px;
 			backdrop-filter: blur(20px);
+			position: relative;
+			z-index: 999;
 
 			&.is-active
 			{
+				position: relative;
+				z-index: 999;
 				opacity: 1;
 				transform: scaleY(1.0);
+				height: 100%;
 			}
 
 			li
@@ -184,4 +192,3 @@ nav {
 		}
 	}
 }
-
