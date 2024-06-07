@@ -155,27 +155,7 @@
 
                     button {
                         width: 1150px;
-                        margin-bottom: 8px;
-                        text-align: left;
-                        padding: 16px 24px;
-                        border: none;
-                        background-color: #050000;
-                        color: white;
-                        border-radius: 10px;
-                        font-size: 25px;
-                        font-weight: 400;
-                        cursor: pointer;
-                        transition: background-color 0.3s ease;
-
-                        &:hover {
-                            outline: none;
-                            box-shadow: 0 0 0 3px $purple;
-                        }
-
-                        &:focus {
-                            outline: none;
-                            box-shadow: 0 0 0 3px #B259EB;
-                        }
+                    
 
                     }
 
