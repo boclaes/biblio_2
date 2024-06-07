@@ -1,6 +1,6 @@
 .account-settings {
     width: 100%;
-    margin: 150px 350px;
+    margin: 150px 10px;
     padding: 20px;
 
 
@@ -35,7 +35,7 @@
                 display: block;
 
                 button {
-                    width: 1150px;
+                    width: 370px;
                     margin-bottom: 8px;
                     text-align: left;
                     padding: 16px 24px;
@@ -64,10 +64,10 @@
                 
                     display: none;
                     padding: 10px;
-                   
+                
 
                     form {
-                     
+                    
                         flex-direction: row;
                         align-items: center;
 
@@ -105,7 +105,7 @@
                             }
 
                             &:focus {
-                         
+                        
                             }
 
                         }
@@ -128,7 +128,7 @@
                             }
 
                             &:focus {
-                         
+                        
                             }
 
                         }
@@ -138,5 +138,50 @@
         }
     }
 }
+@media screen and (min-width: 1100px) {
+    .account-settings {
+        margin: 150px 350px;
 
+        ul {
+            list-style: none;
+            padding: 0;
+
+            li {
+                margin-bottom: 15px;
+
+                .button-container {
+                    text-align: left;
+                    display: block;
+
+                    button {
+                        width: 1150px;
+                        margin-bottom: 8px;
+                        text-align: left;
+                        padding: 16px 24px;
+                        border: none;
+                        background-color: #050000;
+                        color: white;
+                        border-radius: 10px;
+                        font-size: 25px;
+                        font-weight: 400;
+                        cursor: pointer;
+                        transition: background-color 0.3s ease;
+
+                        &:hover {
+                            outline: none;
+                            box-shadow: 0 0 0 3px $purple;
+                        }
+
+                        &:focus {
+                            outline: none;
+                            box-shadow: 0 0 0 3px #B259EB;
+                        }
+
+                    }
+
+                }
+            }
+        }
+    }
+}
 
