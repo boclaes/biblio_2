@@ -18,7 +18,7 @@
         <div class="heading-paragraph-2">
             <h1>Cloud cataloging</h1>
             <h3>Unite your library</h3>
-            <button class="primary big-button" href="{{ route('register') }}">Get started</button>
+            <button class="primary big-button" onclick="window.location.href='{{ route('register') }}'">Get started</button>
         </div>
     </header>
 

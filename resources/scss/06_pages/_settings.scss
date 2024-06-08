@@ -1,7 +1,6 @@
 .account-settings {
     width: 100%;
     margin: 150px 10px;
-    padding: 20px;
 
 
     // Styling messages for errors and successes
@@ -26,6 +25,7 @@
     ul {
         list-style: none;
         padding: 0;
+        margin-left: 20px;
 
         li {
             margin-bottom: 15px;

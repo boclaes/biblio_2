@@ -85,6 +85,7 @@
   }
 
 .edit-book-form {
+    position: relative;
     padding: 20px;
     color: white;
     max-width: 340px;
@@ -107,6 +108,7 @@
 .edit-book-form input[type="text"],
 .edit-book-form input[type="number"],
 .edit-book-form textarea {
+  z-index: 2;
     width: 100%;
     padding: 10px;
     border-radius: 10px;
@@ -129,7 +131,7 @@
 
 .save-notes-book {
     position: absolute;
-    bottom: -150px;
+    bottom: -19px;
     left: 60px;
     padding: 15px 20px;
     border: none;
@@ -299,8 +301,8 @@
     
 .save-notes-book {
     position: absolute;
-    bottom: -200px;
-    left: 470px;
+    bottom: 35px;
+    left: 50px;
     padding: 15px 20px;
     border: none;
     border-radius: 10px;
