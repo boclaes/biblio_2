@@ -3,106 +3,106 @@
 @section('title', 'Book Details')
 
 @section('content')
-    <style>
-        .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 20px;
-        }
-        .book-card {
-            width: 300px;
-            border: 1px solid #ccc;
-            padding: 10px;
-        }
-        .book-details {
-            width: 60%;
-        }
-        .book-image {
-            width: 100%;
-            height: auto;
-        }
-        .description-field {
-            display: inline-block;
-            margin-bottom: 10px;
-            cursor: pointer;
-        }
-        textarea {
-            width: 100%;
-            min-height: 200px;
-        }
-        .stars {
-            display: flex;
-            align-items: center;
-        }
-        .star {
-            font-size: 24px;
-            cursor: pointer;
-            color: #ccc;
-        }
-        .star.active {
-            color: gold;
-        }
-    </style>
 
-    <div class="container">
-        <div class="book-card">
-            <h3>{{ $book->title }}</h3>
-            <p><strong>Author(s)</strong> {{ $book->author }}</p>
-            <p><strong>Pages</strong> {{ $book->pages }}</p>
-            <p><strong>Year</strong> {{ $book->year }}</p>
-            <p><strong>Description</strong> {{ $book->description }}</p>
-            @if ($book->cover)
-                <img src="{{ $book->cover }}" alt="Book Cover" class="book-image">
-            @else
-                <p>No Cover Image</p>
-            @endif
+@php
+    $rating = $book->reviews->avg('rating');
+    $rating = $rating ? $rating : 0;
+    $numStars = round($rating);
+    $status = '';
+    if ($book->want_to_read) {
+        $status = 'Want to Read';
+    } elseif ($book->reading) {
+        $status = 'Reading';
+    } elseif ($book->done_reading) {
+        $status = 'Done Reading';
+    }
+@endphp
+    <div class="container-details">
+        <div class="back-button-container">
+            <a href="{{ route('books') }}" class="close-button" aria-label="Back to Library">
+                &times;
+            </a>
         </div>
-        <div class="book-details" data-book-id="{{ $book->id }}" data-csrf-token="{{ csrf_token() }}">
-            <p><strong>Your Notes</strong></p>
-            <span class="description-field">
-                {{ $book->notes_user ? $book->notes_user : 'No custom notes' }}
-            </span>
-            <br><br>
-            <a href="{{ route('edit.notes', $book->id) }}"><button>Edit Notes</button></a>
-            <p><strong>Your Review</strong></p>
-            <span class="description-field">
-                {{ $book->review ? $book->review : 'No custom review' }}
-            </span>
-            <br><br>
-            <a href="{{ route('edit.review', $book->id) }}"><button>Edit review</button></a>
-            <div>
-                <input type="checkbox" id="want_to_read" {{ $book->want_to_read ? 'checked' : '' }}>
-                <label for="want_to_read">Want to Read</label>
+        <div class="book-card-details">
+            <div class="book-details-container">
+                <div class="book-image-container-details">
+                    @if ($book->cover)
+                        <img src="{{ $book->cover }}" alt="Book Cover" class="book-image-search">
+                    @else
+                        <p>No Cover Image</p>
+                    @endif
+                    <div class="book-details" data-book-id="{{ $book->id }}" data-csrf-token="{{ csrf_token() }}">
+                        <div class="stars">
+                        @for ($i = 1; $i <= $numStars; $i++)
+                            <span class="star">&#9733;</span>
+                        @endfor
+                        @for ($i = $numStars + 1; $i <= 5; $i++)
+                            <span class="star">&#9734;</span>
+                        @endfor
+                        </div>
+                        <div class="reading-status">
+                            <button class="status-button">To be read</button>
+                            <div class="status-dropdown">
+                                <span class="dropdown-item" data-status="to_be_read">To be read</span>
+                                <span class="dropdown-item" data-status="in_progress">In progress</span>
+                                <span class="dropdown-item" data-status="completed">Completed</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="book-text-details">
+                    <h3>{{ $book->title }}</h3>
+                    <p class="author-details">{{ $book->author }}</p>
+                    <p>{{ $book->pages }} Pages</p>
+                    <p>{{ $book->year }}</p>
+                </div>
             </div>
-            <div>
-                <input type="checkbox" id="reading" {{ $book->reading ? 'checked' : '' }}>
-                <label for="reading">Reading</label>
+
+            <div class="tab-container">
+                <div class="tab-buttons">
+                    <span class="tab-label active" data-tab="description">Description</span>
+                    <span class="tab-label" data-tab="notes">Notes</span>
+                    <span class="tab-label" data-tab="review">Review</span>
+                </div>
+                <div class="tab-content active" id="description">
+                    <span class="description-field">
+                        {{ $book->description }}
+                    </span>
+                </div>
+                <div class="tab-content" id="notes">
+                    <span class="description-field">
+                        {{ $book->notes_user ? $book->notes_user : 'No custom notes' }}
+                    </span>
+                </div>
+                <div class="tab-content" id="review">
+                    <span class="description-field">
+                        {{ $book->review ? $book->review : 'No custom review' }}
+                    </span>
+                </div>
             </div>
-            <div>
-                <input type="checkbox" id="done_reading" {{ $book->done_reading ? 'checked' : '' }}>
-                <label for="done_reading">Done Reading</label>
-            </div>
-            <div class="stars">
-                @php
-                    $response = app()->call('App\Http\Controllers\BookController@getBookRating', ['id' => $book->id]);
-                    $rating = $response->original['rating'];
-                    $rating = $rating ? $rating : 0;
-                @endphp
-                @for ($i = 1; $i <= 5; $i++)
-                    @php
-                        $activeClass = $i <= $rating ? 'active' : '';
-                    @endphp
-                    <span class="star {{ $activeClass }}" data-value="{{ $i }}">&#9733;</span>
-                @endfor
-                <form action="{{ route('delete.book', $book->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this book?');">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit">Delete</button>
-                </form>
-            </div>
+        </div>
+        <div class="button-container-notes-details">
+            <a href="{{ route('edit.book', $book->id) }}" class="btn-with-icon">
+                <img src="{{ asset('images/edit-notes.png') }}" class="images-notes-pen" alt="Edit Book Icon">
+                <span>Edit Book</span>
+            </a>
+            <a href="{{ route('edit.notes', $book->id) }}" class="btn-with-icon">
+                <img src="{{ asset('images/notes.png') }}" class="images-notes" alt="Notes Icon">
+                <span>Notes</span>
+            </a>
+            <a href="{{ route('edit.review', $book->id) }}" class="btn-with-icon">
+                <img src="{{ asset('images/review-notes.png') }}" class="images-notes" alt="Review Icon">
+                <span>Review</span>
+            </a>
+            <form action="{{ route('delete.book', $book->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this book?');" class="btn-with-icon">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="delete-button">
+                    <img src="{{ asset('images/delete-notes.png') }}" class="images-notes-delete" alt="Delete Icon">
+                    <span>Delete</span>
+                </button>
+            </form>
         </div>
     </div>
-    <a href="{{ route('books') }}"><button type="button">Back to library</button></a>
     <script src="{{ asset('js/books.js') }}"></script>
 @endsection

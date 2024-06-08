@@ -1,6 +1,11 @@
 window.onload = function() {
     document.getElementById('searchInput').focus();
     setActiveClass('title');  // Set active class on default search type
+    
+    // Check if wish is set to 1 and disable ISBN search option if true
+    if (document.querySelector('input[name="wish"]').value === "1") {
+        disableIsbnOption();
+    }
 };
 
 function setSearchType(type) {
@@ -43,3 +48,11 @@ document.getElementById('searchForm').addEventListener('submit', function(event)
         event.preventDefault();
     }
 });
+
+function disableIsbnOption() {
+    const isbnOption = document.getElementById('searchByIsbn');
+    isbnOption.classList.add('disabled');
+    isbnOption.onclick = function() {
+        return false; // Prevent click action
+    };
+}

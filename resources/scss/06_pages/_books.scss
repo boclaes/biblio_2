@@ -53,6 +53,8 @@
     box-sizing: border-box;
     padding-top: 0 !important;
     width: 100%;
+    z-index: 999;
+    position: relative;
   
     &:nth-child(n+3) {
       padding-top: $padding-medium;
@@ -75,7 +77,6 @@
 }
 
 .books-view {
-    min-height: 100vh;
     width: 100%;
     background: linear-gradient(180deg, #000004 2%, #211530 33%, #030A1C 67%, #050000 95%);
     background-repeat: no-repeat;  
@@ -93,7 +94,7 @@
         left: 0;
         box-sizing: border-box;
         padding-top: 0;
-        z-index: 2; 
+        z-index: 999; 
 
         .main-logo {
 			position: relative;
@@ -106,6 +107,7 @@
             display: block;
             padding: 0;
             position: relative;
+            z-index: 999;
 
             ul {
                 display: block;
@@ -308,9 +310,10 @@
 }
 
 .book-card-library {
-    width: 48%; /* Adjust the width to fit two cards side by side */
+    width: 40%; /* Adjust the width to fit two cards side by side */
     box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
     margin-top: 20px;
+    margin-left: 20px;
 }
 
 .book-image {

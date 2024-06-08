@@ -33,7 +33,6 @@ Route::get('/support_platform', function () {
 Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
-//
 
 Route::get('/contact_platform', function () {
     return view('contact_platform');
@@ -64,6 +63,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/search', [BookController::class, 'search'])->name('search');
     Route::get('/search', [BookController::class, 'search'])->name('search');
     Route::post('/add-book', [BookController::class, 'addBook'])->name('addBook');
+    Route::post('/add-book-wish', [BookController::class, 'addBookWish'])->name('add.book.wish');
     Route::delete('/book/{id}', [BookController::class, 'delete'])->name('delete.book');
     Route::get('/searchform', [BookController::class, 'searchForm'])->name('search.form');
     Route::get('/detailsBack', [BookController::class, 'detailsBack'])->name('details.back');
@@ -85,6 +85,7 @@ Route::middleware(['auth'])->group(function () {
     
     // Book Editing and Updating
     Route::get('/books/{id}/edit', [BookController::class, 'editBook'])->name('edit.book'); 
+    Route::get('/books/{id}/editBook', [BookController::class, 'addEditBook'])->name('add.edit.book'); 
     Route::put('/books/{id}', [BookController::class, 'updateBook'])->name('update.book');
     Route::post('/books/{id}/rate', [BookController::class, 'rateBook'])->name('books.rate');
     Route::get('/books/{id}/rating', [BookController::class, 'getBookRating'])->name('books.rating');

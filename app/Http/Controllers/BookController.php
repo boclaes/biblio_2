@@ -87,10 +87,9 @@ class BookController extends Controller
             return redirect()->route('books')->with('success', 'Book saved to your library');
         } catch (Exception $exception) {
             Log::error("Failed to add book to collection: " . $exception->getMessage());
-            return redirect()->route('books')->with('error', 'Failed to add book to your collection');
+            return redirect()->route('search.form')->with('error', 'Failed to add book to your collection');
         }
     }
-    
     
     private function searchByTitle($title)
     {
@@ -103,23 +102,88 @@ class BookController extends Controller
         $books = $this->bookHelper->searchBooksByTitle($title);
     
         if (empty($books)) {
-            return redirect()->route('search')->with('error', 'No books found for the given title.');
+            return redirect()->route('search.form')->with('error', 'No books found for the given title.');
         }
     
         $books = array_slice($books, 0, 5);
     
         $user = Auth::user();
-        $userBooks = $user->books()->get();
+        $acceptedBooks = $user->acceptedBooks()->get();
+        $userBooks = $user->books()->get(); // Ensure user books are also retrieved
     
-        $userBookMap = $userBooks->pluck('id', 'google_books_id')->toArray();
+        $acceptedBookMap = $acceptedBooks->pluck('id', 'google_books_id')->toArray();
+        $userBookMap = $userBooks->pluck('id', 'google_books_id')->toArray(); // Map for user books
     
-        return view('selectBook', [
-            'books' => $books,
-            'userBookMap' => $userBookMap,
-            'query' => $title,
-        ]);
+        // Check the value of wish parameter
+        if (request()->has('wish') && request()->input('wish') == 1) {
+            return view('selectWish', [
+                'books' => $books,
+                'acceptedBookMap' => $acceptedBookMap,
+                'userBookMap' => $userBookMap, // Pass the userBookMap to the view
+                'query' => $title,
+                'wish' => 1 // Pass the wish parameter to the view
+            ]);
+        } else {
+            return view('selectBook', [
+                'books' => $books,
+                'acceptedBookMap' => $acceptedBookMap,
+                'userBookMap' => $userBookMap, // Pass the userBookMap to the view
+                'query' => $title,
+            ]);
+        }
+    }    
+    
+    public function addBookWish(Request $request)
+    {
+        Log::info('Received data for adding book to wishlist:', $request->all());
+    
+        $bookId = $request->input('bookId');
+        $query = $request->input('query');
+        $searchType = $request->input('searchType', 'isbn');
+        $wish = $request->input('wish', 0); // Get the wish parameter, default to 0
+    
+        $bookDetails = $this->bookHelper->getBookDetailsById($bookId);
+    
+        if (!$bookDetails) {
+            Log::error('Book details not found for ID: ' . $bookId);
+            return redirect()->route('search.form')->with('error', 'Failed to fetch book details.');
+        }
+    
+        Log::info('Book details retrieved:', $bookDetails);
+    
+        try {
+            $user = Auth::user();
+            $existingBook = $user->acceptedBooks()
+                ->where('title', $bookDetails['title'])
+                ->where('google_books_id', $bookDetails['google_books_id'])
+                ->first();
+    
+            if ($existingBook) {
+                Log::warning('Attempt to add duplicate book to wishlist: ' . $bookDetails['title'] . ' (Google Books ID: ' . $bookDetails['google_books_id'] . ')');
+                return redirect()->route('search.form')->with('error', 'This book is already in your wishlist.');
+            }
+    
+            // Add the generated purchase link to the book details
+            $bookDetails['purchase_link'] = $this->generatePurchaseLink($bookDetails['title'], $bookDetails['author']);
+    
+            $acceptedBook = new AcceptedBook($bookDetails);
+            $acceptedBook->user_id = $user->id;
+            $acceptedBook->save();
+    
+            Log::info('Book added to wishlist: ' . $bookDetails['title']);
+    
+            // Redirect based on the wish parameter
+            if ($wish == 1) {
+                return redirect()->route('search', ['query' => $query, 'wish' => 1])->with('success', 'Book added to your wishlist successfully.');
+            } else {
+                return redirect()->route('search', ['query' => $query])->with('success', 'Book added to your wishlist successfully.');
+            }
+        } catch (\Exception $e) {
+            Log::error('Failed to add book to wishlist: ' . $e->getMessage());
+            return redirect()->route('search')->with('error', 'Failed to add book to your wishlist.');
+        }
     }
-    
+
     public function addBook(Request $request)
     {
         Log::info('Received data for adding book:', $request->all());
@@ -160,7 +224,7 @@ class BookController extends Controller
             }
         } catch (\Exception $e) {
             Log::error('Failed to add book: ' . $e->getMessage());
-            return redirect()->route('search')->with('error', 'Failed to add book to your collection.');
+            return redirect()->route('search.form')->with('error', 'Failed to add book to your collection.');
         }
     }
 
@@ -201,6 +265,19 @@ class BookController extends Controller
         return view('edit_book', compact('book', 'query'));
     }
 
+    public function addEditBook(Request $request, $id)
+    {
+        $user = Auth::user();
+        $book = $user->books()->find($id);
+
+        if (!$book) {
+            return redirect()->route('books')->with('error', 'You do not have permission to edit this book.');
+        }
+
+        $query = $request->input('query');
+        return view('add_edit_book', compact('book', 'query'));
+    }
+
     public function updateBook(Request $request, $id)
     {
         $request->validate([
@@ -210,28 +287,28 @@ class BookController extends Controller
             'place' => 'required|integer|min:0',
             'description' => 'required|string',
         ]);
-
+    
         $user = Auth::user();
         $book = $user->books()->find($id);
-
+    
         if (!$book) {
             return redirect()->route('books')->with('error', 'You do not have permission to edit this book.');
         }
-
+    
         $book->title = $request->input('title');
         $book->author = $request->input('author');
         $book->pages = $request->input('pages');
         $book->place = $request->input('place');
         $book->description = $request->input('description');
         $book->save();
-
+    
         $query = $request->input('query');
         if ($query) {
             return redirect()->route('search', ['query' => $query])->with('success', 'Book details updated successfully.');
         }
-
-        return redirect()->route('books', $book->id)->with('success', 'Book details updated successfully.');
-    }
+    
+        return redirect()->route('details.book', $book->id)->with('success', 'Book details updated successfully.');
+    }    
 
     public function saveNotes(Request $request, $id)
     {
@@ -555,7 +632,11 @@ class BookController extends Controller
     {
         $rejectedBooks = RejectedBook::where('user_id', $userId)->get(['title', 'author', 'year']);
         $acceptedBooks = AcceptedBook::where('user_id', $userId)->get(['title', 'author', 'year']);
-        $excludedBooks = $rejectedBooks->concat($acceptedBooks);
+        $libraryBooks = Book::whereHas('users', function($query) use ($userId) {
+            $query->where('user_id', $userId);
+        })->get(['title', 'author', 'year']);
+        
+        $excludedBooks = $rejectedBooks->concat($acceptedBooks)->concat($libraryBooks);
     
         $exclusionList = $excludedBooks->map(function ($book) {
             $title = strtolower(trim($book->title));
@@ -569,6 +650,7 @@ class BookController extends Controller
         Log::info("Complete exclusion list: " . json_encode($exclusionList));
         return $exclusionList;
     }
+    
     
     
     public function acceptBook($userId, $bookDetails)
@@ -672,6 +754,11 @@ class BookController extends Controller
     public function searchForm()
     {
         return view('search'); // This now points to what was previously home.blade.php
+    }
+
+    public function searchWish()
+    {
+        return view('search_wish'); // This now points to what was previously home.blade.php
     }
 
     public function detailsBack(Request $request)

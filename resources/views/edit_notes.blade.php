@@ -4,6 +4,12 @@
 
 @section('content')
 
+    <div class="back-button-container-notes">
+        <a href="{{ route('details.book', $book->id) }}" class="close-button" aria-label="Back to Library">
+            &times;
+        </a>
+    </div>
+
     <h2 class="title-notes">My Book notes</h2>
 
 

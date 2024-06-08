@@ -95,6 +95,23 @@
     }
 }
 
+.button-already-in-wishlist {
+    margin-top: 10px;
+    background-color: #C05532;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 40px;
+    transition: background-color 0.3s;
+
+    &:hover {
+        background-color: darken(#C05532, 10%); // Change to a darker shade of your button color
+    }
+}
+
 .book-details {
     display: flex;
     flex-direction: column;
@@ -239,5 +256,22 @@
 
     .search-pages{
         margin-bottom: 10px;
+    }
+
+    .button-already-in-wishlist {
+        margin-top: 10px;
+        background-color: #C05532;
+        color: #fff;
+        border: none;
+        padding: 8px 25px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-bottom: 40px;
+        transition: background-color 0.3s;
+    
+        &:hover {
+            background-color: darken(#C05532, 10%); // Change to a darker shade of your button color
+        }
     }
 }

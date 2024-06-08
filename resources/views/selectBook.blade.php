@@ -39,7 +39,10 @@
                                     <img src="{{ asset('images/delete.png') }}" alt="Delete from Library" class="action-image"/>
                                 </button>
                             </form>
-                            <form method="get" action="{{ route('edit.book', ['id' => $userBookMap[$googleBooksId]]) }}" class="image-form">
+                            <form method="get" action="{{ route('add.edit.book', ['id' => $userBookMap[$googleBooksId]]) }}" class="image-form">
+                                @if (request('query'))
+                                    <input type="hidden" name="query" value="{{ request('query') }}">
+                                @endif
                                 <button type="submit" class="image-button-hover">
                                     <img src="{{ asset('images/edit.png') }}" alt="Edit Book" class="action-image"/>
                                 </button>
@@ -66,3 +69,16 @@
         <p>No books found for your search query.</p>
     @endforelse
 @endsection
+
+<script>
+    function handleDelete(event, bookId) {
+        event.preventDefault(); // Prevent the form from submitting immediately
+        const bookCard = document.getElementById(`book-${bookId}`);
+        bookCard.classList.add('fade-out'); // Apply the fade-out class
+
+        // Wait for the fade-out animation to complete before submitting the form
+        setTimeout(() => {
+            event.target.submit();
+        }, 500); // Match this duration to the CSS transition duration
+    }
+</script>

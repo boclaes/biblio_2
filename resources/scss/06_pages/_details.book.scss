@@ -1,0 +1,601 @@
+.back-button-container {
+    position: absolute;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    padding: 10px 20px;
+    margin-top: 100px;
+    right: 20px;
+}
+
+.close-button {
+    z-index: 10;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #090C0F; // Background color of the button
+    color: #fff;
+    width: 30px; // Size of the button
+    height: 30px;
+    border-radius: 50%; // Make the button round
+    border: 2px solid #8A8A8A; // Add a gray border around the button
+    text-decoration: none;
+    font-size: 24px; // Size of the "X"
+    line-height: 0; // Adjust line height to center the "X"
+    transition: background-color 0.3s ease;
+}
+
+.close-button:hover {
+    background-color: #a866c7; // Change to your preferred hover color
+}
+
+.close-button:focus {
+    outline: none;
+}
+
+.container-details {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; // Ensure the container takes at least the full height of the viewport
+    position: relative; // Add position relative to correctly position the back button
+}
+
+.book-card-details {
+    flex: 1; // Allow this section to grow and take up available space
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    color: #fff;
+    border-radius: 10px;
+    position: relative;
+}
+
+.book-details-container {
+    display: flex;
+    flex-direction: row; // Change to row to align children side by side
+    align-items: flex-start;
+    width: 85%;
+    margin-right: 45px;
+}
+
+.book-image-container-details {
+    width: 40%;
+    text-align: center;
+    margin-top: 120px;
+    margin-left: 20px;
+
+    img {
+        width: 150px;
+        height: auto;
+        border-radius: 10px;
+    }
+
+    .book-details {
+
+        .stars {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+
+            .star {
+                font-size: 28px;
+                margin-left: 3px;
+                cursor: pointer;
+                pointer-events: none;
+            }
+
+            .star.active {
+                color: #FFFFFF;
+            }
+        }
+
+        div {
+            text-align: left;
+            margin-bottom: 5px;
+        }
+    }
+}
+
+.book-text-details {
+    width: 50%;
+    margin-top: 120px;
+    text-align: left;
+
+    h3 {
+        font-size: 26px;
+        text-align: left;
+        margin-left: 15px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2; // Number of lines to show
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+    }
+
+    p {
+        margin-bottom: 10px;
+        margin-left: 15px;
+    }
+    .author-details{
+        color: #8A8A8A;
+    }
+}
+
+.tab-container {
+    width: 87%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    min-height: 200px; // Set a minimum height to ensure the container doesn't shrink too much
+}
+
+
+.tab-buttons {
+    display: flex;
+    justify-content: center; // Center the tab buttons
+    margin-bottom: 25px;
+    font-weight: bold;
+    font-size: larger;
+
+    .tab-label {
+        cursor: pointer;
+        padding: 10px 20px;
+        margin: 0 5px;
+        position: relative;
+
+        &.active {
+            color: #fff;
+            &:after {
+                content: '';
+                display: block;
+                width: 100%;
+                height: 2px;
+                background-color: #C287E8; // Reddish color
+                position: absolute;
+                bottom: -5px;
+                left: 0;
+            }
+        }
+    }
+}
+
+.tab-content {
+    display: none;
+    flex-grow: 1;
+    &.active {
+        display: block;
+        text-align: left;
+        margin-bottom: 50px;
+    }
+
+    .description-field {
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+}
+
+
+.button-container-notes-details {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+    z-index: 2;
+
+    
+    .btn-with-icon {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        color: inherit;
+    
+        span {
+            font-size: 14px;
+        }
+    }
+    
+    .delete-button {
+        background: none;
+        border: none;
+        color: inherit;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    
+        span {
+            font-size: 14px;
+            color: #BB3C43;
+        }
+    }
+}
+    
+.images-notes {
+    width: 16px;
+    margin-bottom: 5px;
+    transition: transform 0.3s ease-in-out;
+}
+    
+.images-notes:hover {
+    transform: scale(1.2); /* Scales the image up by 10% */
+}
+    
+.images-notes-delete {
+    width: 12.5px;
+    margin-bottom: 5px;
+    transition: transform 0.3s ease-in-out;
+}
+    
+.images-notes-delete:hover {
+    transform: scale(1.2); /* Scales the image up by 10% */
+}
+    
+.images-notes-pen {
+    width: 15px;
+    margin-bottom: 5px;
+    transition: transform 0.3s ease-in-out;
+}
+    
+.images-notes-pen:hover {
+    transform: scale(1.2); /* Scales the image up by 10% */
+}
+    
+.reading-status {
+    position: relative;
+    display: inline-block;
+
+    .status-button { // Changed from reading-status-btn to status-button
+        background-color: rgba(109, 108, 138, 0.6);
+        color: #E4C8A8;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 16px;
+        margin-left: 10px;
+    }
+
+    .status-dropdown { // Changed from dropdown-content to status-dropdown
+        display: none;
+        position: absolute;
+        background-color: #333;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+        border-radius: 5px;
+        margin-top: 5px;
+
+        .dropdown-item {
+            color: #E4C8A8;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #6D6C8A;
+            }
+        }
+    }
+
+    .show {
+        display: block !important;
+    }
+}
+
+@media screen and (min-width: 1100px) {
+
+
+    .back-button-container {
+        position: absolute;
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        padding: 10px 20px;
+        top: -90px;
+        right: 100px;
+    }
+    
+    .close-button {
+        z-index: 10;
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #090C0F; // Background color of the button
+        color: #fff;
+        width: 30px; // Size of the button
+        height: 30px;
+        border-radius: 50%; // Make the button round
+        border: 2px solid #8A8A8A; // Add a gray border around the button
+        text-decoration: none;
+        font-size: 24px; // Size of the "X"
+        line-height: 0; // Adjust line height to center the "X"
+        transition: background-color 0.3s ease;
+    }
+    
+    .close-button:hover {
+        background-color: #a866c7; // Change to your preferred hover color
+    }
+    
+    .close-button:focus {
+        outline: none;
+    }
+    
+    .container-details {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh; // Ensure the container takes at least the full height of the viewport
+        position: relative; // Add position relative to correctly position the back button
+    }
+    
+    .book-card-details {
+        flex: 1; // Allow this section to grow and take up available space
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        color: #fff;
+        border-radius: 10px;
+        position: relative;
+    }
+    
+    .book-details-container {
+        display: flex;
+        flex-direction: row; // Change to row to align children side by side
+        align-items: flex-start;
+        width: 50%;
+        margin-right: 200px;
+    }
+    
+    .book-image-container-details {
+        width: 20%;
+        text-align: center;
+        margin-top: 150px;
+    
+        img {
+            width: 190px;
+            height: auto;
+            border-radius: 10px;
+        }
+    
+        .book-details {
+    
+            .stars {
+                display: flex;
+                justify-content: center;
+                margin-bottom: 10px;
+    
+                .star {
+                    font-size: 28px;
+                    margin-left: 3px;
+                    cursor: pointer;
+                    pointer-events: none;
+                }
+    
+                .star.active {
+                    color: #FFFFFF;
+                }
+            }
+    
+            div {
+                text-align: left;
+                margin-bottom: 5px;
+            }
+        }
+    }
+    
+    .book-text-details {
+        width: 50%;
+        margin-top: 150px;
+        text-align: left;
+        margin-left: 20px;
+    
+        h3 {
+            font-size: 42px;
+            text-align: left;
+            margin-left: 15px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2; // Number of lines to show
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+    
+        }
+    
+        p {
+            margin-left: 15px;
+        }
+        .author-details{
+            color: #8A8A8A;
+            font-weight: bold;
+        }
+    }
+    
+    .tab-container {
+        position: relative;
+        width: 50%;
+        margin-left: 300px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        min-height: 0px; // Set a minimum height to ensure the container doesn't shrink too much
+        bottom: 200px;
+    }
+    
+    
+    .tab-buttons {
+        position: relative;
+        display: flex;
+        justify-content: center; // Center the tab buttons
+        margin-bottom: 25px;
+        font-weight: bold;
+        font-size: larger;
+        margin-right: 560px;
+    
+        .tab-label {
+            cursor: pointer;
+            padding: 10px 20px;
+            margin: 0 5px;
+            position: relative;
+    
+            &.active {
+                color: #fff;
+                &:after {
+                    content: '';
+                    display: block;
+                    width: 100%;
+                    height: 2px;
+                    background-color: #C287E8; // Reddish color
+                    position: absolute;
+                    bottom: -5px;
+                    left: 0;
+                }
+            }
+        }
+    }
+    
+    .tab-content {
+        display: none;
+        flex-grow: 1;
+        &.active {
+            display: block;
+            text-align: left;
+            margin-bottom: 50px;
+            margin-left: 25px;
+        }
+    
+        .description-field {
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+    }
+    
+    
+    .button-container-notes-details {
+        position: absolute;
+        display: flex;
+        justify-content: flex-start;
+        bottom: 850px;
+        z-index: 2;
+        margin-left: 300px;
+    
+        .btn-with-icon {
+            display: flex;
+            flex-direction: row; // Change to row direction
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+            margin-left: 100px; // Adjust spacing as needed
+    
+            img {
+                width: 16px; // Adjust the size of the image as needed
+                height: 16px; // Adjust the size of the image as needed
+                margin-right: 8px; // Adjust spacing between icon and text
+            }
+    
+            span {
+                font-size: 14px;
+            }
+        }
+    
+        .delete-button {
+            background: none;
+            border: none;
+            color: inherit;
+            cursor: pointer;
+            display: flex;
+            flex-direction: row; // Change to row direction
+            align-items: center;
+    
+            img {
+                width: 16px; // Adjust the size of the image as needed
+                height: 16px; // Adjust the size of the image as needed
+                margin-right: 8px; // Adjust spacing between icon and text
+            }
+    
+            span {
+                font-size: 14px;
+                color: #BB3C43;
+            }
+        }
+    }   
+        
+    .images-notes {
+        width: 16px;
+        margin-bottom: 5px;
+        transition: transform 0.3s ease-in-out;
+    }
+        
+    .images-notes:hover {
+        transform: scale(1.2); /* Scales the image up by 10% */
+    }
+        
+    .images-notes-delete {
+        width: 12.5px;
+        margin-bottom: 5px;
+        transition: transform 0.3s ease-in-out;
+    }
+        
+    .images-notes-delete:hover {
+        transform: scale(1.2); /* Scales the image up by 10% */
+    }
+        
+    .images-notes-pen {
+        width: 15px;
+        margin-bottom: 5px;
+        transition: transform 0.3s ease-in-out;
+    }
+        
+    .images-notes-pen:hover {
+        transform: scale(1.2); /* Scales the image up by 10% */
+    }
+        
+    .reading-status {
+        position: relative;
+        display: inline-block;
+    
+        .status-button { // Changed from reading-status-btn to status-button
+            background-color: rgba(109, 108, 138, 0.6);
+            color: #E4C8A8;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-left: 35px;
+        }
+    
+        .status-dropdown { // Changed from dropdown-content to status-dropdown
+            display: none;
+            position: absolute;
+            background-color: #333;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 5px;
+            margin-top: 5px;
+            margin-left: 16px;
+    
+            .dropdown-item {
+                color: #E4C8A8;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+                cursor: pointer;
+    
+                &:hover {
+                    background-color: #6D6C8A;
+                }
+            }
+        }
+    
+        .show {
+            display: block !important;
+        }
+    }    
+}

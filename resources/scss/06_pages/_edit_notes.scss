@@ -5,6 +5,16 @@
   margin-left: 30px;
 }
 
+.back-button-container-notes {
+  position: absolute;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  padding: 10px 20px;
+  margin-top: 0px;
+  right: 20px;
+}
+
 .blur-overlay-notes {
   position: absolute;
   top: 200px;
@@ -167,6 +177,16 @@ box-shadow: 0 9px 10px 10px rgba(194, 135, 232, 0.30); // Drop shadow only at th
       text-align: left;
       margin-left: 400px;
   }
+
+  .back-button-container-notes {
+    position: absolute;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    padding: 10px 20px;
+    top: 10px;
+    right: 100px;
+  }
      
   .blur-overlay-notes {
       position: absolute;
@@ -266,7 +286,7 @@ box-shadow: 0 9px 10px 10px rgba(194, 135, 232, 0.30); // Drop shadow only at th
       position: relative;
       display: flex;
       justify-content: flex-start;
-      bottom: 865px;
+      bottom: 862px;
       z-index: 2;
       margin-left: 300px;
   
