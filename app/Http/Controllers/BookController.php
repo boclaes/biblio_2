@@ -15,7 +15,6 @@ use App\Models\Borrowing;
 use App\Models\AcceptedBook;
 use Illuminate\Support\Facades\Session;
 
-
 class BookController extends Controller
 {
     protected $bookHelper;
@@ -51,8 +50,7 @@ class BookController extends Controller
             return $this->searchByTitle($query);
         }
     }    
-    
-    
+
     private function searchByISBN($isbn)
     {
         Log::info("Searching for book with ISBN: {$isbn}");
@@ -60,7 +58,7 @@ class BookController extends Controller
     
         if (!$bookDetails) {
             Log::error("Book not found or API request failed for ISBN: {$isbn}");
-            return redirect()->route('books')->with('error', 'Book not found or API request failed');
+            return redirect()->route('books')->with('error', 'Book not found or API request failed.');
         }
     
         if (!isset($bookDetails['title'])) {
@@ -77,17 +75,17 @@ class BookController extends Controller
     
             if ($existingBook) {
                 Log::info("Book already in collection: {$bookDetails['title']}");
-                return redirect()->route('books')->with('error', 'This book is already in your collection');
+                return redirect()->route('books')->with('error', 'This book is already in your collection.');
             }
     
             $book = Book::create($bookDetails);
             $user->books()->attach($book);
     
             Log::info("Book saved to library: {$bookDetails['title']}");
-            return redirect()->route('books')->with('success', 'Book saved to your library');
-        } catch (Exception $exception) {
+            return redirect()->route('books')->with('success', 'Book saved to your library.');
+        } catch (\Exception $exception) {
             Log::error("Failed to add book to collection: " . $exception->getMessage());
-            return redirect()->route('search.form')->with('error', 'Failed to add book to your collection');
+            return redirect()->route('search.form')->with('error', 'Failed to add book to your collection.');
         }
     }
     
@@ -132,7 +130,7 @@ class BookController extends Controller
             ]);
         }
     }    
-    
+
     public function addBookWish(Request $request)
     {
         Log::info('Received data for adding book to wishlist:', $request->all());
@@ -238,18 +236,27 @@ class BookController extends Controller
 
     public function delete(Request $request, $id)
     {
-        $book = Book::findOrFail($id);
-        $book->delete();
-
         $user = Auth::user();
-        $user->books()->detach($id);
+        $book = $user->books()->find($id);
 
-        $query = $request->input('query');
-        if ($query) {
-            return redirect()->route('search', ['query' => $query])->with('success', 'Book deleted successfully');
+        if (!$book) {
+            return redirect()->route('books')->with('error', 'You do not have permission to delete this book.');
         }
 
-        return redirect()->back()->with('success', 'Book deleted successfully.');
+        try {
+            $book->delete();
+            $user->books()->detach($id);
+
+            $query = $request->input('query');
+            if ($query) {
+                return redirect()->route('search', ['query' => $query])->with('success', 'Book deleted successfully.');
+            }
+
+            return redirect()->back()->with('success', 'Book deleted successfully.');
+        } catch (\Exception $e) {
+            Log::error('Failed to delete book: ' . $e->getMessage());
+            return redirect()->route('books')->with('error', 'Failed to delete the book.');
+        }
     }
 
     public function editBook(Request $request, $id)
@@ -295,25 +302,36 @@ class BookController extends Controller
             return redirect()->route('books')->with('error', 'You do not have permission to edit this book.');
         }
     
-        $book->title = $request->input('title');
-        $book->author = $request->input('author');
-        $book->pages = $request->input('pages');
-        $book->place = $request->input('place');
-        $book->description = $request->input('description');
-        $book->save();
+        try {
+            $book->title = $request->input('title');
+            $book->author = $request->input('author');
+            $book->pages = $request->input('pages');
+            $book->place = $request->input('place');
+            $book->description = $request->input('description');
+            $book->save();
     
-        $query = $request->input('query');
-        if ($query) {
-            return redirect()->route('search', ['query' => $query])->with('success', 'Book details updated successfully.');
+            $query = $request->input('query');
+            if ($query) {
+                return redirect()->route('search', ['query' => $query])->with('success', 'Book details updated successfully.');
+            }
+    
+            return redirect()->route('details.book', $book->id)->with('success', 'Book details updated successfully.');
+        } catch (\Exception $e) {
+            Log::error('Failed to update book: ' . $e->getMessage());
+            return redirect()->route('books')->with('error', 'Failed to update the book.');
         }
-    
-        return redirect()->route('details.book', $book->id)->with('success', 'Book details updated successfully.');
-    }    
+    }
 
     public function saveNotes(Request $request, $id)
     {
+        $user = Auth::user();
+        $book = $user->books()->find($id);
+
+        if (!$book) {
+            return redirect()->route('books')->with('error', 'You do not have permission to edit this book.');
+        }
+
         try {
-            $book = Book::findOrFail($id);
             $book->notes_user = $request->input('notes');
             $book->save();
             return redirect()->route('details.book', $book->id)->with('success', 'Notes saved successfully.');
@@ -326,15 +344,21 @@ class BookController extends Controller
 
     public function saveReview(Request $request, $id)
     {
+        $user = Auth::user();
+        $book = $user->books()->find($id);
+
+        if (!$book) {
+            return redirect()->route('books')->with('error', 'You do not have permission to edit this book.');
+        }
+
         try {
-            $book = Book::findOrFail($id);
             $book->review = $request->input('review');
             $book->save();
-            return redirect()->route('details.book', $book->id)->with('success', 'Notes saved successfully.');
+            return redirect()->route('details.book', $book->id)->with('success', 'Review saved successfully.');
         } catch (\Exception $e) {
             logger()->error('Error saving review: ' . $e->getMessage());
             
-            return back()->withInput()->withErrors(['error' => 'Failed to save notes. Please try again later.']);
+            return back()->withInput()->withErrors(['error' => 'Failed to save review. Please try again later.']);
         }
     }
 
@@ -344,7 +368,7 @@ class BookController extends Controller
         $book = $user->books()->find($id);
 
         if (!$book) {
-            return redirect()->route('books');
+            return redirect()->route('books')->with('error', 'You do not have permission to view this book.');
         }
 
         return view('details', compact('book'));
@@ -355,13 +379,12 @@ class BookController extends Controller
         $book = $user->books()->find($id);
     
         if (!$book) {
-            return redirect()->route('books');
+            return redirect()->route('books')->with('error', 'You do not have permission to view this book.');
         }
     
         $query = request('query', '');
         return view('detailsSearch', ['book' => $book, 'query' => $query]);
     }
-    
 
     public function editNotes($id)
     {
@@ -388,17 +411,24 @@ class BookController extends Controller
         $review = $book->review;
     
         return view('edit_review', compact('book', 'review'));
-    }    
+    }
 
     public function rateBook(Request $request, $bookId)
     {
         $request->validate([
             'rating' => 'required|integer|min:1|max:5',
         ]);
+
+        $user = Auth::user();
+        $book = $user->books()->find($bookId);
+
+        if (!$book) {
+            return response()->json(['error' => 'You do not have permission to rate this book.'], 403);
+        }
     
         $logData = [
             'rating' => $request->rating,
-            'user_id' => auth()->id(),
+            'user_id' => $user->id,
             'book_id' => $bookId,
             'timestamp' => now()->toDateTimeString(),
         ];
@@ -408,7 +438,7 @@ class BookController extends Controller
     
         try {
             $review = Review::updateOrCreate(
-                ['user_id' => auth()->id(), 'book_id' => $bookId],
+                ['user_id' => $user->id, 'book_id' => $bookId],
                 ['rating' => $request->rating]
             );
     
@@ -422,7 +452,7 @@ class BookController extends Controller
     
             return response()->json(['error' => 'Internal Server Error'], 500);
         }
-    }    
+    }
 
     public function getBookRating($id)
     {
@@ -435,20 +465,30 @@ class BookController extends Controller
 
     public function updateStatus(Request $request, $id)
     {
-        $book = Book::findOrFail($id);
+        $user = Auth::user();
+        $book = $user->books()->find($id);
+
+        if (!$book) {
+            return response()->json(['error' => 'You do not have permission to update this book.'], 403);
+        }
 
         Log::info('Received status update data:', $request->all());
         
-        $fields = ['want_to_read', 'reading', 'done_reading'];
-        foreach ($fields as $field) {
-            if ($request->has($field)) {
-                $book->$field = $request->$field;
+        try {
+            $fields = ['want_to_read', 'reading', 'done_reading'];
+            foreach ($fields as $field) {
+                if ($request->has($field)) {
+                    $book->$field = $request->$field;
+                }
             }
+    
+            $book->save();
+            
+            return response()->json(['message' => 'Status updated successfully', 'book' => $book], 200);
+        } catch (\Exception $e) {
+            Log::error('Failed to update status: ' . $e->getMessage());
+            return response()->json(['error' => 'Failed to update the status.'], 500);
         }
-
-        $book->save();
-        
-        return response()->json(['message' => 'Status updated successfully', 'book' => $book], 200);
     }
 
     protected function calculateTopGenre($userId)
@@ -507,7 +547,7 @@ class BookController extends Controller
         Log::info("Top genre being queried: {$selectedGenre}");
     
         return $selectedGenre;
-    }    
+    }
 
     public function recommendBook()
     {
@@ -542,7 +582,7 @@ class BookController extends Controller
     
         return view('recommendation', compact('books'));
     }
-    
+
     public function handleDecision(Request $request)
     {
         try {
@@ -593,7 +633,7 @@ class BookController extends Controller
             return response()->json(['error' => 'Internal Server Error'], 500);
         }
     }    
-    
+
     public function rejectBook($userId, $bookDetails)
     {
         Log::info('Rejecting book: ' . $bookDetails['title'] . ' by ' . $bookDetails['author']);
@@ -626,7 +666,7 @@ class BookController extends Controller
             'success' => true,
             'newBook' => $newBook
         ]);
-    }     
+    }
 
     protected function getExclusionList($userId)
     {
@@ -650,9 +690,7 @@ class BookController extends Controller
         Log::info("Complete exclusion list: " . json_encode($exclusionList));
         return $exclusionList;
     }
-    
-    
-    
+
     public function acceptBook($userId, $bookDetails)
     {
         // Check if the book is already in the accepted books
@@ -680,7 +718,7 @@ class BookController extends Controller
             'pages' => $bookDetails['pages'],
             'purchase_link' => $bookDetails['purchase_link'] ?? $defaultPurchaseLink
         ]);
-    }    
+    }
 
     private function generatePurchaseLink($title, $author)
     {
@@ -698,9 +736,20 @@ class BookController extends Controller
 
     public function deleteAcceptedBook($id)
     {
-        $acceptedBook = AcceptedBook::findOrFail($id);
-        $acceptedBook->delete();
-        return redirect()->back()->with('success', 'Accepted book deleted successfully.');
+        $user = Auth::user();
+        $acceptedBook = $user->acceptedBooks()->findOrFail($id);
+
+        if (!$acceptedBook) {
+            return redirect()->route('books')->with('error', 'You do not have permission to delete this book.');
+        }
+
+        try {
+            $acceptedBook->delete();
+            return redirect()->back()->with('success', 'Accepted book deleted successfully.');
+        } catch (\Exception $e) {
+            Log::error('Failed to delete accepted book: ' . $e->getMessage());
+            return redirect()->route('books')->with('error', 'Failed to delete the accepted book.');
+        }
     }
 
     public function showAddBorrow()
@@ -718,21 +767,30 @@ class BookController extends Controller
             'borrowed_since' => 'required|date',
         ]);
 
-        $book = Book::findOrFail($request->book_id);
-        $book->borrowed = true;
-        $book->save();
-
         $user = Auth::user();
+        $book = $user->books()->findOrFail($request->book_id);
 
-        $borrowing = new Borrowing([
-            'book_id' => $request->book_id,
-            'borrower_name' => $request->borrower_name,
-            'borrowed_since' => $request->borrowed_since,
-            'user_id' => $user->id,
-        ]);
-        $borrowing->save();
+        if (!$book) {
+            return redirect()->route('borrowed-books')->with('error', 'You do not have permission to borrow this book.');
+        }
 
-        return redirect()->route('borrowed-books')->with('success', 'Book borrowing recorded successfully.');
+        try {
+            $book->borrowed = true;
+            $book->save();
+    
+            $borrowing = new Borrowing([
+                'book_id' => $request->book_id,
+                'borrower_name' => $request->borrower_name,
+                'borrowed_since' => $request->borrowed_since,
+                'user_id' => $user->id,
+            ]);
+            $borrowing->save();
+    
+            return redirect()->route('borrowed-books')->with('success', 'Book borrowing recorded successfully.');
+        } catch (\Exception $e) {
+            Log::error('Failed to record book borrowing: ' . $e->getMessage());
+            return redirect()->route('borrowed-books')->with('error', 'Failed to record the book borrowing.');
+        }
     }
 
     public function showBorrowedBooks()
@@ -744,11 +802,22 @@ class BookController extends Controller
 
     public function returnBook(Borrowing $borrowing)
     {
-        $book = $borrowing->book;
-        $book->borrowed = 0;
-        $book->save();
-        $borrowing->delete();
-        return redirect()->route('borrowed-books')->with('success', 'Book returned successfully!');
+        $user = Auth::user();
+
+        if ($borrowing->user_id !== $user->id) {
+            return redirect()->route('borrowed-books')->with('error', 'You do not have permission to return this book.');
+        }
+
+        try {
+            $book = $borrowing->book;
+            $book->borrowed = 0;
+            $book->save();
+            $borrowing->delete();
+            return redirect()->route('borrowed-books')->with('success', 'Book returned successfully!');
+        } catch (\Exception $e) {
+            Log::error('Failed to return book: ' . $e->getMessage());
+            return redirect()->route('borrowed-books')->with('error', 'Failed to return the book.');
+        }
     }
 
     public function searchForm()
@@ -767,28 +836,48 @@ class BookController extends Controller
         return redirect()->route('search', ['query' => $query]);
     }
 
-    public function showEditBorrow(Borrowing $borrowing)
+    public function showEditBorrow($id)
     {
         $user = Auth::user();
+        
+        // Fetch the borrowing record
+        $borrowing = Borrowing::where('id', $id)->where('user_id', $user->id)->first();
+    
+        if (!$borrowing) {
+            // Redirect to the borrowed books page if the borrowing record is not found or doesn't belong to the user
+            return redirect()->route('borrowed-books')->with('error', 'Borrowing record not found or you do not have permission to edit this record.');
+        }
+    
         $books = $user->books; // Assuming you want to show all books regardless of borrowing status here for editing
-
+    
         return view('edit_borrow', compact('borrowing', 'books'));
     }
 
     public function updateBorrow(Request $request, Borrowing $borrowing)
     {
+        $user = Auth::user();
+
+        if ($borrowing->user_id !== $user->id) {
+            return redirect()->route('borrowed-books')->with('error', 'You do not have permission to edit this borrowing record.');
+        }
+
         $request->validate([
             'book_id' => 'required|exists:books,id',
             'borrower_name' => 'required|string',
             'borrowed_since' => 'required|date',
         ]);
 
-        $borrowing->update([
-            'book_id' => $request->book_id,
-            'borrower_name' => $request->borrower_name,
-            'borrowed_since' => $request->borrowed_since,
-        ]);
-
-        return redirect()->route('borrowed-books')->with('success', 'Borrowing details updated successfully.');
+        try {
+            $borrowing->update([
+                'book_id' => $request->book_id,
+                'borrower_name' => $request->borrower_name,
+                'borrowed_since' => $request->borrowed_since,
+            ]);
+    
+            return redirect()->route('borrowed-books')->with('success', 'Borrowing details updated successfully.');
+        } catch (\Exception $e) {
+            Log::error('Failed to update borrowing details: ' . $e->getMessage());
+            return redirect()->route('borrowed-books')->with('error', 'Failed to update the borrowing details.');
+        }
     }
 }
