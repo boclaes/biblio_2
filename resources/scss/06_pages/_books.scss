@@ -310,15 +310,15 @@
 }
 
 .book-card-library {
-    width: 40%; /* Adjust the width to fit two cards side by side */
+    width: 45%; /* Adjust the width to fit two cards side by side */
     box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
-    margin-top: 20px;
-    margin-left: 20px;
+    margin-top: 10px;
+    margin-left: 5px;
 }
 
 .book-image {
     max-width: 100%; /* Ensures images fit within the card */
-    width: 170px;
+    width: 130px;
     transition: transform 0.3s ease-in-out; /* Smooth transition */
     margin-bottom: 10px;
     border-radius: 15px;
@@ -347,7 +347,7 @@
 
 .image-button-library {
     position: relative;
-    margin-left: 170px;
+    margin-left: 130px;
     top: 20px;
     position: relative;
     background: none;
@@ -362,6 +362,10 @@
     transform: scale(1.2); /* Scales the image up by 10% */
 }
 
+.nav-group li.active a {
+    color: #C05532 !important; /* or any color to indicate active state */
+    font-weight: bold;
+}  
 
 @media screen and (min-width: 1100px) {
 
@@ -630,6 +634,7 @@
     }
     
     .book-image {
+        width: 170px;
         max-width: 100%; /* Ensures images fit within the card */
         height: auto; /* Maintains aspect ratio */
         transition: transform 0.3s ease-in-out; /* Smooth transition */
@@ -674,5 +679,10 @@
     .image-button-library:hover {
         transform: scale(1.2); /* Scales the image up by 10% */
     }
+
+    .nav-group li.active a {
+        color: #C05532 !important; /* or any color to indicate active state */
+        font-weight: bold;
+    }    
 }	
 

@@ -69,13 +69,31 @@
             <div class="wrapper-library"> 
                 <div class="menu-list-desktop">
                     <ul class="nav-group">
-                        <li><a href="{{ route('welcome') }}">My library</a></li>
-                        <li><a href="{{ route('search.form') }}">Add books</a></li>
-                        <li><a href="{{ route('borrowed-books') }}">Book borrower</a></li>
-                        <li><a href="{{ route('book.recommend') }}">Discover books</a></li>
-                        <li><a href="{{ route('accepted.books') }}">Wishlist</a></li>
-                        <li><a href="{{ route('account.settings') }}">Account</a></li>
-                        <li><a href="{{ route('support_platform') }}">Support</a></li>
+                        @php
+                            $currentRoute = Route::currentRouteName();
+                            $isWishlist = request()->query('wish') == 1;
+                        @endphp
+                        <li class="{{ $currentRoute == 'books' || $currentRoute == 'details.book' || $currentRoute == 'edit.notes' || $currentRoute == 'edit.review' || $currentRoute == 'edit.book' ? 'active' : '' }}">
+                            <a href="{{ route('books') }}">My library</a>
+                        </li>
+                        <li class="{{ $currentRoute == 'search.form' && !$isWishlist || $currentRoute == 'search' || $currentRoute == 'add.edit.book' || $currentRoute == 'details.book.search' ? 'active' : '' }}">
+                            <a href="{{ route('search.form') }}">Add books</a>
+                        </li>
+                        <li class="{{ $currentRoute == 'borrowed-books' || $currentRoute == 'books.addBorrow'  || $currentRoute == 'borrowings.edit' ? 'active' : '' }}">
+                            <a href="{{ route('borrowed-books') }}">Book borrower</a>
+                        </li>
+                        <li class="{{ $currentRoute == 'book.recommend' ? 'active' : '' }}">
+                            <a href="{{ route('book.recommend') }}">Discover books</a>
+                        </li>
+                        <li class="{{ $currentRoute == 'accepted.books' || $currentRoute == 'search.form' && $isWishlist ? 'active' : '' }}">
+                            <a href="{{ route('accepted.books') }}">Wishlist</a>
+                        </li>
+                        <li class="{{ $currentRoute == 'account.settings' ? 'active' : '' }}">
+                            <a href="{{ route('account.settings') }}">Account</a>
+                        </li>
+                        <li class="{{ $currentRoute == 'support_platform' || $currentRoute == 'contact_platform' ? 'active' : '' }}">
+                            <a href="{{ route('support_platform') }}">Support</a>
+                        </li>
                         <li>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
@@ -89,50 +107,41 @@
                         <a class="hamburger-menu-library">Menu</a>
                     </div>
                     <ul class="nav-group">
-                        <li><a href="{{ route('welcome') }}">My library</a></li>
-                        <li><a href="{{ route('search.form') }}">Add books</a></li>
-                        <li><a href="{{ route('borrowed-books') }}">Book borrower</a></li>
-                        <li><a href="{{ route('book.recommend') }}">Discover books</a></li>
-                        <li><a href="{{ route('accepted.books') }}">Wishlist</a></li>
-                        <li><a href="{{ route('account.settings') }}">Account</a></li>
-                        <li><a href="{{ route('support_platform') }}">Support</a></li>
+                        @php
+                            $currentRoute = Route::currentRouteName();
+                        @endphp
+                        <li class="{{ $currentRoute == 'books' || $currentRoute == 'details.book' || $currentRoute == 'edit.notes' || $currentRoute == 'edit.review' || $currentRoute == 'edit.book' ? 'active' : '' }}">
+                            <a href="{{ route('books') }}">My library</a>
+                        </li>
+                        <li class="{{ $currentRoute == 'search.form' && !$isWishlist || $currentRoute == 'search' || $currentRoute == 'add.edit.book' || $currentRoute == 'details.book.search' ? 'active' : '' }}">
+                            <a href="{{ route('search.form') }}">Add books</a>
+                        </li>
+                        <li class="{{ $currentRoute == 'borrowed-books' || $currentRoute == 'books.addBorrow'  || $currentRoute == 'borrowings.edit' ? 'active' : '' }}">
+                            <a href="{{ route('borrowed-books') }}">Book borrower</a>
+                        </li>
+                        <li class="{{ $currentRoute == 'book.recommend' ? 'active' : '' }}">
+                            <a href="{{ route('book.recommend') }}">Discover books</a>
+                        </li>
+                        <li class="{{ $currentRoute == 'accepted.books' || $currentRoute == 'search.form' && $isWishlist ? 'active' : '' }}">
+                            <a href="{{ route('accepted.books') }}">Wishlist</a>
+                        </li>
+                        <li class="{{ $currentRoute == 'account.settings' ? 'active' : '' }}">
+                            <a href="{{ route('account.settings') }}">Account</a>
+                        </li>
+                        <li class="{{ $currentRoute == 'support_platform' || $currentRoute == 'contact_platform' ? 'active' : '' }}">
+                            <a href="{{ route('support_platform') }}">Support</a>
+                        </li>
                         <li>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <button type="submit" class="primary small-button center">Logout</button>
                             </form>
                         </li>
-                    </ul>                    
+                    </ul>                   
                 </div>
             </div>  
         </nav>
     </div>
-    {{--
-    <div class="sidebar">
-        <a href="{{ route('welcome') }}"><img src="{{ Vite::asset('resources/images/logo.png') }}" alt="Company logo" class="main-logo"></a>
-        <nav>
-            <ul class="nav-group">
-                <li><a href="{{ route('welcome') }}">My library</a></li>
-                <li><a href="{{ route('search.form') }}">Add books</a></li>
-                <li><a href="{{ route('borrowed-books') }}">Book borrower</a></li>
-                <li><a href="{{ route('book.recommend') }}">Discover books</a></li>
-                <li><a href="{{ route('accepted.books') }}">Wishlist</a></li>
-            </ul>
-            <ul class="nav-group">
-                <li><a href="{{ route('account.settings') }}">Account</a></li>
-                <li><a href="{{ route('welcome') }}">Support</a></li>
-            </ul>
-            <ul class="nav-group">
-                <li>
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit" class="primary small-button center">Logout</button>
-                    </form>
-                </li>
-            </ul>
-        </nav>
-    </div>
-    --}}
     <div class="content">
         @yield('content')
     </div>

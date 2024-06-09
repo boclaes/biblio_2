@@ -61,6 +61,10 @@ nav {
 				padding-top: 10px;
 				padding-bottom: 10px;
 			}
+			li.active a {
+				color: #C05532 !important; /* or any color to indicate active state */
+				font-weight: bold;
+			}  
 		}
 	}
 
@@ -189,6 +193,10 @@ nav {
 				color: $orange;
 				text-decoration: underline;
 			  }
+			li.active a {
+				color: #C05532 !important; /* or any color to indicate active state */
+				font-weight: bold;
+			}  
 		}
 	}
 }
