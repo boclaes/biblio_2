@@ -109,22 +109,24 @@ class ApiController extends Controller
         $user = Auth::user();
         $book = Book::findOrFail($id);
         $rpi = RaspberryPi::where('user_id', $user->id)->first();
-
+    
         if (!$rpi) {
             return redirect('/books')->with('error', 'No Raspberry Pi registered for this user.');
         }
-
+    
         $rpi_ip_address = $rpi->ngrok_url;
-
-        Log::info('Sending show book request', ['rpi_ip' => $rpi_ip_address, 'book_id' => $id]);
-
+        $unique_identifier = $rpi->unique_identifier;
+    
+        Log::info('Sending show book request', ['rpi_ip' => $rpi_ip_address, 'book_id' => $id, 'unique_identifier' => $unique_identifier]);
+    
         try {
             $response = Http::post("{$rpi_ip_address}/control", [
                 'place' => $book->place,
+                'unique_identifier' => $unique_identifier
             ]);
-
+    
             Log::info('Show book response', ['status' => $response->status(), 'body' => $response->body()]);
-
+    
             if ($response->successful()) {
                 return redirect('/books')->with('status', 'Show book request sent!');
             } else {
@@ -133,5 +135,5 @@ class ApiController extends Controller
         } catch (\Exception $e) {
             return redirect('/books')->with('error', 'Failed to send message: ' . $e->getMessage());
         }
-    } 
+    }    
 }

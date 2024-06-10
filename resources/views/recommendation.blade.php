@@ -28,5 +28,11 @@
             <p>No recommendations available at the moment.</p>
         @endif
     </div>
+    <div id="success-message" class="message-box" style="display: none;">
+        Book has been added to your wishlist!
+    </div>
+    <div id="error-message" class="message-box error-message" style="display: none;">
+        Error: An error occurred while processing your request.
+    </div>
     <script src="{{ asset('js/recommendationHandler.js') }}"></script>
 @endsection

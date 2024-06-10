@@ -9,15 +9,15 @@
     @vite(['resources/scss/app.scss', 'resources/js/app.js'])
 </head>
 <body class="books-view">
-    {{--
+
     <!-- Error and success messages -->
     @if(session('error'))
-        <div style="color: red;">{{ session('error') }}</div>
+    <div id="error-message" style="display: none; color: red; position: fixed; top: 20px; right: 20px; background-color: #f8d7da; padding: 10px; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">{{ session('error') }}</div>
     @endif
     @if(session('success'))
-        <div style="color: green;">{{ session('success') }}</div>
+        <div id="success-message" style="display: none; color: green; position: fixed; top: 20px; right: 20px; background-color: #dff0d8; padding: 10px; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">{{ session('success') }}</div>
     @endif
-    --}}
+
     <div class="sidebar">
     <a href="{{ route('welcome') }}"><img src="{{ Vite::asset('resources/images/logo.png') }}" alt="Company logo" class="main-logo"></a>
         <nav class="container-library">

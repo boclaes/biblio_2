@@ -17,7 +17,6 @@
         <div style="color: green;">{{ session('success') }}</div>
     @endif
     --}}
-
     <div class="dropdown">
         <div class="select-wrapper">
             <select id="sort" class="select-custom">

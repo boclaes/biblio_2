@@ -56,3 +56,5 @@ function disableIsbnOption() {
         return false; // Prevent click action
     };
 }
+
+

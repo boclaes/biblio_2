@@ -77,7 +77,8 @@
 
         .arrow-right {
             left: 90px;
-            top: 30px;
+            top: 15px;
+            margin-bottom: 0;
             position: relative;
             width: 24px;
             height: 24px;
@@ -216,4 +217,25 @@
             }
         }
     }
+    .message-box {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        transition: opacity 0.5s ease-in-out;
+        opacity: 0;
+        z-index: 1000; /* Ensure the message is on top */
+    }
+    
+    #success-message {
+        background-color: #dff0d8;
+        color: green;
+    }
+    
+    #error-message {
+        background-color: #f8d7da;
+        color: red;
+    }    
 }

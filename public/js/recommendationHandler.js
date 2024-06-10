@@ -34,11 +34,17 @@ function handleDecision(decision, googleBooksId) {
                     handleDecision(decision, googleBooksId);
                 }
             }, 500); // Match this duration to the CSS transition duration
+
+            // Show the success message
+            showSuccessMessage();
         } else {
-            alert('Error: ' + data.error);
+            showErrorMessage(data.error);
         }
     })
-    .catch(error => console.error('Error:', error));
+    .catch(error => {
+        console.error('Error:', error);
+        showErrorMessage('An unexpected error occurred.');
+    });
 }
 
 function isDuplicateBook(newBook) {
@@ -79,4 +85,41 @@ function updateBookSection(googleBooksId, newBook) {
             bookSection.classList.remove('fade-in-active');
         }, 500); // Match this duration to the CSS transition duration
     }
+}
+
+function showSuccessMessage() {
+    const successMessage = document.getElementById('success-message');
+    successMessage.style.display = 'block';
+
+    // Allow the display change to take effect
+    setTimeout(() => {
+        successMessage.style.opacity = '1';
+    }, 10);
+
+    // Hide the message after 3 seconds
+    setTimeout(() => {
+        successMessage.style.opacity = '0';
+        setTimeout(() => {
+            successMessage.style.display = 'none';
+        }, 500); // Match this duration to the CSS transition duration
+    }, 3000);
+}
+
+function showErrorMessage(message) {
+    const errorMessage = document.getElementById('error-message');
+    errorMessage.textContent = message;
+    errorMessage.style.display = 'block';
+
+    // Allow the display change to take effect
+    setTimeout(() => {
+        errorMessage.style.opacity = '1';
+    }, 10);
+
+    // Hide the message after 3 seconds
+    setTimeout(() => {
+        errorMessage.style.opacity = '0';
+        setTimeout(() => {
+            errorMessage.style.display = 'none';
+        }, 500); // Match this duration to the CSS transition duration
+    }, 3000);
 }
